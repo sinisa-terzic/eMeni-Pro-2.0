@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Osnovne postavke stranice -->
+    <meta charset="UTF-8"> <!-- Definisanje karakter seta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive dizajn -->
+    <!-- <meta name="theme-color" content="#607D8B" /> -->
+    <title>Advanced Slider</title> <!-- Naslov stranice -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Povezivanje CSS fajla -->
+</head>
+
+<body>
+
+    <div id="overlay"></div> <!-- Overlay za tamnu pozadinu -->
+
+    <!-- Header sekcija -->
+    <header id="header" class="menu-container" role="banner">
+        <div class="logo" aria-label="Logo">LOGO</div> <!-- Logo stranice -->
+        <!-- Hamburger meni za mobilne uređaje -->
+        <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dropdownMenu">
+            ☰
+        </button>
+        <!-- Padajući meni (dropdown) -->
+        <div class="dropdown-content" id="dropdownMenu" role="menu"></div>
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
+    </header>
+
+    <main>
+        <!-- Progress bar za prikaz napretka (npr. u karuselu) -->
+        <div id="progress" class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+            aria-valuemax="100">
+            <div class="progress-bar" id="progressBar"></div> <!-- Progress bar -->
+        </div>
+
+        <!-- Karusel za prikaz kategorija -->
+        <div id="carousel" class="container" role="region" aria-label="Carousel">
+            <!-- Carousel items will be dynamically inserted here -->
+        </div>
+
+        <!-- Kontrole za karusel (prethodna, play, sljedeća) -->
+        <div id="control" class="controls" role="group" aria-label="Carousel controls">
+            <button class="btn prev" aria-label="Previous category">← &nbsp; Nazad</button>
+            <!-- Prethodna kategorija -->
+            <button class="btn play" aria-label="Play categories">▶ &nbsp; Auto-play</button> <!-- Auto-play -->
+            <button class="btn next" aria-label="Next category">Napred &nbsp; →</button> <!-- Sljedeća kategorija -->
+        </div>
+
+        <!-- Informacioni kontejner za prikaz detalja kategorija -->
+        <div class="info-container" id="infoContainer" aria-live="polite" role="region"
+            aria-label="Category information">
+            <!-- Info items will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <!-- Popup prozor za prikaz detalja stavke -->
+    <div id="imagePopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+        <!-- Ostali dinamički sadržaj -->
+    </div>
+
+    <!-- Korpa za prikaz odabranih stavki -->
+    <div id="cart" class="cart" role="region" aria-label="Shopping cart">
+        <h3 id="cartTitle" class="back-to-menu"> ← Meni</h3>
+        <div id="selectedItems" role="list" aria-live="polite"></div> <!-- Dodajte aria-live za dinamičke promene -->
+    </div>
+
+    <!-- Info meni (postavke, korpa, kontakt) -->
+    <div id="infoMenu" class="infoMenu" role="navigation" aria-label="Utility menu">
+        <!-- Postavke -->
+        <div class="sett" role="button" aria-label="Settings">
+            <span>Sett</span>
+        </div>
+        <!-- Korpa sa brojačem stavki -->
+        <div class="basket" role="button" aria-label="Shopping cart" aria-expanded="false" aria-controls="cart">
+            <span>Korpa</span>
+            <span id="checkboxCount" aria-live="polite">0</span> <!-- Brojač stavki u korpi -->
+        </div>
+        <!-- Kontakt -->
+        <div class="tel" role="button" aria-label="Contact">
+            <span id="phoneNumber">tel</span>
+            <div class="call-options" id="callOptions">
+                <!-- Dugme X -->
+                <button class="call-option-close-btn" aria-label="Zatvori">×</button>
+                <a href="tel:+38267806066" class="call-option flex g-10 y_center">
+                    <img src="img/call/viber_152851.png" alt="Phone icon"> Phone
+                </a>
+                <a href="viber://add?number=%2B38267806066" class="call-option flex g-10 y_center">
+                    <img src="img/call/viber_2504948.png" alt="Viber icon"> Viber
+                </a>
+                <a href="https://wa.me/38267806066" class="call-option flex g-10 y_center">
+                    <img src="img/call/whatsapp_3536445.png" alt="WhatsApp icon"> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Povezivanje JavaScript fajla -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
