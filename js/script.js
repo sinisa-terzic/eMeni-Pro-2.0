@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addTouchEvents(element) {
         let touchStartX = 0;
         let touchStartY = 0;
-        const swipeThreshold = 30;
+        const swipeThreshold = 20;
         const verticalThreshold = 30;
 
         element.addEventListener('touchstart', (e) => {
