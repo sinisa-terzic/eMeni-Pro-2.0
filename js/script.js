@@ -550,8 +550,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             cartContent += `
                 <div class="cart-actions">
-                    <button id="clearAllButton">Izbriši sve</button>
                     <button id="backToMenuButton" class="back-to-menu">Povratak na meni</button>
+                    <button id="clearAllButton">Izbriši sve</button>
                 </div>
             `;
 
