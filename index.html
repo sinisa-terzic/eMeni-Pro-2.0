@@ -16,6 +16,7 @@
 
     <!-- Header sekcija -->
     <header id="header" class="menu-container" role="banner">
+        <!-- <div class="logo" aria-label="Logo">e-Meni<sup>&trade;</sup></div>  Logo stranice -->
         <div class="logo" aria-label="Logo">LOGO</div> <!-- Logo stranice -->
         <!-- Hamburger meni za mobilne uređaje -->
         <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dropdownMenu">
@@ -46,11 +47,12 @@
             <button class="btn next" aria-label="Next category">Napred &nbsp; →</button> <!-- Sljedeća kategorija -->
         </div>
 
-        <!-- Informacioni kontejner za prikaz detalja kategorija -->
-        <div class="info-container" id="infoContainer" aria-live="polite" role="region"
+        <!-- Kontejner za prikaz detalja kategorija -->
+        <div class="data-container" id="dataContainer" aria-live="polite" role="region"
             aria-label="Category information">
-            <!-- Info items will be dynamically inserted here -->
+            <!-- Data items will be dynamically inserted here -->
         </div>
+        <div id="scrollArrow" class="scroll-arrow">↓</div>
     </main>
 
     <!-- Popup prozor za prikaz detalja stavke -->
@@ -63,9 +65,28 @@
         <h3 id="cartTitle" class="back-to-menu"> ← Meni</h3>
         <div id="selectedItems" role="list" aria-live="polite"></div> <!-- Dodajte aria-live za dinamičke promene -->
     </div>
+    <div id="clearAllConfirmationPopup" class="popup-overlay">
+        <div class="popup-content text-center">
+            <p>Želite li da uklonite sve stavke?</p>
+            <div class="popup-buttons">
+                <button id="confirmClearAll">Da</button>
+                <button id="cancelClearAll">Ne</button>
+            </div>
+        </div>
+    </div>
+    <div id="deleteConfirmationPopup" class="popup-overlay">
+        <div class="popup-content text-center">
+            <img id="deleteItemImage" src="" alt="Slika stavke" class="popup-image">
+            <p>Želite li da uklonite stavku "<span id="itemName"></span>"?</p>
+            <div class="popup-buttons">
+                <button id="confirmDelete">Da</button>
+                <button id="cancelDelete">Ne</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Info meni (postavke, korpa, kontakt) -->
-    <div id="infoMenu" class="infoMenu" role="navigation" aria-label="Utility menu">
+    <footer id="infoMenu" class="infoMenu" role="navigation" aria-label="Utility menu">
         <!-- Postavke -->
         <div class="sett" role="button" aria-label="Settings">
             <span>Sett</span>
@@ -92,7 +113,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Povezivanje JavaScript fajla -->
     <script src="js/script.js"></script>
