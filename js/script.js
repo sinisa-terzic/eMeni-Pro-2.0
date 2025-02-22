@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('clearAllConfirmationPopup').style.display = 'flex';
         }
 
-        elements.cartContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        // elements.cartContainer.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Dohvati elemente za otvori/zatvori korpu
