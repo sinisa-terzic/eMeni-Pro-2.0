@@ -1,5 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('js/service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker registrovano:', registration);
+                })
+                .catch(error => {
+                    console.log('Registracija ServiceWorker-a nije uspela:', error);
+                });
+        });
+    }
+
     // Konstante
     const JSON_PATH = 'js/data.json'; // Putanja do JSON fajla sa podacima
     const IMG_BASE_PATH = 'img/food/'; // Osnovna putanja do slika
@@ -72,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menuItem.addEventListener('click', () => {
             state.activeIndex = index;
             updateClasses();
-            closeDropdown();
+            toggleDropdown('close');
         });
         elements.dropdownMenu.appendChild(menuItem);
     }
@@ -121,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.quantity = item.quantity || 1;
                 item.price = item.price || parseFloat(item.cost_key?.replace('€', '').trim() || 0);
 
+                // Izračunaj cijenu po jedinici
+                const pricePerUnit = (item.price / item.quantity).toFixed(2);
+
                 return `
                         <article class="menu-card" data-id="${index}-${itemIndex}">
                             <img src="${IMG_BASE_PATH}${item.imageSrc}" 
@@ -142,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <span class="quantity">${item.quantity}</span>
                                         <button class="quantity-btn increment">+</button>
                                     </div>
-                                    <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} €</span>
+                                    <span class="title-quantity-price">${item.quantity} x ${pricePerUnit} €</span>
                                     <span class="price">${item.cost_key || '0.00 €'}</span>
                                 </div>
                             </div>
@@ -380,19 +395,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Navigacija kroz slajdove
-    function changeToNextSlide() {
-        state.activeIndex = (state.activeIndex + 1) % state.categories.length;
-        updateClasses();
-    }
-
-    function goToPrevSlide() {
-        state.activeIndex = (state.activeIndex - 1 + state.categories.length) % state.categories.length;
-        stopAutoPlay();
-        updateClasses();
-    }
-
-    function goToNextSlide() {
-        state.activeIndex = (state.activeIndex + 1) % state.categories.length;
+    function changeSlide(direction) {
+        if (direction === 'next') {
+            state.activeIndex = (state.activeIndex + 1) % state.categories.length;
+        } else if (direction === 'prev') {
+            state.activeIndex = (state.activeIndex - 1 + state.categories.length) % state.categories.length;
+        }
         stopAutoPlay();
         updateClasses();
     }
@@ -426,8 +434,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const deltaY = Math.abs(touchEndY - touchStartY);
 
             if (Math.abs(deltaX) > swipeThreshold && deltaY < verticalThreshold) {
-                if (deltaX > 0) goToPrevSlide();
-                else goToNextSlide();
+                if (deltaX > 0) changeSlide('prev');
+                else changeSlide('next');
             }
         }, 100));
     }
@@ -437,9 +445,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-play funkcionalnost
     function startAutoPlay() {
-        changeToNextSlide();
+        changeSlide('next');
         if (!state.isAutoPlayActive) {
-            state.autoPlayInterval = setInterval(changeToNextSlide, AUTO_PLAY_DELAY);
+            state.autoPlayInterval = setInterval(() => changeSlide('next'), AUTO_PLAY_DELAY);
             state.isAutoPlayActive = true;
             elements.playBtn.textContent = '⏸ Pauziraj';
             elements.playBtn.classList.add('stop');
@@ -501,121 +509,124 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.checkboxCount.textContent = state.selectedItems.length;
 
         if (state.selectedItems.length === 0) {
-            elements.selectedItemsContainer.innerHTML = `
-                <div class="empty-cart-message">
-                    Vaša korpa je prazna.
-                </div>
-                <div class="cart-actions">
-                    <button id="backToMenuButton" class="back-to-menu" role="button" aria-label="Povratak na meni">Povratak na meni</button>
-                </div>
-            `;
-            document.querySelector('.cart-actions').style.justifyContent = 'center';
+            renderEmptyCart();
         } else {
-            const groupedItems = state.selectedItems.reduce((groups, item) => {
-                const [categoryIndex, itemIndex] = item.id.split('-');
-                const category = state.categories[categoryIndex];
-
-                if (!groups[categoryIndex]) {
-                    groups[categoryIndex] = {
-                        categoryName: category.details,
-                        items: []
-                    };
-                }
-
-                const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] h3 .item-checkbox`);
-                if (checkbox) {
-                    const quantity = parseInt(checkbox.closest('.card-content').querySelector('.quantity').textContent);
-                    const basePrice = parseFloat(checkbox.getAttribute('data-price'));
-                    item.price = basePrice * quantity;
-                    item.quantity = quantity;
-                }
-
-                groups[categoryIndex].items.push(item);
-                return groups;
-            }, {});
-
-            let cartContent = Object.values(groupedItems).map(group => `
-                <div class="category-group">
-                    <span class="category-title">${group.categoryName}</span>
-                    ${group.items.map(item => `
-                        <div class="selected-item" data-id="${item.id}">
-                            <button class="edit-item" data-id="${item.id}">✎</button>
-                            <div class="title-quantity">
-                                <span class="title-quantity-name">${item.title}</span> 
-                                <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} € = ${item.price.toFixed(2)} €</span>
-                            </div>
-                            <button class="remove-item" data-id="${item.id}">×</button>
-                        </div>
-                `).join('')}
-                </div>
-            `).join('');
-
-            const totalPrice = state.selectedItems.reduce((total, item) => total + item.price, 0);
-            cartContent += `
-                <div id="totalPriceContainer" class="total-price-container">
-                    <span>Ukupna cena:</span>
-                    <span id="totalPrice">${totalPrice.toFixed(2)} €</span>
-                </div>
-            `;
-
-            cartContent += `
-                <div class="cart-actions">
-                    <button id="backToMenuButton" class="back-to-menu">Povratak na meni</button>
-                    <button id="clearAllButton">Izbriši sve</button>
-                </div>
-            `;
-
-            elements.selectedItemsContainer.innerHTML = cartContent;
-            document.querySelector('.cart-actions').style.justifyContent = '';
-
-            document.querySelectorAll('.edit-item').forEach(button => {
-                button.addEventListener('click', () => {
-                    const itemId = button.getAttribute('data-id');
-                    const [categoryIndex, itemIndex] = itemId.split('-');
-                    const category = state.categories[categoryIndex];
-                    const item = category.translations[itemIndex];
-                    openPopup(item, itemId, categoryIndex, itemIndex);
-                });
-            });
+            renderCartItems();
         }
 
         elements.checkboxCount.style.display = state.selectedItems.length > 0 ? 'flex' : 'none';
     }
 
+    function renderEmptyCart() {
+        elements.selectedItemsContainer.innerHTML = `
+            <div class="empty-cart-message">
+                Vaša korpa je prazna.
+            </div>
+            <div class="cart-actions">
+                <button id="backToMenuButton" class="back-to-menu" role="button" aria-label="Povratak na meni">Povratak na meni</button>
+            </div>
+        `;
+        document.querySelector('.cart-actions').style.justifyContent = 'center';
+    }
+
+    function renderCartItems() {
+        const groupedItems = state.selectedItems.reduce((groups, item) => {
+            const [categoryIndex, itemIndex] = item.id.split('-');
+            const category = state.categories[categoryIndex];
+
+            if (!groups[categoryIndex]) {
+                groups[categoryIndex] = {
+                    categoryName: category.details,
+                    items: []
+                };
+            }
+
+            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] h3 .item-checkbox`);
+            if (checkbox) {
+                const quantity = parseInt(checkbox.closest('.card-content').querySelector('.quantity').textContent);
+                const basePrice = parseFloat(checkbox.getAttribute('data-price'));
+                item.price = basePrice * quantity;
+                item.quantity = quantity;
+            }
+
+            groups[categoryIndex].items.push(item);
+            return groups;
+        }, {});
+
+        let cartContent = Object.values(groupedItems).map(group => `
+            <div class="category-group">
+                <span class="category-title">${group.categoryName}</span>
+                ${group.items.map(item => `
+                    <div class="selected-item" data-id="${item.id}">
+                        <button class="edit-item" data-id="${item.id}">✎</button>
+                        <div class="title-quantity">
+                            <span class="title-quantity-name">${item.title}</span> 
+                            <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} € = ${item.price.toFixed(2)} €</span>
+                        </div>
+                        <button class="remove-item" data-id="${item.id}">×</button>
+                    </div>
+            `).join('')}
+            </div>
+        `).join('');
+
+        const totalPrice = state.selectedItems.reduce((total, item) => total + item.price, 0);
+        cartContent += `
+            <div id="totalPriceContainer" class="total-price-container">
+                <span>Ukupna cena:</span>
+                <span id="totalPrice">${totalPrice.toFixed(2)} €</span>
+            </div>
+        `;
+
+        cartContent += `
+            <div class="cart-actions">
+                <button id="backToMenuButton" class="back-to-menu">Povratak na meni</button>
+                <button id="clearAllButton">Izbriši sve</button>
+            </div>
+        `;
+
+        elements.selectedItemsContainer.innerHTML = cartContent;
+        document.querySelector('.cart-actions').style.justifyContent = '';
+
+        document.querySelectorAll('.edit-item').forEach(button => {
+            button.addEventListener('click', () => {
+                const itemId = button.getAttribute('data-id');
+                const [categoryIndex, itemIndex] = itemId.split('-');
+                const category = state.categories[categoryIndex];
+                const item = category.translations[itemIndex];
+                openPopup(item, itemId, categoryIndex, itemIndex);
+            });
+        });
+    }
+
     // Event listener za dugme "Povratak na meni"
     document.addEventListener('click', (event) => {
         if (event.target.classList.contains('back-to-menu')) {
-            elements.cartContainer.classList.remove('open');
-            closeCart();
+            toggleCart('close');
         }
 
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('remove-item') || event.target.closest('.remove-item')) {
-                const itemId = event.target.getAttribute('data-id');
-                const item = state.selectedItems.find(item => item.id === itemId);
+        if (event.target.classList.contains('remove-item') || event.target.closest('.remove-item')) {
+            const itemId = event.target.getAttribute('data-id');
+            const item = state.selectedItems.find(item => item.id === itemId);
 
-                if (item) {
-                    const itemImage = document.querySelector(`.menu-card[data-id="${itemId}"] .item-image`);
-                    if (itemImage) {
-                        const deleteItemImage = document.getElementById('deleteItemImage');
-                        deleteItemImage.src = itemImage.src;
-                        deleteItemImage.alt = item.title;
-                    }
-
-                    document.getElementById('itemName').textContent = item.title;
-
-                    itemToDeleteId = itemId;
-
-                    document.getElementById('deleteConfirmationPopup').style.display = 'flex';
+            if (item) {
+                const itemImage = document.querySelector(`.menu-card[data-id="${itemId}"] .item-image`);
+                if (itemImage) {
+                    const deleteItemImage = document.getElementById('deleteItemImage');
+                    deleteItemImage.src = itemImage.src;
+                    deleteItemImage.alt = item.title;
                 }
+
+                document.getElementById('itemName').textContent = item.title;
+
+                itemToDeleteId = itemId;
+
+                document.getElementById('deleteConfirmationPopup').style.display = 'flex';
             }
-        });
+        }
 
         if (event.target.id === 'clearAllButton') {
             document.getElementById('clearAllConfirmationPopup').style.display = 'flex';
         }
-
-        // elements.cartContainer.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Dohvati elemente za otvori/zatvori korpu
@@ -626,8 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
         basketElement.addEventListener('click', () => {
             updateCart();
             stopAutoPlay();
-            cartElement.classList.toggle('open');
-            openCart();
+            toggleCart('open');
         });
     } else {
         console.error('Basket ili cart element nije pronađen u DOM-u.');
@@ -764,25 +774,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Funkcija za zatvaranje padajućeg menija i skrivanje overlay-a
-    function openDropdown() {
-        const isExpanded = elements.dropdownMenu.classList.toggle('show');
+    function toggleDropdown(action) {
+        const isExpanded = action === 'open';
+        elements.dropdownMenu.classList.toggle('show', isExpanded);
         elements.dropdownOverlay.style.display = isExpanded ? 'block' : 'none';
         elements.hamburger.setAttribute('aria-expanded', isExpanded);
-        stopAutoPlay();
-    }
-
-    function closeDropdown() {
-        elements.dropdownMenu.classList.remove('show');
-        elements.dropdownOverlay.style.display = 'none';
+        if (isExpanded) stopAutoPlay();
     }
 
     // Funkcije za otvaranje i zatvaranje korpe
-    function openCart() {
-        elements.cartContainer.classList.add('open');
-    }
-
-    function closeCart() {
-        elements.cartContainer.classList.remove('open');
+    function toggleCart(action) {
+        elements.cartContainer.classList.toggle('open', action === 'open');
     }
 
     // Funkcija za zatvaranje pop-up prozora
@@ -791,59 +793,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Funkcije za otvaranje / zatvaranje telefonskog izbornika
-    function openCallMenu() {
-        elements.callOptions.style.display = 'block';
-        elements.overlay.classList.add('active');
-        const mainContent = document.querySelector('main');
+    function toggleCallMenu(action) {
+        const isOpen = action === 'open';
+        elements.callOptions.style.display = isOpen ? 'block' : 'none';
+        elements.overlay.classList.toggle('active', isOpen);
+        /* const mainContent = document.querySelector('main');
         if (mainContent) {
-            mainContent.setAttribute('aria-hidden', 'true');
-        }
-        stopAutoPlay();
-    }
-
-    function closeCallMenu() {
-        elements.callOptions.style.display = 'none';
-        elements.overlay.classList.remove('active');
-        const mainContent = document.querySelector('main');
-        if (mainContent) {
-            mainContent.setAttribute('aria-hidden', 'false');
-        }
+            mainContent.setAttribute('aria-hidden', isOpen);
+        } */
+        if (isOpen) stopAutoPlay();
     }
 
     // Postavljanje event listenera
     function setupEventListeners() {
-
-        // 1. **Resize Event Listener**
         window.addEventListener('resize', debounce(() => {
             calculateDataContainerHeight();
         }, 100));
 
-        // 2. **Hamburger Menu i Dropdown Functionality**
         elements.hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
-            openDropdown();
+            toggleDropdown('open');
         });
 
         document.addEventListener('click', () => {
-            elements.dropdownMenu.classList.remove('show');
-            elements.dropdownOverlay.style.display = 'none';
+            toggleDropdown('close');
         });
 
-        // 3. **Navigacija kroz Slajdove**
-        elements.prevBtn.addEventListener('click', goToPrevSlide);
-        elements.nextBtn.addEventListener('click', goToNextSlide);
+        elements.prevBtn.addEventListener('click', () => changeSlide('prev'));
+        elements.nextBtn.addEventListener('click', () => changeSlide('next'));
         elements.playBtn.addEventListener('click', toggleAutoPlay);
 
         elements.container.addEventListener('click', (e) => {
             const clickedBox = e.target.closest('.box');
             if (clickedBox) {
-                if (clickedBox.classList.contains('nextSlide')) goToNextSlide();
-                if (clickedBox.classList.contains('prevSlide')) goToPrevSlide();
+                if (clickedBox.classList.contains('nextSlide')) changeSlide('next');
+                if (clickedBox.classList.contains('prevSlide')) changeSlide('prev');
                 elements.dataContainer.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
-        // 4. **Auto-play Kontrole**
         elements.dataContainer.addEventListener('scroll', stopAutoPlay);
         elements.dataContainer.addEventListener('click', (e) => {
             if (e.type === 'scroll' || e.target.closest('.data-item')) {
@@ -851,19 +839,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 5. **Telefonski Izbornik**
         elements.phoneNumber.addEventListener('click', () => {
-            if (elements.callOptions.style.display === 'block') {
-                closeCallMenu();
+            if (elements.callOptions.style.display === 'flex') {
+                toggleCallMenu('close');
             } else {
-                openCallMenu();
+                toggleCallMenu('open');
             }
         });
 
-        elements.closeBtn.addEventListener('click', closeCallMenu);
-        elements.overlay.addEventListener('click', closeCallMenu);
+        elements.closeBtn.addEventListener('click', () => toggleCallMenu('close'));
+        elements.overlay.addEventListener('click', () => toggleCallMenu('close'));
 
-        // 6. **Keyboard Event Listeners**
         document.addEventListener('keydown', (event) => {
             const { key } = event;
             const isMenuOpen = elements.dropdownMenu.classList.contains('show');
@@ -871,20 +857,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const isCartOpen = elements.cartContainer.classList.contains('open');
 
             if (key === "Escape") {
-                closeCallMenu();
-                closeDropdown();
+                toggleCallMenu('close');
+                toggleDropdown('close');
                 closePopup();
-                closeCart();
+                toggleCart('close');
             }
 
             if (isMenuOpen || isCallMenuOpen || isCartOpen) return;
 
             switch (key) {
                 case "ArrowLeft":
-                    goToPrevSlide();
+                    changeSlide('prev');
                     break;
                 case "ArrowRight":
-                    goToNextSlide();
+                    changeSlide('next');
                     break;
                 case "ArrowUp":
                     scrollDataSection('up');
@@ -899,15 +885,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 8. **Zatvaranje Padajućeg Menija Klikom na Overlay**
         elements.dropdownOverlay.addEventListener('click', () => {
-            elements.dropdownMenu.classList.remove('show');
-            elements.dropdownOverlay.style.display = 'none';
+            toggleDropdown('close');
         });
 
-        // 9. **Resize Event Listener za Ažuriranje Visine Kontejnera**
         window.addEventListener('resize', debounce(calculateDataContainerHeight));
-
     }
 
     // Funkcija za pomicanje sadržaja aktivnog data-item elementa
