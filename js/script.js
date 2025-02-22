@@ -109,43 +109,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Kreiranje sekcije sa podacima za svaku kategoriju
     function createDataSection(category, index) {
-        const dataItem = document.createElement('div');
-        dataItem.className = 'data-item';
-        dataItem.innerHTML = `
-            <h2>${category.details || 'Nepoznata kategorija'}</h2>
-            <div class="category-description">${category.description || 'Nema opisa.'}</div>
-            <div class="items-grid">
-            ${category.translations?.map((item, itemIndex) => `
-                <article class="menu-card" data-id="${index}-${itemIndex}">
-                    <img src="${IMG_BASE_PATH}${item.imageSrc}" 
-                        alt="${item.title_key || 'Nepoznata stavka'}" 
-                        class="item-image"
-                        loading="lazy">
-                    <div class="card-content">
-                        <h3 class="card-title">
-                            ${item.title_key || 'Nepoznata stavka'}
-                            <input type="checkbox" class="item-checkbox" 
-                                data-id="${index}-${itemIndex}" 
-                                data-title="${item.title_key || 'Nepoznata stavka'}" 
-                                data-price="${item.cost_key?.replace('€', '').trim() || 0}">
-                        </h3>
-                        <p class="item-description">${item.text_key || 'Nema opisa.'}</p>
-                        <div class="item-footer">
-                            <div class="quantity-controls">
-                                <button class="quantity-btn decrement">-</button>
-                                <span class="quantity">${item.quantity || 1}</span>
-                                <button class="quantity-btn increment">+</button>
+        try {
+            const dataItem = document.createElement('div');
+            dataItem.className = 'data-item';
+            dataItem.innerHTML = `
+                <h2>${category.details || 'Nepoznata kategorija'}</h2>
+                <div class="category-description">${category.description || 'Nema opisa.'}</div>
+                <div class="items-grid">
+                ${category.translations?.map((item, itemIndex) => {
+                // Inicijalizuj quantity i price ako nisu definisani
+                item.quantity = item.quantity || 1;
+                item.price = item.price || parseFloat(item.cost_key?.replace('€', '').trim() || 0);
+
+                return `
+                        <article class="menu-card" data-id="${index}-${itemIndex}">
+                            <img src="${IMG_BASE_PATH}${item.imageSrc}" 
+                                alt="${item.title_key || 'Nepoznata stavka'}" 
+                                class="item-image"
+                                loading="lazy">
+                            <div class="card-content">
+                                <h3 class="card-title">
+                                    ${item.title_key || 'Nepoznata stavka'}
+                                    <input type="checkbox" class="item-checkbox" 
+                                        data-id="${index}-${itemIndex}" 
+                                        data-title="${item.title_key || 'Nepoznata stavka'}" 
+                                        data-price="${item.cost_key?.replace('€', '').trim() || 0}">
+                                </h3>
+                                <p class="item-description">${item.text_key || 'Nema opisa.'}</p>
+                                <div class="item-footer">
+                                    <div class="quantity-controls">
+                                        <button class="quantity-btn decrement">-</button>
+                                        <span class="quantity">${item.quantity}</span>
+                                        <button class="quantity-btn increment">+</button>
+                                    </div>
+                                    <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} €</span>
+                                    <span class="price">${item.cost_key || '0.00 €'}</span>
+                                </div>
                             </div>
-                            <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} €</span>
-                            <span class="price">${item.cost_key || '0.00 €'}</span>
-                        </div>
-                    </div>
-                </article>
-            `).join('') || '<p>Nema dostupnih stavki.</p>'}
-            </div>
-        `;
-        elements.dataContainer.appendChild(dataItem);
-        setupQuantityControls(dataItem);
+                        </article>
+                    `;
+            }).join('') || '<p>Nema dostupnih stavki.</p>'}
+                </div>
+            `;
+            elements.dataContainer.appendChild(dataItem);
+            setupQuantityControls(dataItem); // Postavlja kontrole za količinu
+        } catch (error) {
+            console.error('Greška pri kreiranju sekcije sa podacima:', error);
+        }
     }
 
     // Postavljanje kontrola za količinu
@@ -225,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openPopup(item, itemId, categoryIndex, itemIndex) {
         elements.popupOverlay.innerHTML = `
             <div class="popup-content" data-id="${itemId}">
-                <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image">
+                <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
                 <div class="popup-details">
                     <div class="card-content">
                         <div class="popup-header">
