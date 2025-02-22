@@ -284,10 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         elements.popupOverlay.style.display = 'flex';
+        updateURL(itemId); // Ažuriraj URL sa popup parametrom
 
         elements.popupOverlay.addEventListener('click', (e) => {
             if (e.target === elements.popupOverlay || e.target.classList.contains('close-popup')) {
-                closePopup();
+                closePopupAndUpdateURL(); // Zatvori popup i ukloni parametar iz URL-a
             }
         });
 
@@ -905,11 +906,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Funkcija za ažuriranje URL-a
+    function updateURL(openPopupId = null) {
+        let newURL = `${window.location.pathname}?slide=${state.activeIndex}`;
+        if (openPopupId) {
+            newURL += `&popup=${openPopupId}`; // Dodaj parametar za popup
+        }
+        window.history.pushState({ slideIndex: state.activeIndex, popupId: openPopupId }, '', newURL);
+    }
+
+    // Funkcija za zatvaranje popup-a i uklanjanje parametra iz URL-a
+    function closePopupAndUpdateURL() {
+        closePopup();
+        // Vrati URL na stanje bez popup parametra
+        window.history.replaceState({ slideIndex: state.activeIndex, popupId: null }, '', `${window.location.pathname}?slide=${state.activeIndex}`);
+    }
+
+    // Provera i postavljanje početnog URL-a ako ne postoji slide parametar
+    function initializeURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.has('slide')) {
+            updateURL(); // Postavi URL na slide=0 ako ne postoji
+        }
+    }
+
+    // Funkcija za promenu slajda
+    function changeSlide(direction) {
+        if (direction === 'next') {
+            state.activeIndex = (state.activeIndex + 1) % state.categories.length;
+        } else if (direction === 'prev') {
+            state.activeIndex = (state.activeIndex - 1 + state.categories.length) % state.categories.length;
+        }
+        stopAutoPlay();
+        updateClasses();
+        updateURL(); // Ažurirajte URL nakon promene slajda
+    }
+
+    // Event listener za promene u istoriji (nazad/napred u brauzeru)
+    window.addEventListener('popstate', (event) => {
+        if (event.state) {
+            // Ažuriraj aktivni slajd
+            if (event.state.slideIndex !== undefined) {
+                state.activeIndex = event.state.slideIndex;
+                updateClasses();
+            }
+
+            // Zatvori popup ako nije otvoren u trenutnom stanju
+            if (!event.state.popupId && elements.popupOverlay.style.display === 'flex') {
+                closePopup();
+            }
+        }
+    });
+
     // Inicijalizacija slajda na osnovu URL-a
     function initialize() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slideIndex = parseInt(urlParams.get('slide')) || 0;
+        state.activeIndex = slideIndex;
+        initializeURL(); // Proveri i postavi početni URL ako je potrebno
         fetchData();
         setupEventListeners();
+        updateClasses();
     }
+
 
     // Pokretanje inicijalizacije
     initialize();

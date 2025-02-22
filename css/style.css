@@ -16,6 +16,16 @@ button {
     all: unset;
 }
 
+body,
+img,
+button {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 /* input[type="checkbox"] {
     all: unset;
 } */
@@ -486,19 +496,14 @@ img {
 }
 
 .selected-item {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.2s ease-in-out;
 }
 
 .selected-item.fade-out {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
 }
 
-/* .selected-item span {
-    flex-grow: 1;
-    margin: 0 10px;
-}
- */
 /* === INFO MENU === */
 .infoMenu {
     display: flex;
