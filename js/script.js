@@ -528,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="category-group">
                     <span class="category-title">${group.categoryName}</span>
                     ${group.items.map(item => `
-                        <div class="selected-item">
+                        <div class="selected-item" data-id="${item.id}">
                             <button class="edit-item" data-id="${item.id}">✎</button>
                             <div class="title-quantity">
                                 <span class="title-quantity-name">${item.title}</span> 
@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <button class="remove-item" data-id="${item.id}">×</button>
                         </div>
-                    `).join('')}
+                `).join('')}
                 </div>
             `).join('');
 
@@ -700,13 +700,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funkcija za brisanje pojedinačne stavke iz korpe
     function removeItem(id) {
-        state.selectedItems = state.selectedItems.filter(item => item.id !== id);
         const checkbox = document.querySelector(`.menu-card[data-id="${id}"] h3 .item-checkbox`);
+        const itemElement = document.querySelector(`.selected-item[data-id="${id}"]`);
+
+        // Pokreni animaciju za uklanjanje stavke
+        if (itemElement) {
+            itemElement.classList.add('fade-out');
+            itemElement.addEventListener('transitionend', () => {
+                itemElement.remove(); // Ukloni element iz DOM-a
+                state.selectedItems = state.selectedItems.filter(item => item.id !== id); // Ažuriraj stanje
+                updateCart(); // Ažuriraj korpu
+            }, { once: true });
+        }
+
+        // Resetuj checkbox i količinu
         if (checkbox) {
             checkbox.checked = false;
         }
         resetQuantity(id);
-        updateCart();
     }
 
     // Funkcija za resetovanje količine na 1
