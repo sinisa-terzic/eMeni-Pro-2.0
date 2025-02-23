@@ -487,8 +487,8 @@ img {
 .remove-item {
     color: #dc3545;
     font-weight: bold;
-    margin-left: auto;
-    margin-left: 5px;
+    /* margin-left: auto;
+    margin-left: 5px; */
 }
 
 .remove-item:hover {
