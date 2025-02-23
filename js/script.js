@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Registracija Service Workera za offline funkcionalnosti i caching
+    // Registracija Service Workera
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('js/service-worker.js')
@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Konstante za putanje i vremenske intervale
+    // Konstante
     const JSON_PATH = 'js/data.json'; // Putanja do JSON fajla sa podacima
     const IMG_BASE_PATH = 'img/food/'; // Osnovna putanja do slika
     const AUTO_PLAY_DELAY = 3600; // Kašnjenje za auto-play u milisekundama
 
-    // Selektovanje DOM elemenata
+    // DOM elementi
     const elements = {
         container: document.querySelector('.container'),
         dropdownMenu: document.getElementById('dropdownMenu'),
@@ -37,9 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay: document.getElementById('overlay'),
         closeBtn: document.querySelector('.call-option-close-btn'),
         progressBar: document.getElementById('progressBar'),
+        settingsContainer: document.querySelector('.settings'),
+        settingsOverlay: document.querySelector('.settings-overlay'),
+        settingBtn: document.getElementById('setting'),
+        settingTitle: document.getElementById('settingTitle'),
     };
 
-    // Globalno stanje aplikacije
+    // Stanje aplikacije
     let state = {
         activeIndex: 0,
         categories: [],
@@ -48,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoPlayInterval: null,
     };
 
-    // Funkcija za učitavanje podataka iz JSON fajla
+    // Dohvatanje podataka iz JSON fajla
     async function fetchData() {
         try {
             const response = await fetch(JSON_PATH);
@@ -65,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicijalizacija menija i kreiranje elemenata za svaku kategoriju
+    // Inicijalizacija menija
     function initializeMenu() {
         state.categories.forEach((category, index) => {
             createBox(category, index);
@@ -86,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
             state.activeIndex = index;
             updateClasses();
             toggleDropdown('close');
-            updateURL();
         });
         elements.dropdownMenu.appendChild(menuItem);
     }
@@ -131,9 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="category-description">${category.description || 'Nema opisa.'}</div>
                 <div class="items-grid">
                 ${category.translations?.map((item, itemIndex) => {
+                // Inicijalizuj quantity i price ako nisu definisani
                 item.quantity = item.quantity || 1;
                 item.price = item.price || parseFloat(item.cost_key?.replace('€', '').trim() || 0);
+
+                // Izračunaj cijenu po jedinici
                 const pricePerUnit = (item.price / item.quantity).toFixed(2);
+
                 return `
                         <article class="menu-card" data-id="${index}-${itemIndex}">
                             <img src="${IMG_BASE_PATH}${item.imageSrc}" 
@@ -165,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             elements.dataContainer.appendChild(dataItem);
-            setupQuantityControls(dataItem);
+            setupQuantityControls(dataItem); // Postavlja kontrole za količinu
         } catch (error) {
             console.error('Greška pri kreiranju sekcije sa podacima:', error);
         }
@@ -282,11 +289,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         elements.popupOverlay.style.display = 'flex';
-        updateURL(itemId);
 
         elements.popupOverlay.addEventListener('click', (e) => {
             if (e.target === elements.popupOverlay || e.target.classList.contains('close-popup')) {
-                closePopupAndUpdateURL();
+                closePopup();
             }
         });
 
@@ -393,6 +399,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Funkcija za nastavak auto-playa nakon promjene slajda
+    function autoPlayNextSlide() {
+        state.activeIndex = (state.activeIndex + 1) % state.categories.length; // Prelazak na sljedeći slajd
+        updateClasses(); // Ažuriranje klasa i prikaza
+        updateProgress(); // Ažuriranje progress bara
+    }
+
+
     // Navigacija kroz slajdove
     function changeSlide(direction) {
         if (direction === 'next') {
@@ -402,14 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         stopAutoPlay();
         updateClasses();
-        updateURL();
-    }
-
-    // Funkcija za promenu slajda bez zaustavljanja auto-play
-    function changeSlideWithoutStop() {
-        state.activeIndex = (state.activeIndex + 1) % state.categories.length;
-        updateClasses();
-        updateURL();
     }
 
     // Debounce funkcija za ograničenje broja poziva funkcije
@@ -452,11 +458,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-play funkcionalnost
     function startAutoPlay() {
-        changeSlideWithoutStop();
         if (!state.isAutoPlayActive) {
-            state.autoPlayInterval = setInterval(() => {
-                changeSlideWithoutStop();
-            }, AUTO_PLAY_DELAY);
+            autoPlayNextSlide();
+            state.autoPlayInterval = setInterval(autoPlayNextSlide, AUTO_PLAY_DELAY);
             state.isAutoPlayActive = true;
             elements.playBtn.textContent = '⏸ Pauziraj';
             elements.playBtn.classList.add('stop');
@@ -788,49 +792,20 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.dropdownMenu.classList.toggle('show', isExpanded);
         elements.dropdownOverlay.style.display = isExpanded ? 'block' : 'none';
         elements.hamburger.setAttribute('aria-expanded', isExpanded);
+        if (isExpanded) stopAutoPlay();
+    }
 
-        if (isExpanded) {
-            updateURL(null, false, true); // Ažuriraj URL sa parametrom za padajući meni
-        } else {
-            closeDropdownAndUpdateURL(); // Zatvori padajući meni i ukloni parametar iz URL-a
-        }
+    // Funkcije za otvaranje i zatvaranje settings menija
+    function toggleSettings(action) {
+        settingsOpen = action === 'open';
+        elements.settingsContainer.classList.toggle('open', settingsOpen);
+        elements.settingsOverlay.classList.toggle('active', settingsOpen);
     }
 
     // Funkcije za otvaranje i zatvaranje korpe
     function toggleCart(action) {
-        const isOpen = action === 'open';
-        elements.cartContainer.classList.toggle('open', isOpen);
-        if (isOpen) {
-            updateURL(null, true); // Ažuriraj URL sa parametrom za korpu
-        } else {
-            closeCartAndUpdateURL(); // Zatvori korpu i ukloni parametar iz URL-a
-        }
-    }
-
-    function closeDropdownAndUpdateURL() {
-        // Zatvori padajući meni bez pozivanja toggleDropdown
-        elements.dropdownMenu.classList.remove('show');
-        elements.dropdownOverlay.style.display = 'none';
-        elements.hamburger.setAttribute('aria-expanded', false);
-
-        // Ažuriraj URL bez parametra za padajući meni
-        window.history.replaceState(
-            { slideIndex: state.activeIndex, popupId: null, cartOpen: false, menuOpen: false },
-            '',
-            `${window.location.pathname}?slide=${state.activeIndex}`
-        );
-    }
-
-    // Funkcija za zatvaranje korpe i uklanjanje parametra iz URL-a
-    function closeCartAndUpdateURL() {
-        // Zatvori korpu bez pozivanja toggleCart
-        elements.cartContainer.classList.remove('open');
-        // Ažuriraj URL bez parametra za korpu
-        window.history.replaceState(
-            { slideIndex: state.activeIndex, popupId: null, cartOpen: false },
-            '',
-            `${window.location.pathname}?slide=${state.activeIndex}`
-        );
+        cartOpen = action === 'open';
+        elements.cartContainer.classList.toggle('open', cartOpen);
     }
 
     // Funkcija za zatvaranje pop-up prozora
@@ -843,88 +818,79 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = action === 'open';
         elements.callOptions.style.display = isOpen ? 'block' : 'none';
         elements.overlay.classList.toggle('active', isOpen);
-
-        if (isOpen) {
-            updateURL(null, false, false, true); // Ažuriraj URL sa parametrom za opcije telefoniranja
-        } else {
-            closeCallMenuAndUpdateURL(); // Zatvori opcije telefoniranja i ukloni parametar iz URL-a
-        }
-    }
-
-    function closeCallMenuAndUpdateURL() {
-        // Zatvori opcije telefoniranja bez pozivanja toggleCallMenu
-        elements.callOptions.style.display = 'none';
-        elements.overlay.classList.remove('active');
-
-        // Ažuriraj URL bez parametra za opcije telefoniranja
-        window.history.replaceState(
-            { slideIndex: state.activeIndex, popupId: null, cartOpen: false, menuOpen: false, callOpen: false },
-            '',
-            `${window.location.pathname}?slide=${state.activeIndex}`
-        );
+        if (isOpen) stopAutoPlay();
     }
 
     // Postavljanje event listenera
     function setupEventListeners() {
-        window.addEventListener('resize', debounce(() => {
-            calculateDataContainerHeight();
-        }, 100));
+        // Debounce za resize event
+        window.addEventListener('resize', debounce(calculateDataContainerHeight, 100));
 
-        elements.hamburger.addEventListener('click', (e) => {
+        // Klik na hamburger meni
+        elements.hamburger?.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleDropdown('open');
+        });
+
+        // Klik van dropdowna zatvara ga
+        document.addEventListener('click', () => toggleDropdown('close'));
+
+        // Navigacioni dugmići
+        elements.prevBtn?.addEventListener('click', () => changeSlide('prev'));
+        elements.nextBtn?.addEventListener('click', () => changeSlide('next'));
+        elements.playBtn?.addEventListener('click', toggleAutoPlay);
+
+        // Klik na slajder elemente
+        elements.container?.addEventListener('click', (e) => {
+            const clickedBox = e.target.closest('.box');
+            if (clickedBox?.classList.contains('nextSlide')) changeSlide('next');
+            if (clickedBox?.classList.contains('prevSlide')) changeSlide('prev');
+            elements.dataContainer?.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll event u dataContaineru
+        elements.dataContainer?.addEventListener('scroll', stopAutoPlay);
+        elements.dataContainer?.addEventListener('click', (e) => {
+            if (e.target.closest('.data-item')) stopAutoPlay();
+        });
+
+        // Klik na settings dugme
+        elements.settingBtn?.addEventListener('click', () => {
+            toggleSettings('open');
             stopAutoPlay();
         });
 
-        document.addEventListener('click', () => {
-            toggleDropdown('close');
+        // Zatvaranje settings menija
+        elements.settingsOverlay?.addEventListener('click', () => toggleSettings('close'));
+        elements.settingTitle?.addEventListener('click', () => toggleSettings('close'));
+
+        // Klik na broj telefona - otvaranje/zatvaranje call menija
+        elements.phoneNumber?.addEventListener('click', () => {
+            toggleCallMenu(elements.callOptions?.style.display === 'flex' ? 'close' : 'open');
         });
 
-        elements.prevBtn.addEventListener('click', () => changeSlide('prev'));
-        elements.nextBtn.addEventListener('click', () => changeSlide('next'));
-        elements.playBtn.addEventListener('click', toggleAutoPlay);
+        // Zatvaranje call menija
+        elements.closeBtn?.addEventListener('click', () => toggleCallMenu('close'));
+        elements.overlay?.addEventListener('click', () => toggleCallMenu('close'));
 
-        elements.container.addEventListener('click', (e) => {
-            const clickedBox = e.target.closest('.box');
-            if (clickedBox) {
-                if (clickedBox.classList.contains('nextSlide')) changeSlide('next');
-                if (clickedBox.classList.contains('prevSlide')) changeSlide('prev');
-                elements.dataContainer.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
+        // Zatvaranje dropdown menija klikom na overlay
+        elements.dropdownOverlay?.addEventListener('click', () => toggleDropdown('close'));
 
-        elements.dataContainer.addEventListener('scroll', stopAutoPlay);
-        elements.dataContainer.addEventListener('click', (e) => {
-            if (e.type === 'scroll' || e.target.closest('.data-item')) {
-                stopAutoPlay();
-            }
-        });
-
-        elements.phoneNumber.addEventListener('click', () => {
-            if (elements.callOptions.style.display === 'flex') {
-                toggleCallMenu('close');
-            } else {
-                toggleCallMenu('open');
-            }
-        });
-
-        elements.closeBtn.addEventListener('click', () => toggleCallMenu('close'));
-        elements.overlay.addEventListener('click', () => toggleCallMenu('close'));
-
+        // Globalni event listener za tastaturu
         document.addEventListener('keydown', (event) => {
             const { key } = event;
-            const isMenuOpen = elements.dropdownMenu.classList.contains('show');
-            const isCallMenuOpen = elements.callOptions.style.display === 'block';
-            const isCartOpen = elements.cartContainer.classList.contains('open');
+
+            const isMenuOpen = elements.dropdownMenu?.classList.contains('show');
+            const isCallMenuOpen = elements.callOptions?.style.display === 'block';
+            const isCartOpen = elements.cartContainer?.classList.contains('open');
+            const isSettingsOpen = elements.settingsContainer?.classList.contains('open');
 
             if (key === "Escape") {
-                toggleCallMenu('close');
-                toggleDropdown('close');
-                closePopup();
-                toggleCart('close');
+                closeAllMenus();
             }
 
-            if (isMenuOpen || isCallMenuOpen || isCartOpen) return;
+            // Ako je bilo koji meni otvoren, ne izvršavaj dalje komande
+            if (isMenuOpen || isCallMenuOpen || isCartOpen || isSettingsOpen) return;
 
             switch (key) {
                 case "ArrowLeft":
@@ -946,11 +912,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        elements.dropdownOverlay.addEventListener('click', () => {
+        // Funkcija za zatvaranje svih menija
+        function closeAllMenus() {
+            toggleCallMenu('close');
             toggleDropdown('close');
-        });
-
-        window.addEventListener('resize', debounce(calculateDataContainerHeight));
+            closePopup();
+            toggleCart('close');
+            toggleSettings?.('close'); // Pozovi samo ako toggleSettings postoji
+        }
     }
 
     // Funkcija za pomicanje sadržaja aktivnog data-item elementa
@@ -966,99 +935,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Funkcija za ažuriranje URL-a
-    function updateURL(openPopupId = null, openCart = false, openMenu = false, openCall = false) {
-        let newURL = `${window.location.pathname}?slide=${state.activeIndex}`;
-        if (openPopupId) {
-            newURL += `&popup=${openPopupId}`; // Dodaj parametar za popup
-        }
-        if (openCart) {
-            newURL += `&cart=open`; // Dodaj parametar za korpu
-        }
-        if (openMenu) {
-            newURL += `&menu=open`; // Dodaj parametar za padajući meni
-        }
-        if (openCall) {
-            newURL += `&call=open`; // Dodaj parametar za opcije telefoniranja
-        }
-        window.history.pushState(
-            { slideIndex: state.activeIndex, popupId: openPopupId, cartOpen: openCart, menuOpen: openMenu, callOpen: openCall },
-            '',
-            newURL
-        );
-    }
-
-    // Funkcija za zatvaranje popup-a i uklanjanje parametra iz URL-a
-    function closePopupAndUpdateURL() {
-        closePopup();
-        // Vrati URL na stanje bez popup parametra
-        window.history.replaceState({ slideIndex: state.activeIndex, popupId: null, cartOpen: false }, '', `${window.location.pathname}?slide=${state.activeIndex}`);
-    }
-
-    // Provera i postavljanje početnog URL-a ako ne postoji slide parametar
-    function initializeURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (!urlParams.has('slide')) {
-            updateURL(); // Postavi URL na slide=0 ako ne postoji
-        }
-    }
-
-    // Event listener za promene u istoriji (nazad/napred u brauzeru)
-    window.addEventListener('popstate', (event) => {
-        if (event.state) {
-            // Ažuriraj aktivni slajd
-            if (event.state.slideIndex !== undefined) {
-                state.activeIndex = event.state.slideIndex;
-                updateClasses();
-            }
-
-            // Zatvori popup ako nije otvoren u trenutnom stanju
-            if (!event.state.popupId && elements.popupOverlay.style.display === 'flex') {
-                closePopup();
-            }
-
-            // Zatvori korpu ako nije otvorena u trenutnom stanju
-            if (!event.state.cartOpen && elements.cartContainer.classList.contains('open')) {
-                toggleCart('close');
-            }
-
-            // Zatvori padajući meni ako nije otvoren u trenutnom stanju
-            if (!event.state.menuOpen && elements.dropdownMenu.classList.contains('show')) {
-                closeDropdownAndUpdateURL();
-            }
-
-            // Zatvori opcije telefoniranja ako nisu otvorene u trenutnom stanju
-            if (!event.state.callOpen && elements.callOptions.style.display === 'block') {
-                closeCallMenuAndUpdateURL();
-            }
-        }
-    });
-
     // Inicijalizacija slajda na osnovu URL-a
     function initialize() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const slideIndex = parseInt(urlParams.get('slide')) || 0;
-        state.activeIndex = slideIndex;
-
-        // Proveri da li je korpa otvorena
-        if (urlParams.has('cart') && urlParams.get('cart') === 'open') {
-            toggleCart('open');
-        }
-
-        // Proveri da li je padajući meni otvoren
-        if (urlParams.has('menu') && urlParams.get('menu') === 'open') {
-            toggleDropdown('open');
-        }
-
-        // Proveri da li su opcije telefoniranja otvorene
-        if (urlParams.has('call') && urlParams.get('call') === 'open') {
-            toggleCallMenu('open');
-        }
-
-        initializeURL(); // Proveri i postavi početni URL ako je potrebno
         fetchData();
         setupEventListeners();
-        updateClasses();
     }
 
     // Pokretanje inicijalizacije

@@ -89,8 +89,13 @@
     <!-- Info meni (postavke, korpa, kontakt) -->
     <footer id="infoMenu" class="infoMenu" role="navigation" aria-label="Utility menu">
         <!-- Postavke -->
-        <div class="sett" role="button" aria-label="Settings">
-            <span>Sett</span>
+        <div class="setting" role="button" aria-label="Settings">
+            <span id="setting">Sett</span>
+            <div class="settings" role="dialog">
+                <h3 id="settingTitle" class="back-to-menu" role="button" tabindex="0"> ← Meni</h3>
+                <!-- Dodajte ostale elemente settings menija ovde -->
+            </div>
+            <div class="settings-overlay"></div>
         </div>
         <!-- Korpa sa brojačem stavki -->
         <div class="basket" role="button" aria-label="Shopping cart" aria-expanded="false" aria-controls="cart">

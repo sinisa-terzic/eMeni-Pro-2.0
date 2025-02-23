@@ -52,7 +52,7 @@ img {
     height: 100%;
     background: rgba(0, 0, 0, 0.06);
     display: none;
-    z-index: 3;
+    z-index: 6;
 }
 
 /* Kada je vidljiv */
@@ -363,6 +363,97 @@ img {
     cursor: pointer;
 }
 
+/* === SETTING === */
+/* Osnovni stil za settings meni */
+.settings {
+    display: block;
+    padding: 10px;
+    color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.08s ease-out;
+    transform: translateX(-100%);
+}
+
+/* Kada je settings meni otvoren */
+.settings.open {
+    transform: translateX(0);
+}
+
+.settings h3 {
+    padding: 0 0 10px 0;
+    font-size: 16px;
+    border-bottom: 1px solid;
+}
+
+/* Overlay za settings meni */
+.settings-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Kada je overlay aktivan */
+.settings-overlay.active {
+    display: block;
+}
+
+/* Stil za zatvaranje settings menija (opciono) */
+.close-settings {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Stil za sadržaj unutar settings menija */
+.settings-content {
+    padding: 20px;
+}
+
+/* Stil za naslov settings menija */
+.settings-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Stil za input polja, dugmad i ostale elemente unutar settings menija */
+.settings-content input,
+.settings-content button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.settings-content button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.settings-content button:hover {
+    background-color: #0056b3;
+}
+
+
 /* === CART === */
 .cart {
     position: fixed;
@@ -380,6 +471,7 @@ img {
     /* height: 100vh; */
     transform: translateY(100%);
     overflow-y: auto;
+    transition: all 0.04s ease-in;
 }
 
 .cart.open {
