@@ -1021,6 +1021,162 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    /*  Rutiranje
+    =================== */
+    if (!window.location.hash) {
+        window.location.hash = "#/slide=0";  // Postavi početni hash ako nije definisan
+    }
+
+    // Glavna router funkcija
+    function router() {
+        const hash = window.location.hash || "#/slide=0"; // Postavi početni hash ako nije definisan
+        const params = new URLSearchParams(hash.replace("#/", "")); // Pretvaranje hash-a u parametre
+
+        // Resetuj sve
+        toggleSettings('close');
+        toggleCart('close');
+        toggleCallMenu('close');
+        closePopup(); // Zatvori popup prozor
+
+        // Ažuriraj slajd ako postoji u hash-u
+        if (params.has("slide")) {
+            const slideIndex = parseInt(params.get("slide"), 10);
+            if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < state.categories.length) {
+                state.activeIndex = slideIndex;
+                updateClasses(); // Ažuriraj prikaz slajda
+            } else {
+                console.error("Nevažeći indeks slajda:", slideIndex);
+            }
+        }
+
+        // Aktiviraj odgovarajući ekran
+        if (params.has("settings")) {
+            toggleSettings('open');
+        } else if (params.has("cart")) {
+            toggleCart('open');
+        } else if (params.has("call")) {
+            toggleCallMenu('open');
+        } else if (params.has("popup")) {
+            // Ako je URL u formatu #/popup=categoryIndex-itemIndex
+            const popupValue = params.get("popup");
+            const [categoryIndex, itemIndex] = popupValue.split("-").map(Number);
+
+            // Validacija indeksa
+            if (
+                !isNaN(categoryIndex) && categoryIndex >= 0 && categoryIndex < state.categories.length &&
+                !isNaN(itemIndex) && itemIndex >= 0 && itemIndex < state.categories[categoryIndex]?.translations?.length
+            ) {
+                const category = state.categories[categoryIndex];
+                const item = category.translations[itemIndex];
+                openPopup(item, `${categoryIndex}-${itemIndex}`, categoryIndex, itemIndex);
+            } else {
+                console.error("Nevažeći indeksi za popup:", categoryIndex, itemIndex);
+            }
+        }
+    }
+
+    // Ažurira URL prilikom promene slajda
+    function updateSlideHash() {
+        const newHash = `#/slide=${state.activeIndex}`;
+        if (window.location.hash !== newHash) {
+            history.pushState(null, "", newHash); // Ažurira URL bez reload-a
+        }
+    }
+
+    // Nadogradnja funkcije za promenu slajda da ažurira hash
+    function changeSlide(direction) {
+        if (direction === 'next') {
+            state.activeIndex = (state.activeIndex + 1) % state.categories.length;
+        } else if (direction === 'prev') {
+            state.activeIndex = (state.activeIndex - 1 + state.categories.length) % state.categories.length;
+        }
+        stopAutoPlay();
+        updateClasses();
+        updateSlideHash(); // Ažuriranje URL-a
+    }
+
+    // Ažuriraj padajući meni da prikaže aktivnu stavku
+    function updateDropdownMenu() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item, index) => {
+            item.classList.toggle('active-menu-item', index === state.activeIndex);
+        });
+    }
+
+    // Postavi osluškivače za padajući meni
+    function setupDropdownMenuListeners() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                state.activeIndex = index;
+                updateClasses();
+                toggleDropdown('close');
+                updateSlideHash(); // Ažuriraj hash URL-a
+            });
+        });
+    }
+
+    // Presluškuj promene hash-a sa debounce-om
+    window.addEventListener("hashchange", debounce(router));
+    document.addEventListener("DOMContentLoaded", router);
+
+    // Dodajemo popstate listener kako bi podržali navigaciju "Napred" i "Nazad"
+    window.addEventListener("popstate", debounce(router));
+
+    // Funkcije za navigaciju
+    function openSettings() {
+        window.location.hash = "#/slide=" + state.activeIndex + "&settings";  // Prvo slajd, pa onda settings
+    }
+
+    function openCart() {
+        window.location.hash = "#/slide=" + state.activeIndex + "&cart";  // Prvo slajd, pa onda cart
+    }
+
+    function openCall() {
+        window.location.hash = "#/slide=" + state.activeIndex + "&call";  // Prvo slajd, pa onda call
+    }
+
+    function openPopupRoute(categoryIndex, itemIndex) {
+        if (
+            categoryIndex >= 0 && categoryIndex < state.categories.length &&
+            itemIndex >= 0 && itemIndex < state.categories[categoryIndex]?.translations?.length
+        ) {
+            window.location.hash = `#/slide=${state.activeIndex}&popup=${categoryIndex}-${itemIndex}`;  // Prvo slajd, pa onda popup
+        } else {
+            console.error("Nevažeći indeksi za popup:", categoryIndex, itemIndex);
+        }
+    }
+
+    // Klik na dugmad za navigaciju
+    document.querySelector(".setting").addEventListener("click", openSettings);
+    document.querySelector(".basket").addEventListener("click", openCart);
+    document.querySelector(".tel").addEventListener("click", openCall);
+
+    // Klik na stavke menija
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('item-image') || e.target.classList.contains('edit-item')) {
+            const menuCard = e.target.closest('.menu-card');
+            if (menuCard) {
+                const itemId = menuCard.getAttribute('data-id');
+                const [categoryIndex, itemIndex] = itemId.split('-').map(Number);
+                openPopupRoute(categoryIndex, itemIndex);
+            }
+        }
+    });
+
+    // Inicijalizacija padajućeg menija
+    function initializeMenu() {
+        state.categories.forEach((category, index) => {
+            createBox(category, index);
+            createDataSection(category, index);
+            createMenuItem(category, index);
+        });
+        setupDropdownMenuListeners(); // Postavi osluškivače za padajući meni
+    }
+    /* ============================= */
+
+
     // Inicijalizacija slajda na osnovu URL-a
     function initialize() {
         fetchData();
@@ -1030,4 +1186,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pokretanje inicijalizacije
     initialize();
 });
-/* možeš li doraditi kod kad mjenjam slajdove da se ispišu u url i istoriju pretraživača, da poćetni slajd bode 0 u url, ali i kad otvorim popup prozor, podešavanja, korpu, opcije pozivanja takođe budu ispisani u url i istoriji pretraživača.treba kad kliknem na dugme za napred / nazad u pretraživaču otvara / zatvara prozore ili menja slajdove kako se koja radnja dešavala.molim te ako možeš da ispoštuješ sve navedeno bez ikakvog preskakanja radnji */
