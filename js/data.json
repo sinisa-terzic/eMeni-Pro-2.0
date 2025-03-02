@@ -10,8 +10,8 @@
                     "cost_key": "12.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kraft pivo"
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -20,8 +20,9 @@
                     "cost_key": "5.50 €",
                     "imageSrc": "pr/5.jpg",
                     "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "drink_1": "Kafa 1",
+                        "drink_2": "Kafa 2",
+                        "drink_3": "Kafa 3"
                     }
                 }
             ]
@@ -36,9 +37,9 @@
                     "cost_key": "9.90 €",
                     "imageSrc": "pr/5.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1",
+                        "drink_3": "Kafa 3"
                     }
                 },
                 {
@@ -191,38 +192,37 @@
             ]
         },
         "cat_5": {
-            "details": "Karta vina",
-            "description": "Domaći specijaliteti sa mediteranskim začinima...",
+            "details": "Kafa",
+            "description": "Opis za kafe...",
             "translations": [
                 {
-                    "title_key": "Domaći pršut",
-                    "text_key": "Suhomesnati proizvod od svinjskog buta...",
-                    "cost_key": "12.50 €",
+                    "title_key": "Kafa 1",
+                    "text_key": "Opis kafe 1...",
+                    "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
-                    "title_key": "Strani pršut",
-                    "text_key": "Suhomesnati proizvod od stranog svinjskog buta...",
-                    "cost_key": "10.50 €",
-                    "imageSrc": "pr/2.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa"
-                    }
-                },
-                {
-                    "title_key": "Fabrički pršut",
-                    "text_key": "Suhomesnati proizvod od stranog svinjskog buta...",
+                    "title_key": "Kafa 2",
+                    "text_key": "Opis kafe 2...",
                     "cost_key": "5.50 €",
-                    "imageSrc": "pr/3.jpg",
-                    "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                    "imageSrc": "pr/5.jpg",
+                    "food": {
+                        "food_1": "Grill povrće"
+                    }
+                },
+                {
+                    "title_key": "Kafa 3",
+                    "text_key": "Opis kafe 23...",
+                    "cost_key": "7.50 €",
+                    "imageSrc": "pr/5.jpg",
+                    "food": {
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 }
             ]

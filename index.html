@@ -13,8 +13,6 @@
 
 <body>
 
-    <div id="overlay"></div> <!-- Overlay za tamnu pozadinu -->
-
     <!-- Header sekcija -->
     <header id="header" class="menu-container" role="banner">
         <!-- <div class="logo" aria-label="Logo">e-Meni<sup>&trade;</sup></div>  Logo stranice -->
@@ -52,8 +50,8 @@
         <div class="data-container" id="dataContainer" aria-live="polite" role="region"
             aria-label="Category information">
             <!-- Data items will be dynamically inserted here -->
+            <div id="scrollArrow" class="scroll-arrow">↓</div>
         </div>
-        <div id="scrollArrow" class="scroll-arrow">↓</div>
     </main>
 
     <!-- Popup prozor za prikaz detalja stavke -->
@@ -125,11 +123,12 @@
                     <img src="img/call/whatsapp_3536445.png" alt="WhatsApp icon"> WhatsApp
                 </a>
             </div>
+            <div id="overlay"></div> <!-- Overlay za tamnu pozadinu -->
         </div>
     </footer>
 
     <!-- Povezivanje JavaScript fajla -->
-    <script src="js/script-bc.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

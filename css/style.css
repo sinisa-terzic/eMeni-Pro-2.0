@@ -44,17 +44,6 @@ img {
     text-align: center;
 }
 
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.06);
-    display: none;
-    z-index: 6;
-}
-
 /* Kada je vidljiv */
 #overlay.active {
     display: block;
@@ -654,6 +643,17 @@ img {
     z-index: 1000;
 }
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.06);
+    display: none;
+    z-index: 6;
+}
+
 .call-option {
     display: flex;
     align-items: center;
@@ -760,16 +760,24 @@ img {
     display: block;
 }
 
+.recommended-item {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* strlica pod dolje */
 .scroll-arrow {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 80px;
+    /* right: 20px; */
     font-size: 24px;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
+    transition: opacity 0.1s ease-in-out;
+    /* z-index: 1000; */
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .scroll-arrow.visible {
