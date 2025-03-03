@@ -771,7 +771,7 @@ img {
     bottom: 80px;
     /* right: 20px; */
     font-size: 24px;
-    cursor: pointer;
+    /* cursor: pointer; */
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
     /* z-index: 1000; */
