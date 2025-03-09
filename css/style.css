@@ -57,12 +57,21 @@ img {
     align-items: center;
 }
 
-.logo,
-.hamburger {
+.logo {
     font-size: 20px;
-    cursor: pointer;
     user-select: none;
     padding: 8px 10px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.hamburgerBtn {
+    width: 30px;
+    margin-right: 10px;
 }
 
 .dropdown-overlay {
@@ -72,7 +81,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 5;
 }
 
@@ -81,10 +90,11 @@ img {
     position: absolute;
     background: white;
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     z-index: 6;
     right: 0;
     top: calc(100% - 2px);
+    top: 0;
 }
 
 .dropdown-content.show {
@@ -183,28 +193,54 @@ img {
 }
 
 /* === CONTROLS === */
+/* Osnovni stilovi za kontejner kontrola */
 .controls {
     text-align: center;
     margin: 5px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn {
-    padding: 5px 20px;
-    background: #3f51b5;
-    color: white;
+/* Stilovi za sva dugmad */
+.controls .btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    padding: 5px 20px;
+    background: #262a48;
+    color: white;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.btn.play {
-    background: #4CAF50;
+/* Stilovi za strelice (napred/nazad) */
+.controls .btn.prev,
+.controls .btn.next {
+    width: 30%;
+    height: 10px;
 }
 
-.btn.stop {
-    background-color: #af4c4c;
+/* Stilovi za dugme play */
+.controls .btn.play {
+    width: 30%;
+    height: 15px;
+    background: #2e8540;
+}
+
+/* Stilovi za dugme stop */
+.controls .btn.play.stop {
+    background-color: #981b1e;
+    /* Crvena boja za stop dugme */
+}
+
+/* Stilovi za slike unutar dugmadi */
+.controls .btn img {
+    width: 100%;
+    height: 100%;
 }
 
 /* === INFO CONTAINER === */
@@ -219,10 +255,10 @@ img {
 .data-item {
     position: absolute;
     width: 100%;
-    height: auto;
+    height: 3000px;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
     color: #3f51b5;
     transition: transform 0.25s ease-out, opacity 0.25s ease-out;
     opacity: 0;
@@ -230,12 +266,16 @@ img {
     padding: 10px 0 60px 0;
 }
 
+.items-title {
+    text-align: center;
+}
+
 .menu-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
-    margin-top: 1rem;
+    padding-top: 1rem;
 }
 
 .menu-card img {
@@ -244,6 +284,7 @@ img {
 }
 
 .card-content {
+    display: grid;
     width: 100%;
     padding: 0 10px;
 }
@@ -257,6 +298,11 @@ img {
 .item-footer {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+}
+
+.item-footer {
+    align-self: self-end;
 }
 
 .error-container {
@@ -561,13 +607,17 @@ img {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ccc;
-    gap: 10px;
+    gap: 5px;
 }
 
 .title-quantity {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.quantity-price {
+    font-size: 14px;
 }
 
 .edit-item,
@@ -620,13 +670,13 @@ img {
     height: 50px;
     padding: 0 20px;
     bottom: 0;
-    color: #fff;
-    background-color: #607D8B;
+    background-color: #262a48;
     z-index: 3;
+    border-top: 3px solid #fff;
 }
 
 #phoneNumber {
-    padding: 10px;
+    width: 30px;
 }
 
 .call-options {
@@ -649,7 +699,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.3);
     display: none;
     z-index: 6;
 }
@@ -678,22 +728,29 @@ img {
     width: 6vw;
 }
 
-.basket {
-    display: flex;
+.basketBtn {
+    width: 35px;
+    position: relative;
+}
+
+#settingBtn {
+    width: 30px;
 }
 
 #checkboxCount {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     justify-content: center;
     align-items: center;
     background-color: red;
     color: white;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 15px;
     display: none;
+    position: absolute;
+    top: -5px;
+    right: 0px;
 }
-
 
 .popup-overlay {
     display: none;
@@ -768,18 +825,171 @@ img {
 /* strlica pod dolje */
 .scroll-arrow {
     position: fixed;
-    bottom: 80px;
-    /* right: 20px; */
-    font-size: 24px;
-    /* cursor: pointer; */
+    bottom: 70px;
+    right: 0;
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
-    /* z-index: 1000; */
+    /* transition: opacity 0.4s ease; */
     display: flex;
     justify-content: center;
-    width: 100%;
+    left: 0;
+}
+
+.scroll-arrow img {
+    width: 8%;
 }
 
 .scroll-arrow.visible {
     opacity: 1;
+    z-index: 3;
+    /* transition: opacity 1s ease; */
+}
+
+
+/* Osnovni stilovi za dugme za pretragu */
+.searchBtn {
+    width: 17px;
+}
+
+.searchBtn:hover {
+    background-color: #0056b3;
+    /* Tamnija plava boja na hover */
+}
+
+.searchBtn[aria-expanded="true"] {
+    background-color: #0056b3;
+    /* Tamnija plava boja kada je pretraga otvorena */
+}
+
+/* Stilovi za kontejner pretrage */
+.search-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 4;
+    width: 100%;
+    /* height: 100vh; */
+    transform: translateY(-100%);
+    overflow-y: auto;
+    transition: all 0.2s ease-in-out;
+}
+
+.search-container.open {
+    transform: translateY(0);
+}
+
+/* Stilovi za zaglavlje pretrage */
+.search-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid;
+}
+
+.search-header h3 {
+    font-size: 16px;
+    padding: 0 0 10px 0;
+}
+
+.search-header h3:hover {
+    color: #007bff;
+    /* Plava boja na hover */
+}
+
+.search-box {
+    display: flex;
+    width: 100%;
+}
+
+/* Stilovi za kontejner filtera */
+#filterContainer {
+    width: 70%;
+    /* max-width: 600px; */
+    margin-bottom: 20px;
+}
+
+#filterContainer input[type="radio"] {
+    margin-right: 10px;
+}
+
+#filterContainer label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+#filterContainer label:hover {
+    color: #007bff;
+    /* Plava boja na hover */
+}
+
+#searchContainer {
+    width: 100%;
+}
+
+/* Stilovi za polje za unos */
+#searchInput {
+    width: 100%;
+    /*  max-width: 600px; */
+    padding: 5px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #007bff;
+    /* Plava boja kada je polje u fokusu */
+    outline: none;
+}
+
+/* Stilovi za rezultate pretrage */
+.search-results {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f9f9f9;
+    /* Svetlo siva pozadina na hover */
+}
+
+/* Animacija za highlight stavke */
+@keyframes highlight {
+    0% {
+        background-color: rgba(255, 235, 59, 0.5);
+        /* Žuta boja sa providnošću */
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.highlight {
+    animation: highlight 2.5s ease;
 }

@@ -10,6 +10,7 @@
                 {
                     "title_key": "Pršut",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -20,6 +21,7 @@
                 {
                     "title_key": "Sir",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -30,6 +32,7 @@
                 {
                     "title_key": "Sir iz ulja",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -40,6 +43,7 @@
                 {
                     "title_key": "Bokeška zakuska",
                     "text_key": "700 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "20.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -50,6 +54,7 @@
                 {
                     "title_key": "Slana riba",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -60,6 +65,7 @@
                 {
                     "title_key": "Riblja pašteta",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -73,6 +79,7 @@
                 {
                     "title_key": "Riblja supa",
                     "text_key": "300 ml.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -89,6 +96,7 @@
                 {
                     "title_key": "Rižoto sa povrćem",
                     "text_key": "300 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/5.jpg",
                     "drink": {
@@ -100,6 +108,7 @@
                 {
                     "title_key": "Špageti sa sirom",
                     "text_key": "300 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
@@ -111,6 +120,7 @@
                 {
                     "title_key": "Špageti sa povrćem",
                     "text_key": "300 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/4.jpg",
                     "drink": {
@@ -122,6 +132,7 @@
                 {
                     "title_key": "Taljatela",
                     "text_key": "350 gr. / sa miješanim gljivama i tunjevinom",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/6.jpg",
                     "drink": {
@@ -139,6 +150,7 @@
                 {
                     "title_key": "Vitaminska salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -150,6 +162,7 @@
                 {
                     "title_key": "Miješana salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -161,6 +174,7 @@
                 {
                     "title_key": "Zelena salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -172,6 +186,7 @@
                 {
                     "title_key": "Šopska salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -183,6 +198,7 @@
                 {
                     "title_key": "Kupus salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -194,6 +210,7 @@
                 {
                     "title_key": "Paradajz",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -205,6 +222,7 @@
                 {
                     "title_key": "Masline",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -216,6 +234,7 @@
                 {
                     "title_key": "Kropmpir salata",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -227,6 +246,7 @@
                 {
                     "title_key": "Pomfrit",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -238,6 +258,7 @@
                 {
                     "title_key": "Blitva",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -249,6 +270,7 @@
                 {
                     "title_key": "Geilovano povrće",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -269,6 +291,7 @@
                 {
                     "title_key": "Riba I klase",
                     "text_key": "1 kg.",
+                    "description_key": "bla bla bla",
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -280,6 +303,7 @@
                 {
                     "title_key": "Riba II klase",
                     "text_key": "1 kg.",
+                    "description_key": "bla bla bla",
                     "cost_key": "30.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -294,6 +318,7 @@
                 {
                     "title_key": "Pržene lignje sa blitvom",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -305,6 +330,7 @@
                 {
                     "title_key": "Lignje na žaru sa blitvom",
                     "text_key": "300 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -316,6 +342,7 @@
                 {
                     "title_key": "Punjene lignje sa gamborima",
                     "text_key": "400 gr. / prilog blitva",
+                    "description_key": "bla bla bla",
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -327,6 +354,7 @@
                 {
                     "title_key": "Punjene lignje sa pršutom i sirom",
                     "text_key": "300 gr. / prilog blitva",
+                    "description_key": "bla bla bla",
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -341,6 +369,7 @@
                 {
                     "title_key": "Bakalar",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "17.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -355,6 +384,7 @@
                 {
                     "title_key": "Salata od hobotnice",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -366,6 +396,7 @@
                 {
                     "title_key": "Hobotnica na žaru",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -380,6 +411,7 @@
                 {
                     "title_key": "Prženi gambori",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -391,6 +423,7 @@
                 {
                     "title_key": "Gambori na žaru",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -402,6 +435,7 @@
                 {
                     "title_key": "Gambori na buzari",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -413,6 +447,7 @@
                 {
                     "title_key": "Špageti sa gamborima",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -424,6 +459,7 @@
                 {
                     "title_key": "Rižoto od gambora",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -438,6 +474,7 @@
                 {
                     "title_key": "Rižoto od sipe",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -452,6 +489,7 @@
                 {
                     "title_key": "Brodet",
                     "text_key": "300 gr. / od sipa sa palentom",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -466,6 +504,7 @@
                 {
                     "title_key": "Mušlje na buzaru",
                     "text_key": "0,50 kg.",
+                    "description_key": "bla bla bla",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -480,6 +519,7 @@
                 {
                     "title_key": "alla \"Bokeški gušti\"",
                     "text_key": "900 gr. / za 2 osobe",
+                    "description_key": "bla bla bla",
                     "cost_key": "35.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -491,6 +531,7 @@
                 {
                     "title_key": "alla \"Bokeški gušti\"",
                     "text_key": "1 kg. / za 2 osobe ",
+                    "description_key": "bla bla bla",
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -503,7 +544,7 @@
         },
         "Karta_Vina": {
             "details": "Karta vina",
-            "description": "da upotpunjuje jelovnik - različitih ukusa i stilova.",
+            "description": "da upotpuni jelovnik - različitih ukusa i stilova.",
             "translations": [
                 {
                     "details": "Bijelo vino"
@@ -511,6 +552,7 @@
                 {
                     "title_key": "Krstač",
                     "text_key": "1l / Alc.13,5%",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -521,6 +563,7 @@
                 {
                     "title_key": "Krstač",
                     "text_key": "0,75l / Alc.13,5%",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -531,6 +574,7 @@
                 {
                     "title_key": "Shardonnay",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -541,6 +585,7 @@
                 {
                     "title_key": "Sauvignon",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -551,6 +596,7 @@
                 {
                     "title_key": "Malvazija Plantaže",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -561,6 +607,7 @@
                 {
                     "title_key": "Malvazija",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -571,6 +618,7 @@
                 {
                     "title_key": "Pošip Čara",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -581,6 +629,7 @@
                 {
                     "title_key": "Pošip Intrade",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -591,6 +640,7 @@
                 {
                     "title_key": "Laguna",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -601,6 +651,7 @@
                 {
                     "title_key": "Graševina",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -611,6 +662,7 @@
                 {
                     "title_key": "Koziović",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -621,6 +673,7 @@
                 {
                     "title_key": "Arhonte",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -631,6 +684,7 @@
                 {
                     "title_key": "Laguna",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -641,6 +695,7 @@
                 {
                     "title_key": "Graševina",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -651,6 +706,7 @@
                 {
                     "title_key": "Shardonnay",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -661,6 +717,7 @@
                 {
                     "title_key": "Malvazija",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
@@ -674,6 +731,7 @@
                 {
                     "title_key": "Vranac",
                     "text_key": "1 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -685,6 +743,7 @@
                 {
                     "title_key": "Vranac",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -696,6 +755,7 @@
                 {
                     "title_key": "Vranac Pro Corde",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -707,6 +767,7 @@
                 {
                     "title_key": "Cabernet",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -718,6 +779,7 @@
                 {
                     "title_key": "Meriot",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -729,6 +791,7 @@
                 {
                     "title_key": "Vladika",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -740,6 +803,7 @@
                 {
                     "title_key": "Zlatan Plavac",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -751,6 +815,7 @@
                 {
                     "title_key": "Vranac",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -762,6 +827,7 @@
                 {
                     "title_key": "Plavac",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -776,6 +842,7 @@
                 {
                     "title_key": "Kutjevo",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -787,6 +854,7 @@
                 {
                     "title_key": "Kutjevo",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -798,6 +866,7 @@
                 {
                     "title_key": "Roze Crnogorski",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -809,6 +878,7 @@
                 {
                     "title_key": "Roze Crnogorski",
                     "text_key": "0,187 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -823,6 +893,7 @@
                 {
                     "title_key": "Moje vino (poluslatko)",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
@@ -833,77 +904,76 @@
         },
         "Žestoka_Pića": {
             "details": "Žestoka pića",
-            "description": "Izbor idealan kao aperitiv - rakija, viski, rum ...",
+            "description": "izbor idealan kao aperitiv - rakija, viski, rum ...",
             "translations": [
                 {
                     "title_key": "Travarica",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Lozova rakija",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/2.jpg",
                     "food": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Viljamovka",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Pelinkovac",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Vodka",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Gin",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Čokanj",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
@@ -912,51 +982,51 @@
                 {
                     "title_key": "Ballantines",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Johnie Walker",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Black Label",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Chivas Regal",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Jack Daniels",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
@@ -965,68 +1035,68 @@
                 {
                     "title_key": "Jaggermeister",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Baileys",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Amaro Montenegro",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Ramazzoti",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Martini",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Aperol",
                     "text_key": "0.03l",
+                    "description_key": "bla bla bla",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "food_1": "Grupa 1"
                     }
                 }
             ]
         },
         "Piva_Cyders": {
             "details": "Pivo / Cyders",
-            "description": "Osvežavajuća alkoholna pića – izbor piva i voćnih cidra.",
+            "description": "osvežavajuća alkoholna pića – izbor piva i voćnih cidra.",
             "translations": [
                 {
                     "details": "Pivo"
@@ -1034,52 +1104,51 @@
                 {
                     "title_key": "Tuborg",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.20 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Budweiser (svijetli i tamni)",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.30 €",
                     "imageSrc": "pr/2.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Calsberg",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/3.jpg",
-                    "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Točeno - malo",
                     "text_key": "0,30 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
-                    "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Točeno - veliko",
                     "text_key": "0,50 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
-                    "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
@@ -1088,19 +1157,18 @@
                 {
                     "title_key": "Somersby",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 }
             ]
         },
         "Bezalkoholna_Pića": {
             "details": "Bezalkoholna pića",
-            "description": "Osvežavajući – sokovi, voda, limunada, kafa...",
+            "description": "osvežavajući – sokovi, voda, limunada, kafa...",
             "translations": [
                 {
                     "details": "Topli napici"
@@ -1108,45 +1176,41 @@
                 {
                     "title_key": "Kafa espresso",
                     "text_key": "0,01",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Kafa sa mlijekom",
                     "text_key": "0,03",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.20 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Kapućino",
                     "text_key": "0,03",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Čaj",
                     "text_key": "0,05",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
@@ -1155,45 +1219,41 @@
                 {
                     "title_key": "Gazirani sok limenka",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.70 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Prirodni sok flašica",
                     "text_key": "0,20 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.70 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Ice Tea",
                     "text_key": "0,20 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.80 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Limunada",
                     "text_key": "0,20 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
@@ -1202,45 +1262,41 @@
                 {
                     "title_key": "Kisela voda - mala",
                     "text_key": "0,25 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Kisela voda - velika",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Negazirana voda - mala",
                     "text_key": "0,33 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 },
                 {
                     "title_key": "Negazirana voda -velika",
                     "text_key": "0,75 l",
+                    "description_key": "bla bla bla",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
-                    "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                    "food": {
+                        "food_1": "Grupa 1"
                     }
                 }
             ]
@@ -1261,7 +1317,8 @@
                 },
                 {
                     "title_key": "Grupa 2",
-                    "text_key": "Suhomesnati proizvod od stranog svinjskog buta...",
+                    "text_key": "",
+                    "description_key": "bla bla bla",
                     "cost_key": "10.50 €",
                     "imageSrc": "pr/2.jpg",
                     "drink": {
@@ -1270,7 +1327,8 @@
                 },
                 {
                     "title_key": "Grupa 3",
-                    "text_key": "Suhomesnati proizvod od stranog svinjskog buta...",
+                    "text_key": "",
+                    "description_key": "bla bla bla",
                     "cost_key": "5.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
@@ -1287,6 +1345,7 @@
                 {
                     "title_key": "Voćni kolač",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -1298,6 +1357,7 @@
                 {
                     "title_key": "Čokoladni kolač",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
@@ -1309,6 +1369,7 @@
                 {
                     "title_key": "Slani kolač",
                     "text_key": "200 gr.",
+                    "description_key": "bla bla bla",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {

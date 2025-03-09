@@ -17,13 +17,37 @@
     <header id="header" class="menu-container" role="banner">
         <!-- <div class="logo" aria-label="Logo">e-Meni<sup>&trade;</sup></div>  Logo stranice -->
         <div class="logo" aria-label="Logo">LOGO</div> <!-- Logo stranice -->
-        <!-- Hamburger meni za mobilne uređaje -->
-        <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dropdownMenu">
-            ☰
-        </button>
-        <!-- Padajući meni (dropdown) -->
-        <div class="dropdown-content" id="dropdownMenu" role="menu"></div>
-        <div class="dropdown-overlay" id="dropdownOverlay"></div>
+
+        <div class="header-nav">
+            <!-- search -->
+            <button class="searchBtn" aria-label="Open search" aria-expanded="false" aria-controls="searchContainer">
+                <img src="img/command/search.svg" alt="Arrow left">
+            </button>
+            <div id="search" class="search-container">
+                <div class="search-header">
+                    <h3 id="searchTitle" class="back-to-menu">← Meni</h3>
+                </div>
+                <div class="search-box">
+                    <div id="filterContainer">
+                        <p>Filteri</p>
+                        <!-- Radio dugmad će se dinamički generisati -->
+                    </div>
+                    <div id="searchContainer">
+                        <p>Pretraga</p>
+                        <input type="text" id="searchInput" placeholder="Unesite naziv stavke">
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamburger meni za mobilne uređaje -->
+            <button class="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="dropdownMenu">
+                <img class="" src="img/command/hamburger.svg" alt="hamburger-menu">
+            </button>
+            <!-- Padajući meni (dropdown) -->
+            <div class="dropdown-content" id="dropdownMenu" role="menu"></div>
+            <div class="dropdown-overlay" id="dropdownOverlay"></div>
+        </div>
     </header>
 
     <main>
@@ -40,17 +64,25 @@
 
         <!-- Kontrole za karusel (prethodna, play, sljedeća) -->
         <div id="control" class="controls" role="group" aria-label="Carousel controls">
-            <button class="btn prev" aria-label="Previous category">← &nbsp; Nazad</button>
-            <!-- Prethodna kategorija -->
-            <button class="btn play" aria-label="Play categories">▶ &nbsp; Auto-play</button> <!-- Auto-play -->
-            <button class="btn next" aria-label="Next category">Napred &nbsp; →</button> <!-- Sljedeća kategorija -->
+            <button class="btn prev" aria-label="Previous category">
+                <img src="img/command/arrow-left.svg" alt="arrow-left">
+            </button>
+            <button class="btn play" aria-label="Play categories">
+                <img src="img/command/play.svg" alt="play">
+            </button>
+            <button class="btn next" aria-label="Next category">
+                <img src="img/command/arrow-right.svg" alt="arrow-right">
+            </button>
         </div>
 
         <!-- Kontejner za prikaz detalja kategorija -->
         <div class="data-container" id="dataContainer" aria-live="polite" role="region"
             aria-label="Category information">
             <!-- Data items will be dynamically inserted here -->
-            <div id="scrollArrow" class="scroll-arrow">↓</div>
+            <div id="scrollArrow" class="scroll-arrow">
+                <!-- &#8615; -->
+                <img src="img/command/arrow.png" alt="arrow-down">
+            </div>
         </div>
     </main>
 
@@ -95,7 +127,7 @@
     <footer id="infoMenu" class="infoMenu" role="navigation" aria-label="Utility menu">
         <!-- Postavke -->
         <div class="setting" role="button" aria-label="Settings">
-            <span id="setting">Sett</span>
+            <button id="settingBtn"><img class="" src="img/command/setting.svg" alt="setting"></button>
             <div class="settings" role="dialog">
                 <h3 id="settingTitle" class="back-to-menu" role="button" tabindex="0"> ← Meni</h3>
                 <!-- Dodajte ostale elemente settings menija ovde -->
@@ -103,13 +135,13 @@
             <div class="settings-overlay"></div>
         </div>
         <!-- Korpa sa brojačem stavki -->
-        <div class="basket" role="button" aria-label="Shopping cart" aria-expanded="false" aria-controls="cart">
-            <span>Korpa</span>
+        <button class="basketBtn" role="button" aria-label="Shopping cart" aria-expanded="false" aria-controls="cart">
+            <img class="" src="img/command/cart.svg" alt="hamburger-menu">
             <span id="checkboxCount" aria-live="polite">0</span> <!-- Brojač stavki u korpi -->
-        </div>
+        </button>
         <!-- Kontakt -->
         <div class="tel" role="button" aria-label="Contact">
-            <span id="phoneNumber">tel</span>
+            <button id="phoneNumber"><img class="" src="img/menu/call-bell.png" alt="call-bell"></button>
             <div class="call-options" id="callOptions">
                 <!-- Dugme X -->
                 <button class="call-option-close-btn" aria-label="Zatvori">×</button>
@@ -128,7 +160,7 @@
     </footer>
 
     <!-- Povezivanje JavaScript fajla -->
-    <script src="js/script.js"></script>
+    <script src="js/script-bc.js"></script>
 </body>
 
 </html>
