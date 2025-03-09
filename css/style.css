@@ -255,7 +255,7 @@ img {
 .data-item {
     position: absolute;
     width: 100%;
-    height: 3000px;
+    height: 5000px;
     justify-content: center;
     align-items: center;
     /* text-align: center; */

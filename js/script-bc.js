@@ -356,8 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrollArrow && dataContainer) {
             const menuCards = dataItem.querySelectorAll('.data-item .menu-card');
 
-            if (menuCards.length >= 2) {
-                const secondToLastMenuCard = menuCards[menuCards.length - 2]; // Uzimamo predzadnji element
+            if (menuCards.length >= 3) {
+                const secondToLastMenuCard = menuCards[menuCards.length - 3]; // Uzimamo predzadnji element
 
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
