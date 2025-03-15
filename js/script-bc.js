@@ -192,17 +192,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debounce funkcija za ograničenje broja poziva funkcije
     const debounce = (func, wait = 100, immediate = false) => {
         let timeout;
-        return function (...args) {
-            const context = this;
+
+        const debounced = (...args) => {
             const callNow = immediate && !timeout;
+
             clearTimeout(timeout);
+
             timeout = setTimeout(() => {
                 timeout = null;
-                if (!immediate) func.apply(context, args);
+                if (!immediate) func(...args);
             }, wait);
-            if (callNow) func.apply(context, args);
+
+            if (callNow) func(...args);
         };
+
+        debounced.cancel = () => clearTimeout(timeout);
+
+        return debounced;
     };
+
 
     // Funkcije za otvaranje i zatvaranje menija s debounce-om
     const debouncedOpenSettings = debounce(() => toggleSettings('open'));
