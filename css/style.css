@@ -385,6 +385,10 @@ img {
     position: relative;
 }
 
+.popup-content img {
+    width: 100%;
+}
+
 .popup-header {
     display: flex;
     justify-content: space-between;
