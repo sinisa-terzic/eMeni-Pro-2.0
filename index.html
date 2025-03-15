@@ -21,7 +21,7 @@
         <div class="header-nav">
             <!-- search -->
             <button class="searchBtn" aria-label="Open search" aria-expanded="false" aria-controls="searchContainer">
-                <img src="img/command/search.svg" alt="Arrow left">
+                <img src="img/command/search.svg" alt="search">
             </button>
             <div id="search" class="search-container">
                 <div class="search-header">
@@ -52,10 +52,10 @@
 
     <main>
         <!-- Progress bar za prikaz napretka (npr. u karuselu) -->
-        <div id="progress" class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+        <!-- <div id="progress" class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0"
             aria-valuemax="100">
-            <div class="progress-bar" id="progressBar"></div> <!-- Progress bar -->
-        </div>
+            <div class="progress-bar" id="progressBar"></div>
+        </div> -->
 
         <!-- Karusel za prikaz kategorija -->
         <div id="carousel" class="container" role="region" aria-label="Carousel">
@@ -67,9 +67,7 @@
             <button class="btn prev" aria-label="Previous category">
                 <img src="img/command/arrow-left.svg" alt="arrow-left">
             </button>
-            <button class="btn play" aria-label="Play categories">
-                <img src="img/command/play.svg" alt="play">
-            </button>
+            <input type="range" id="slider" min="0" max="100" value="0" aria-label="Slider to navigate categories">
             <button class="btn next" aria-label="Next category">
                 <img src="img/command/arrow-right.svg" alt="arrow-right">
             </button>
@@ -95,8 +93,14 @@
     <div id="cart" class="cart" role="region" aria-label="Shopping cart">
         <div class="cart-header">
             <h3 id="cartTitle" class="back-to-menu">← Meni</h3>
-            <button class="hamburger cart-hamburger">☰</button>
+            <button class="searchBtn" aria-label="Open search" aria-expanded="false" aria-controls="searchContainer">
+                <img src="img/command/search.svg" alt="search">
+            </button>
+            <button class="hamburgerBtn cart-hamburger">
+                <img class="" src="img/command/hamburger.svg" alt="hamburger-menu">
+            </button>
         </div>
+
         <div id="dropdownMenu" class="dropdown-menu">
             <!-- Stavke padajućeg menija -->
         </div>

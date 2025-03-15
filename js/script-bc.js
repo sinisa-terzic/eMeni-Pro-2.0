@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Konstante
     const JSON_PATH = 'js/data-copy.json'; // Putanja do JSON fajla sa podacima
     const IMG_BASE_PATH = 'img/food/'; // Osnovna putanja do slika
-    const AUTO_PLAY_DELAY = 3600; // Kašnjenje za auto-play u milisekundama
 
     // DOM elementi
     const elements = {
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownOverlay: document.getElementById('dropdownOverlay'),
         prevBtn: document.querySelector('.btn.prev'),
         nextBtn: document.querySelector('.btn.next'),
-        playBtn: document.querySelector('.btn.play'),
         hamburgerBtn: document.querySelector('.hamburgerBtn'),
         dataContainer: document.getElementById('dataContainer'),
         selectedItemsContainer: document.getElementById('selectedItems'),
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         callOptions: document.getElementById('callOptions'),
         overlay: document.getElementById('overlay'),
         closeBtn: document.querySelector('.call-option-close-btn'),
-        progressBar: document.getElementById('progressBar'),
         settingsContainer: document.querySelector('.settings'),
         settingsOverlay: document.querySelector('.settings-overlay'),
         settingBtn: document.getElementById('settingBtn'),
@@ -46,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterContainer: document.getElementById('filterContainer'),
         searchResults: document.getElementById('searchResults'),
         scrollArrow: document.getElementById('scrollArrow'),
+        slider: document.getElementById('slider'),
     };
 
     // Stanje aplikacije
@@ -53,45 +51,140 @@ document.addEventListener('DOMContentLoaded', () => {
         activeIndex: 0,
         categories: [],
         selectedItems: [],
-        isAutoPlayActive: false,
-        autoPlayInterval: null,
-        slideHistory: [], // Istorija pregledanih slajdova
-        itemHistory: [],  // Istorija pregledanih stavki
+        slideHistory: [],
+        itemHistory: [],
+        popupOpen: false,
+        callMenuOpen: false,
+        searchQuery: '',
+        cartOpen: false,
+        settingsOpen: false,
+        searchOpen: false,
     };
+
+    // Funkcija za ažuriranje URL-a
+    function updateURL() {
+        const url = new URL(window.location);
+
+        // Postavljamo parametre u zavisnosti od stanja
+        url.searchParams.set('slide', state.activeIndex);
+        if (state.popupOpen) url.searchParams.set('popup', 'true');
+        if (state.callMenuOpen) url.searchParams.set('call', 'true');
+        if (state.searchQuery) url.searchParams.set('search', state.searchQuery);
+        if (state.cartOpen) url.searchParams.set('cart', 'true');
+        if (state.settingsOpen) url.searchParams.set('settings', 'true');
+        if (state.dropdownOpen) url.searchParams.set('dropdown', 'true');
+
+        // Ako neki od elemenata nisu aktivni, uklanjamo odgovarajući parametar iz URL-a
+        if (!state.popupOpen) url.searchParams.delete('popup');
+        if (!state.callMenuOpen) url.searchParams.delete('call');
+        if (!state.searchQuery) url.searchParams.delete('search');
+        if (!state.cartOpen) url.searchParams.delete('cart');
+        if (!state.settingsOpen) url.searchParams.delete('settings');
+        if (!state.dropdownOpen) url.searchParams.delete('dropdown');
+
+        // Dodajemo novo stanje u istoriju pretraživača
+        history.pushState(state, '', url);
+    }
+
+    // Funkcija za čitanje stanja iz URL-a
+    function readURL() {
+        const url = new URL(window.location);
+        const stateFromURL = {
+            activeIndex: parseInt(url.searchParams.get('slide')) || 0, // Pročitaj indeks slajda
+            popupOpen: url.searchParams.get('popup') || null,
+            callMenuOpen: url.searchParams.get('call') || null,
+            searchQuery: url.searchParams.get('search') || '',
+            cartOpen: url.searchParams.get('cart') || null,
+            settingsOpen: url.searchParams.get('settings') || null,
+            dropdownOpen: url.searchParams.get('dropdown') || null,
+        };
+        return stateFromURL;
+    }
+
+    // Funkcija za primenu stanja iz URL-a
+    function applyURLState(stateFromURL) {
+        if (stateFromURL.activeIndex !== undefined) {
+            state.activeIndex = stateFromURL.activeIndex;
+            updateClasses(); // Ažuriraj prikaz slajdova
+        }
+        if (stateFromURL.popupOpen === 'true') {
+            state.popupOpen = true;
+            elements.popupOverlay.style.display = 'flex';
+        } else {
+            state.popupOpen = false;
+            elements.popupOverlay.style.display = 'none';
+        }
+        if (stateFromURL.callMenuOpen === 'true') {
+            toggleCallMenu('open');
+        } else {
+            toggleCallMenu('close');
+        }
+        if (stateFromURL.searchQuery) {
+            elements.searchInput.value = stateFromURL.searchQuery;
+            searchItem(stateFromURL.searchQuery);
+        } else {
+            toggleSearch('close'); // Zatvaramo pretragu i uklanjamo fokus
+        }
+        if (stateFromURL.cartOpen === 'true') {
+            toggleCart('open');
+        } else {
+            toggleCart('close');
+        }
+        if (stateFromURL.settingsOpen === 'true') {
+            toggleSettings('open');
+        } else {
+            toggleSettings('close');
+        }
+        if (stateFromURL.dropdownOpen === 'true') {
+            toggleDropdown('open');
+        } else {
+            toggleDropdown('close');
+        }
+    }
+
+    // Event listener za promene u URL-u
+    window.addEventListener('popstate', (event) => {
+        if (event.state) {
+            applyURLState(event.state);
+        } else {
+            closeAllMenus(); // Zatvaramo sve otvorene elemente
+        }
+    });
+
+    // Inicijalizacija stanja iz URL-a prilikom učitavanja stranice
+    const initialState = readURL();
+    applyURLState(initialState);
 
     // Funkcija za čuvanje stanja aplikacije u localStorage
     function saveAppStateToLocalStorage() {
         const appState = {
-            activeIndex: state.activeIndex, // Sačuvaj aktivni indeks
+            activeIndex: state.activeIndex,
             selectedItems: state.selectedItems,
-            isAutoPlayActive: state.isAutoPlayActive,
             slideHistory: state.slideHistory,
             itemHistory: state.itemHistory,
             dropdownState: {
-                isDropdownOpen: elements.dropdownMenu.classList.contains('show'), // Da li je padajući meni otvoren
+                isDropdownOpen: elements.dropdownMenu.classList.contains('show'),
             },
         };
         localStorage.setItem('appState', JSON.stringify(appState));
     }
 
+    // Funkcija za učitavanje stanja aplikacije iz localStorage
     function loadAppStateFromLocalStorage() {
         const savedState = localStorage.getItem('appState');
         if (savedState) {
             const parsedState = JSON.parse(savedState);
-            state.activeIndex = parsedState.activeIndex || 0; // Učitaj aktivni indeks
+            state.activeIndex = parsedState.activeIndex || 0;
             state.selectedItems = parsedState.selectedItems || [];
-            state.isAutoPlayActive = parsedState.isAutoPlayActive || false;
             state.slideHistory = parsedState.slideHistory || [];
             state.itemHistory = parsedState.itemHistory || [];
 
-            // Ažuriraj padajući meni na osnovu učitanog stanja
             if (parsedState.dropdownState) {
                 if (parsedState.dropdownState.isDropdownOpen) {
-                    toggleDropdown('open'); // Otvori padajući meni ako je bio otvoren
+                    toggleDropdown('open');
                 }
             }
 
-            // Postavi aktivni slajd na osnovu učitanog indeksa
             updateClasses();
         }
     }
@@ -150,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         state.selectedItems.forEach(item => {
             const quantityElement = document.querySelector(`.menu-card[data-id="${item.id}"] .quantity`);
             const priceElement = document.querySelector(`.menu-card[data-id="${item.id}"] .price`);
-            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] h3 .item-checkbox`);
+            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] .item-checkbox`);
             const titleQuantityPriceElement = document.querySelector(`.menu-card[data-id="${item.id}"] .title-quantity-price`);
 
             if (quantityElement && priceElement && checkbox && titleQuantityPriceElement) {
@@ -240,9 +333,11 @@ document.addEventListener('DOMContentLoaded', () => {
         menuItem.addEventListener('click', () => {
             state.activeIndex = index; // Postavi aktivni indeks
             updateClasses(); // Ažuriraj klase
+            updateSlider(); // Ažuriraj slider
             toggleDropdown('close'); // Zatvori padajući meni
             toggleCart('close'); // Zatvori korpu
             saveAppStateToLocalStorage(); // Sačuvaj stanje u localStorage
+            scrollArrow.classList.remove('visible');
         });
         elements.dropdownMenu.appendChild(menuItem);
     }
@@ -252,7 +347,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const box = document.createElement('div');
         box.className = 'box';
         box.innerHTML = `
-            <p class="box-text">${category.details || 'Nepoznata kategorija'}</p>
+            <div class="box-text">
+               <div>${category.details || 'Nepoznata kategorija'}</div>
+                <div class="category-description">${category.description || 'Nema opisa.'}</div>
+            </div>
             <div class="image-overlay"></div>
         `;
         box.style.backgroundImage = `url('${IMG_BASE_PATH}cat/${index + 1}.jpg')`;
@@ -332,10 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join('') || '<p>Nema dostupnih stavki.</p>';
 
             dataItem.innerHTML = `
-                <div class="items-title">
+               <!--  <div class="items-title">
                     <h2>${category.details || 'Nepoznata kategorija'}</h2>
                     <div class="category-description">${category.description || 'Nema opisa.'}</div>
-                </div>
+                </div> -->
                 <div class="items-grid">
                     ${itemsGridContent}
                 </div>
@@ -356,8 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrollArrow && dataContainer) {
             const menuCards = dataItem.querySelectorAll('.data-item .menu-card');
 
-            if (menuCards.length >= 3) {
-                const secondToLastMenuCard = menuCards[menuCards.length - 3]; // Uzimamo predzadnji element
+            if (menuCards.length >= 2) {
+                const secondToLastMenuCard = menuCards[menuCards.length - 2]; // Uzimamo predzadnji element
 
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -433,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const incrementBtn = control.querySelector('.increment');
             const quantityElement = control.querySelector('.quantity');
             const priceElement = control.closest('.card-content').querySelector('.price');
-            const checkbox = control.closest('.card-content').querySelector('h3 .item-checkbox');
+            const checkbox = control.closest('.card-content').querySelector('.item-checkbox');
 
             if (!decrementBtn || !incrementBtn || !quantityElement || !priceElement || !checkbox) {
                 console.error('Neki od elemenata nisu pronađeni.');
@@ -516,6 +614,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedItem = state.selectedItems.find(item => item.id === itemId);
         const quantity = selectedItem ? selectedItem.quantity : 1;
 
+        // Serijalizujemo podatke o popup-u u string
+        state.popupOpen = true;
+        updateURL();
+
         // Prikupi sve preporučene stavke (pića ili jela)
         const recommendedItems = [];
         if (item.drink) {
@@ -564,36 +666,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generišemo HTML za popup prozor
         elements.popupOverlay.innerHTML = `
-            <div class="popup-content" data-id="${itemId}">
-                <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
-                <div class="popup-details">
-                    <div class="card-content">
-                        <div class="popup-header">
-                            <div class="flex">
-                                <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
-                                    data-id="${itemId}" 
-                                    data-title="${item.title_key}" 
-                                    data-price="${item.cost_key.replace('€', '').trim()}"
-                                    ${selectedItem ? 'checked' : ''}>
-                                <h3 class="card-title">${item.title_key}</h3>
-                            </div>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn decrement">-</button>
-                                <span class="quantity">${quantity}</span>
-                                <button class="quantity-btn increment">+</button>
-                                <span class="price">${(item.price * quantity).toFixed(2)} €</span>
-                            </div>
+        <div class="popup-content" data-id="${itemId}">
+            <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
+            <div class="popup-details">
+                <div class="card-content">
+                    <div class="popup-header">
+                        <div class="flex">
+                            <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
+                                data-id="${itemId}" 
+                                data-title="${item.title_key}" 
+                                data-price="${item.cost_key.replace('€', '').trim()}"
+                                ${selectedItem ? 'checked' : ''}>
+                            <h3 class="card-title">${item.title_key}</h3>
                         </div>
-                        ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
-                        <div class="drinks-section">
-                            <h4>Preporučena ${item.drink ? 'pića' : 'jela'}:</h4>
-                            ${recommendedItemsHTML.length > 0 ? recommendedItemsHTML : '<p>Nema preporuka.</p>'}
+                        <div class="quantity-controls">
+                            <button class="quantity-btn decrement">-</button>
+                            <span class="quantity">${quantity}</span>
+                            <button class="quantity-btn increment">+</button>
+                            <span class="price">${(item.price * quantity).toFixed(2)} €</span>
                         </div>
                     </div>
-                    <button class="close-popup">×</button>
+                    ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
+                    <div class="drinks-section">
+                        <h4>Preporučena ${item.drink ? 'pića' : 'jela'}:</h4>
+                        ${recommendedItemsHTML.length > 0 ? recommendedItemsHTML : '<p>Nema preporuka.</p>'}
+                    </div>
                 </div>
+                <button class="close-popup">×</button>
             </div>
-        `;
+        </div>
+    `;
 
         elements.popupOverlay.style.display = 'flex';
 
@@ -780,7 +882,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         elements.dataContainer.scrollTop = 0;
-        updateProgress();
         calculateDataContainerHeight();
     }
 
@@ -797,13 +898,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Funkcija za nastavak auto-playa nakon promjene slajda
-    function autoPlayNextSlide() {
-        state.activeIndex = (state.activeIndex + 1) % state.categories.length; // Prelazak na sljedeći slajd
-        updateClasses(); // Ažuriranje klasa i prikaza
-        updateProgress(); // Ažuriranje progress bara
-    }
-
     // Navigacija kroz slajdove
     function changeSlide(direction) {
         if (direction === 'next') {
@@ -811,11 +905,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (direction === 'prev') {
             state.activeIndex = (state.activeIndex - 1 + state.categories.length) % state.categories.length;
         }
-        stopAutoPlay();
-        updateClasses();
-        addToSlideHistory(state.activeIndex);
+        updateClasses(); // Ažuriramo prikaz
+        updateSlider(); // Ažuriramo slider
+        addToSlideHistory(state.activeIndex); // Dodajemo u istoriju
         saveAppStateToLocalStorage(); // Sačuvaj stanje u localStorage
-        resetQuantities();
+        resetQuantities(); // Resetujemo količine
         // Sakrij strelicu prilikom promene slajda
         if (elements.scrollArrow) {
             elements.scrollArrow.classList.remove('visible');
@@ -832,7 +926,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
-            stopAutoPlay();
         }, { passive: true });
 
         element.addEventListener('touchend', debounce((e) => {
@@ -851,59 +944,14 @@ document.addEventListener('DOMContentLoaded', () => {
     addTouchEvents(elements.container);
     // addTouchEvents(elements.dataContainer);
 
-    // Auto-play funkcionalnost
-    function startAutoPlay() {
-        if (!state.isAutoPlayActive) {
-            autoPlayNextSlide();
-            state.autoPlayInterval = setInterval(autoPlayNextSlide, AUTO_PLAY_DELAY);
-            state.isAutoPlayActive = true;
-            elements.playBtn.innerHTML = '<img src="img/command/stop.svg" alt="stop">';
-            elements.playBtn.classList.add('stop'); // Dodajemo klasu za stop stanje
-            updateProgress();
-        }
-    }
-
-    function stopAutoPlay() {
-        clearInterval(state.autoPlayInterval);
-        state.isAutoPlayActive = false;
-        elements.playBtn.innerHTML = '<img src="img/command/play.svg" alt="play">';
-        elements.playBtn.classList.remove('stop'); // Uklanjamo klasu za stop stanje
-        updateProgress();
-    }
-
-    function toggleAutoPlay() {
-        state.isAutoPlayActive ? stopAutoPlay() : startAutoPlay();
-    }
-
-    // Ažuriranje progress bara
-    let progressTimeout;
-    function updateProgress() {
-        clearTimeout(progressTimeout);
-
-        if (state.isAutoPlayActive) {
-            elements.progressBar.style.transition = 'none';
-            elements.progressBar.style.width = '0%';
-            setTimeout(() => {
-                elements.progressBar.style.transition = `width ${AUTO_PLAY_DELAY}ms linear`;
-                elements.progressBar.style.width = '105%';
-            }, 50);
-        } else {
-            const progress = (state.activeIndex + 1) / state.categories.length * 100;
-            elements.progressBar.style.transition = '0.25s all';
-            elements.progressBar.style.width = `${progress}%`;
-        }
-    }
-
     // Izračunavanje visine dataContainer-a
     function calculateDataContainerHeight() {
         const header = document.getElementById('header');
-        const progress = document.getElementById('progress');
         const carousel = document.getElementById('carousel');
         const control = document.getElementById('control');
 
         const totalUsedHeight =
             header.offsetHeight +
-            progress.offsetHeight +
             carousel.offsetHeight +
             control.offsetHeight;
 
@@ -971,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Pronalazimo checkbox za ovu stavku i ažuriramo cenu i količinu
-            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] h3 .item-checkbox`);
+            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] .item-checkbox`);
             if (checkbox) {
                 const quantity = item.quantity;
                 const basePrice = parseFloat(checkbox.getAttribute('data-price'));
@@ -992,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generišemo HTML za prikaz stavki u korpi
         let cartContent = Object.values(groupedItems).map(group => `
-            <div class="category-group">
+           <div class="category-group">
                 <span class="category-title">${group.categoryName}</span>
                 ${group.items.map(item => `
                     <div class="selected-item" data-id="${item.id}">
@@ -1001,7 +1049,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="title-quantity-name">${item.title}</span> 
                             <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} € = ${item.price.toFixed(2)} €</span>
                         </div>
-                        <button class="remove-item" data-id="${item.id}">×</button>
+                        <button class="remove-item">
+                         <img  data-id="${item.id}" src="img/command/clear.png" alt="clearBtn">    
+                        </button>
                     </div>
                 `).join('')}
             </div>
@@ -1044,10 +1094,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Pronađite dugme za pretragu u korpi
+    const cartSearchBtn = document.querySelector('#cart .searchBtn');
+
+    // Dodajte event listener za otvaranje pretrage
+    if (cartSearchBtn) {
+        cartSearchBtn.addEventListener('click', () => {
+            toggleSearch('open'); // Otvori prozor za pretragu
+        });
+    }
+
     // Event listener za dugme "Povratak na meni"
     document.addEventListener('click', (event) => {
         if (event.target.classList.contains('back-to-menu')) {
             toggleCart('close');
+            updateSlider(); // Ažuriraj slider kada se vratiš na meni
         }
 
         if (event.target.classList.contains('remove-item') || event.target.closest('.remove-item')) {
@@ -1190,7 +1251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetQuantity(itemId) {
         const mainQuantityElement = document.querySelector(`.menu-card[data-id="${itemId}"] .quantity`);
         const mainPriceElement = document.querySelector(`.menu-card[data-id="${itemId}"] .price`);
-        const mainCheckbox = document.querySelector(`.menu-card[data-id="${itemId}"] h3 .item-checkbox`);
+        const mainCheckbox = document.querySelector(`.menu-card[data-id="${itemId}"] .item-checkbox`);
         const mainTitleQuantityPriceElement = document.querySelector(`.menu-card[data-id="${itemId}"] .title-quantity-price`);
 
         if (mainQuantityElement && mainPriceElement && mainCheckbox && mainTitleQuantityPriceElement) {
@@ -1206,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (popupItemId === itemId) {
                 const popupQuantityElement = popup.querySelector('.quantity');
                 const popupPriceElement = popup.querySelector('.price');
-                const popupCheckbox = popup.querySelector('h3 .item-checkbox');
+                const popupCheckbox = popup.querySelector('.item-checkbox');
                 const popupTitleQuantityPriceElement = popup.querySelector('.title-quantity-price');
 
                 if (popupQuantityElement && popupPriceElement && popupCheckbox && popupTitleQuantityPriceElement) {
@@ -1296,35 +1357,40 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.dropdownMenu.classList.toggle('show', isExpanded);
         elements.dropdownOverlay.style.display = isExpanded ? 'block' : 'none';
         elements.hamburgerBtn.setAttribute('aria-expanded', isExpanded);
-        if (isExpanded) stopAutoPlay();
+        state.dropdownOpen = isExpanded;
+        updateURL();
     }
 
     // Funkcije za otvaranje i zatvaranje settings menija
     function toggleSettings(action) {
-        settingsOpen = action === 'open';
-        elements.settingsContainer.classList.toggle('open', settingsOpen);
-        elements.settingsOverlay.classList.toggle('active', settingsOpen);
-        if (settingsOpen) stopAutoPlay();
+        const isOpen = action === 'open';
+        elements.settingsContainer.classList.toggle('open', isOpen);
+        elements.settingsOverlay.classList.toggle('active', isOpen);
+        state.settingsOpen = isOpen;
+        updateURL();
     }
 
     // Funkcije za otvaranje i zatvaranje korpe
     function toggleCart(action, noTransition = false) {
-        cartOpen = action === 'open';
+        const isOpen = action === 'open';
         if (noTransition) {
             elements.cartContainer.style.transition = 'none';
         } else {
             elements.cartContainer.style.transition = '';
         }
-        elements.cartContainer.classList.toggle('open', cartOpen);
-        if (cartOpen) {
-            toggleDropdown('close'); // Zatvori dropdown meni kada se otvori korpa
-            stopAutoPlay();
+        elements.cartContainer.classList.toggle('open', isOpen);
+        if (isOpen) {
+            toggleDropdown('close');
         }
+        state.cartOpen = isOpen;
+        updateURL();
     }
 
     // Funkcija za zatvaranje pop-up prozora
     function closePopup() {
         elements.popupOverlay.style.display = 'none';
+        state.popupOpen = false;
+        updateURL();
     }
 
     // Funkcije za otvaranje / zatvaranje telefonskog izbornika
@@ -1332,7 +1398,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = action === 'open';
         elements.callOptions.style.display = isOpen ? 'block' : 'none';
         elements.overlay.classList.toggle('active', isOpen);
-        if (isOpen) stopAutoPlay();
+        state.callMenuOpen = isOpen;
+        updateURL();
     }
 
     // Funkcija za otvaranje/zatvaranje pretrage
@@ -1340,8 +1407,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = action === 'open';
         elements.searchContainer.classList.toggle('open', isOpen);
         elements.searchBtn.setAttribute('aria-expanded', isOpen);
+
         if (isOpen) {
-            elements.searchInput.focus();
+            elements.searchInput.focus(); // Fokusiraj polje za pretragu kada se otvori
+        } else {
+            elements.searchInput.blur(); // Ukloni fokus sa polja za pretragu kada se zatvori
+        }
+
+        state.searchOpen = isOpen; // Ažuriramo stanje pretrage
+    }
+
+    // Funkcija za ažuriranje slidera na osnovu aktivnog slajda
+    function updateSlider() {
+        const totalSlides = state.categories.length;
+        const sliderValue = (state.activeIndex / (totalSlides - 1)) * 100; // Računamo vrednost slidera (0-100)
+        elements.slider.value = sliderValue; // Postavljamo vrednost slidera
+    }
+
+    // Funkcija za promenu slajda na osnovu vrednosti slidera
+    function changeSlideFromSlider() {
+        const totalSlides = state.categories.length;
+        const sliderValue = elements.slider.value; // Uzimamo vrednost slidera (0-100)
+        const newIndex = Math.round((sliderValue / 100) * (totalSlides - 1)); // Računamo indeks slajda
+        if (newIndex !== state.activeIndex) {
+            state.activeIndex = newIndex; // Postavljamo novi indeks
+            updateClasses(); // Ažuriramo prikaz
+            updateURL(); // Ažuriramo URL
         }
     }
 
@@ -1350,7 +1441,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Event listeneri za navigaciju i interakciju sa slajdovima
         elements.prevBtn?.addEventListener('click', () => changeSlide('prev'));
         elements.nextBtn?.addEventListener('click', () => changeSlide('next'));
-        elements.playBtn?.addEventListener('click', toggleAutoPlay);
+        // Event listener za slider
+        elements.slider.addEventListener('input', () => {
+            changeSlideFromSlider(); // Menjamo slajd na osnovu slidera
+        });
 
         elements.container?.addEventListener('click', (e) => {
             const clickedBox = e.target.closest('.box');
@@ -1359,9 +1453,8 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.dataContainer?.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        elements.dataContainer?.addEventListener('scroll', stopAutoPlay);
         elements.dataContainer?.addEventListener('click', (e) => {
-            if (e.target.closest('.data-item')) stopAutoPlay();
+            if (e.target.closest('.data-item')) { }
         });
 
         // 2. Event listeneri za padajući meni (dropdown)
@@ -1445,12 +1538,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 case "ArrowDown":
                     scrollDataSection('down');
                     break;
-                case " ":
-                    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                        event.preventDefault();
-                        toggleAutoPlay();
-                    }
-                    break;
             }
         });
 
@@ -1464,6 +1551,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closePopup();
             toggleCart('close');
             toggleSettings('close');
+            toggleSearch('close');
         }
     }
 
@@ -1551,6 +1639,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function searchItem(query) {
         query = query.toLowerCase().trim(); // Normalizujemo upit (mala slova, bez višak razmaka)
         elements.searchResults.innerHTML = ''; // Brišemo prethodne rezultate pretrage
+
+        state.searchQuery = query;
+        updateURL(); // Ažuriraj URL nakon pretrage
 
         // Poseban slučaj: ako je upit "vino" ili "vina", prikazujemo predefinisane kategorije vina
         const wineCategories = ['Bijelo vino', 'Crno vino', 'Rose', 'Moje vino'];
@@ -1695,6 +1786,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     elements.searchResults.innerHTML = '';
                     elements.searchInput.value = '';
                     toggleSearch('close'); // Zatvaramo pretragu
+                    toggleCart('close');
+                    elements.scrollArrow.classList.remove('visible');
                 });
 
                 elements.searchResults.appendChild(resultElement); // Dodajemo rezultat u kontejner
@@ -1732,9 +1825,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchData(() => {
             // Ovo će se izvršiti tek nakon što su kategorije učitane
             loadCartFromLocalStorage(); // Učitaj korpu
+            updateSlider(); // Inicijalizuj slider
         });
         setupEventListeners(); // Postavi event listenere
-        // setupScrollArrow();;
+
+        // Inicijalizuj slajd na osnovu URL-a
+        const initialState = readURL();
+        applyURLState(initialState);
     }
 
     // Pokretanje inicijalizacije

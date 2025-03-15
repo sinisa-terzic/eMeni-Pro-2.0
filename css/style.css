@@ -51,16 +51,19 @@ img {
 
 /* === HEADER === */
 .menu-container {
+    height: 11vw;
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #262a48;
 }
 
 .logo {
     font-size: 20px;
     user-select: none;
-    padding: 8px 10px;
+    padding: 0 10px;
+    color: #bfc2cc;
 }
 
 .header-nav {
@@ -137,14 +140,15 @@ img {
     align-items: center;
     overflow-x: hidden;
     position: relative;
-    min-height: 120px;
+    /* min-height: 120px; */
+    height: 35vw;
 }
 
 .box {
-    width: 190px;
-    height: 85px;
+    width: 97vw;
+    height: 28vw;
     background: #3f51b5;
-    border-radius: 40px;
+    /* border-radius: 15px; */
     display: flex;
     justify-content: center;
     position: absolute;
@@ -154,6 +158,8 @@ img {
     visibility: hidden;
     -webkit-tap-highlight-color: transparent;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .box-text {
@@ -170,6 +176,11 @@ img {
     align-self: end;
 }
 
+.category-description {
+    font-size: 10px;
+    margin-top: 7px;
+}
+
 .activeSlide {
     transform: translateX(0) scale(1);
     opacity: 1;
@@ -177,7 +188,7 @@ img {
     z-index: 2;
     pointer-events: auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    border: 1px solid #593400;
+    /* border: 1px solid #593400; */
 }
 
 .nextSlide,
@@ -212,7 +223,7 @@ img {
     border-radius: 4px;
     cursor: pointer;
     padding: 5px 20px;
-    background: #262a48;
+    background-color: #392a3e;
     color: white;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -259,11 +270,10 @@ img {
     justify-content: center;
     align-items: center;
     /* text-align: center; */
-    color: #3f51b5;
+    color: #262a48;
     transition: transform 0.25s ease-out, opacity 0.25s ease-out;
     opacity: 0;
     transform: translateX(100%);
-    padding: 10px 0 60px 0;
 }
 
 .items-title {
@@ -275,7 +285,7 @@ img {
     border-radius: 8px;
     overflow: hidden;
     display: flex;
-    padding-top: 1rem;
+    padding-top: 8px;
 }
 
 .menu-card img {
@@ -287,11 +297,17 @@ img {
     display: grid;
     width: 100%;
     padding: 0 10px;
+    background: linear-gradient(180deg, rgba(177, 177, 177, 0.09) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(2, 0, 36, 0.05) 100%);
 }
 
 .subcategory-title {
-    color: #850038;
-    padding: 10px;
+    color: #fff;
+    margin-top: 10px;
+    padding: 0 15px;
+    background-color: #1a3e4d;
+    height: 8vw;
+    display: flex;
+    align-items: center;
 }
 
 .popup-content .card-content {
@@ -617,8 +633,16 @@ img {
 
 .title-quantity {
     display: flex;
-    justify-content: space-between;
     width: 100%;
+    justify-content: space-between;
+    margin: 0 5px;
+}
+
+.title-quantity-price {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    align-items: center;
 }
 
 .quantity-price {
@@ -645,16 +669,13 @@ img {
     color: #0056b3;
 }
 
-.remove-item {
-    color: #dc3545;
-    font-weight: bold;
-    /* margin-left: auto;
-    margin-left: 5px; */
+.remove-item img {
+    width: 10px;
 }
 
-.remove-item:hover {
+/* .remove-item:hover {
     color: #a71d2a;
-}
+} */
 
 .selected-item {
     transition: all 0.2s ease-in-out;
@@ -672,7 +693,7 @@ img {
     align-items: center;
     position: absolute;
     width: 100%;
-    height: 50px;
+    height: 12.5vw;
     padding: 0 20px;
     bottom: 0;
     background-color: #262a48;
@@ -876,7 +897,7 @@ img {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    z-index: 4;
+    z-index: 5;
     width: 100%;
     /* height: 100vh; */
     transform: translateY(-100%);
@@ -997,4 +1018,78 @@ img {
 
 .highlight {
     animation: highlight 2.5s ease;
+}
+
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 20rem;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #053a5f;
+    background-color: #d3d1dc;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    margin-top: -4px;
+    /* Centers thumb on the track */
+
+    /*custom styles*/
+    background-color: #5cd5eb;
+    background-color: #157954;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    border: 1px solid #053a5f;
+    outline: 3px solid #053a5f;
+    outline-offset: 0.125rem;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+    background-color: #053a5f;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+    border: none;
+    /*Removes extra border that FF applies*/
+    border-radius: 0;
+    /*Removes default border-radius that FF applies*/
+
+    /*custom styles*/
+    background-color: #5cd5eb;
+    height: 2rem;
+    width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    border: 1px solid #053a5f;
+    outline: 3px solid #053a5f;
+    outline-offset: 0.125rem;
 }
