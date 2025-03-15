@@ -402,10 +402,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Generišemo HTML za stavku
                 return `
                     <article class="menu-card" data-id="${index}-${itemIndex}">
-                        <img src="${IMG_BASE_PATH}${item.imageSrc}" 
-                            alt="${item.title_key || 'Nepoznata stavka'}" 
-                            class="item-image"
-                            loading="lazy">
+                        <div class="menu-card-img">
+                            <img src="${IMG_BASE_PATH}${item.imageSrc}" 
+                                alt="${item.title_key || 'Nepoznata stavka'}" 
+                                class="item-image"
+                                loading="lazy">
+                            <div class="menu-card-img-zoom">
+    							<img src="img/command/zoom-in.png" alt="zoom">
+    						</div>
+                        </div >    
                         <div class="card-content">
                             <h3 class="card-title">
                                 ${item.title_key || 'Nepoznata stavka'}
@@ -726,11 +731,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Postavljanje osluškivača na slike
     function setupImageClickListeners() {
-        const images = document.querySelectorAll('.menu-card .item-image');
-        images.forEach(image => {
-            image.addEventListener('click', (e) => {
-                const menuCard = e.target.closest('.menu-card');
-                const itemId = menuCard.getAttribute('data-id');
+        const menuCards = document.querySelectorAll('.menu-card-img-zoom');
+        menuCards.forEach(menuCard => {
+            menuCard.addEventListener('click', (e) => {
+                const menuCardWithId = e.target.closest('[data-id]');
+                if (!menuCardWithId) {
+                    console.error('Roditeljski element s data-id nije pronađen.');
+                    return;
+                }
+
+                const itemId = menuCardWithId.getAttribute('data-id');
                 const [categoryIndex, itemIndex] = itemId.split('-');
                 const category = state.categories[categoryIndex];
                 const item = category.translations[itemIndex];
