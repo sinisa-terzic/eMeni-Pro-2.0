@@ -1111,7 +1111,7 @@ input[type="range"]:focus::-moz-range-thumb {
 .menu-card-img-zoom {
     /* background-color: rgba(0, 0, 0, .2); */
     background: linear-gradient(45deg, rgba(0, 0, 0, 0) 20%,
-            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.3) 50%,
             rgba(0, 0, 0, 0) 80%);
     bottom: 0;
     left: 0;
