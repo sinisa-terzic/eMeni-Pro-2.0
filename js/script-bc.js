@@ -211,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return debounced;
     };
 
-
     // Funkcije za otvaranje i zatvaranje menija s debounce-om
     const debouncedOpenSettings = debounce(() => toggleSettings('open'));
     const debouncedOpenCart = debounce(() => toggleCart('open'));
@@ -1789,7 +1788,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Skrolujemo do stavke sa animacijom
                         setTimeout(() => {
                             elements.dataContainer.scrollTo({
-                                top: itemPosition,
+                                top: itemPosition - 30,
                                 behavior: 'smooth'
                             });
                             calculateDataContainerHeight(); // Ažuriramo visinu kontejnera

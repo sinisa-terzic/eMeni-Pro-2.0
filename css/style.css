@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -10,6 +12,10 @@ body {
     min-height: 100vh;
     margin: 0;
     overflow: hidden;
+    /* 10px / 16px = 0.625 = 62.5% */
+    /* Percentage of user's browser font-size setting */
+    font-size: 62.5%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 button {
@@ -307,6 +313,9 @@ img {
 }
 
 .subcategory-title {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     color: #fff;
     margin-top: 10px;
     padding: 0 15px;
@@ -393,7 +402,11 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin: 10px 0;
+}
+
+.drinks-section {
+    margin-top: 20px;
 }
 
 .popup-header .item-checkbox {
@@ -1017,7 +1030,7 @@ img {
 /* Animacija za highlight stavke */
 @keyframes highlight {
     0% {
-        background-color: rgba(255, 235, 59, 0.5);
+        background-color: rgba(38, 42, 72, 0.5);
         /* Žuta boja sa providnošću */
     }
 
@@ -1027,7 +1040,7 @@ img {
 }
 
 .highlight {
-    animation: highlight 2.5s ease;
+    animation: highlight 3.5s ease;
 }
 
 
