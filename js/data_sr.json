@@ -1,4 +1,17 @@
 {
+    "language_strings": {
+        "recommended_drinks": "Preporučena pića",
+        "recommended_food": "Preporučena jela",
+        "back_to_menu": "Povratak na meni",
+        "clear_all": "Izbriši sve",
+        "confirm_remove_item": "Želite li da uklonite stavku",
+        "confirm_clear_all": "Da li ste sigurni da želite da obrišete sve stavke iz korpe?",
+        "yes": "Da",
+        "no": "Ne",
+        "empty_cart": "Vaša korpa je prazna",
+        "total_price": "Ukupna cena",
+        "no_recommendations": "Nema preporuka"
+    },
     "category": {
         "Hladna_Predjela": {
             "details": "Hladna predjela",
@@ -131,7 +144,7 @@
                 },
                 {
                     "title_key": "Taljatela",
-                    "text_key": "350 gr. / sa miješanim gljivama i tunjevinom",
+                    "text_key": "350 gr. / sa mješanim gljivama i tunjevinom",
                     "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/6.jpg",
@@ -232,7 +245,7 @@
                     }
                 },
                 {
-                    "title_key": "Kropmpir salata",
+                    "title_key": "Krompir salata",
                     "text_key": "200 gr.",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
@@ -268,7 +281,7 @@
                     }
                 },
                 {
-                    "title_key": "Geilovano povrće",
+                    "title_key": "Grilovano povrće",
                     "text_key": "200 gr.",
                     "description_key": "bla bla bla",
                     "cost_key": "4.50 €",
@@ -1094,8 +1107,8 @@
                 }
             ]
         },
-        "Piva_Cyders": {
-            "details": "Pivo / Cyders",
+        "Piva_Ciders": {
+            "details": "Pivo / Ciders",
             "description": "osvežavajući izbor piva i voćnih cidra.",
             "translations": [
                 {

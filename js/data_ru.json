@@ -1,1381 +1,1257 @@
 {
     "category": {
         "Hladna_Predjela": {
-            "details": "Hladna predjela RU",
-            "description": "od pršuta, sira, ribe, čorbe, pašteta ...",
+            "details": "Холодные закуски",
+            "description": "из прошутто, сыра, рыбы, супов, паштетов...",
             "translations": [
                 {
-                    "details": "Predjela"
+                    "details": "Закуски"
                 },
                 {
-                    "title_key": "Pršut",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Прошутто",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Sir",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Сыр",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Sir iz ulja",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Сыр в масле",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Bokeška zakuska",
-                    "text_key": "700 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Бокельская закуска",
+                    "text_key": "700 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "20.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Slana riba",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Соленая рыба",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Riblja pašteta",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Рыбный паштет",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Riblja supa"
+                    "details": "Рыбный суп"
                 },
                 {
-                    "title_key": "Riblja supa",
-                    "text_key": "300 ml.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Рыбный суп",
+                    "text_key": "300 мл.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1"
+                        "drink_1": ""
                     }
                 }
             ]
         },
         "Specijaliteti_Od_Povrća": {
-            "details": "Specijaliteti od povrća RU",
-            "description": "pripremljena na razne načine.",
+            "details": "Овощные специалитеты",
+            "description": "приготовленные различными способами.",
             "translations": [
                 {
-                    "title_key": "Rižoto sa povrćem",
-                    "text_key": "300 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Ризотто с овощами",
+                    "text_key": "300 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/5.jpg",
                     "drink": {
-                        "drink_1": "Kafa 2",
-                        "drink_2": "Kafa 1",
-                        "drink_3": "Kafa 3"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Špageti sa sirom",
-                    "text_key": "300 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Спагетти с сыром",
+                    "text_key": "300 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Špageti sa povrćem",
-                    "text_key": "300 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Спагетти с овощами",
+                    "text_key": "300 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/4.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Taljatela",
-                    "text_key": "350 gr. / sa miješanim gljivama i tunjevinom",
-                    "description_key": "bla bla bla",
+                    "title_key": "Тальятелле",
+                    "text_key": "350 гр. / с грибами и тунцом",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/6.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 }
             ]
         },
         "Salate_I_Prilozi": {
-            "details": "Salate i prilozi RU",
-            "description": "povrće, riža, krompir, umaci.",
+            "details": "Салаты и гарниры",
+            "description": "овощи, рис, картофель, соусы.",
             "translations": [
                 {
-                    "title_key": "Vitaminska salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Витаминный салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Miješana salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Смешанный салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Zelena salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Зеленый салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Šopska salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Шопский салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Kupus salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Капустный салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Paradajz",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Помидоры",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Masline",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Оливки",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Kropmpir salata",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Картофельный салат",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Pomfrit",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Картофель фри",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Blitva",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мангольд",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Geilovano povrće",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Тушеные овощи",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 }
             ]
         },
         "Morski_Specijaliteti": {
-            "details": "Morski specijaliteti RU",
-            "description": "specijaliteti od ribe i plodova mora.",
+            "details": "Морские деликатесы",
+            "description": "деликатесы из рыбы и морепродуктов.",
             "translations": [
                 {
-                    "details": "Riba"
+                    "details": "Рыба"
                 },
                 {
-                    "title_key": "Riba I klase",
-                    "text_key": "1 kg.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Рыба I класса",
+                    "text_key": "1 кг.",
+                    "description_key": "бла бла бла",
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Riba II klase",
-                    "text_key": "1 kg.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Рыба II класса",
+                    "text_key": "1 кг.",
+                    "description_key": "бла бла бла",
                     "cost_key": "30.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Lignje"
+                    "details": "Кальмары"
                 },
                 {
-                    "title_key": "Pržene lignje sa blitvom",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Жареные кальмары с мангольдом",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Lignje na žaru sa blitvom",
-                    "text_key": "300 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Кальмары на гриле с мангольдом",
+                    "text_key": "300 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Punjene lignje sa gamborima",
-                    "text_key": "400 gr. / prilog blitva",
-                    "description_key": "bla bla bla",
+                    "title_key": "Фаршированные кальмары с креветками",
+                    "text_key": "400 гр. / гарнир мангольд",
+                    "description_key": "бла бла бла",
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Punjene lignje sa pršutom i sirom",
-                    "text_key": "300 gr. / prilog blitva",
-                    "description_key": "bla bla bla",
+                    "title_key": "Фаршированные кальмары с прошутто и сыром",
+                    "text_key": "300 гр. / гарнир мангольд",
+                    "description_key": "бла бла бла",
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Bakalar"
+                    "details": "Треска"
                 },
                 {
-                    "title_key": "Bakalar",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Треска",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "17.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Hobotnica"
+                    "details": "Осьминог"
                 },
                 {
-                    "title_key": "Salata od hobotnice",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Салат из осьминога",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Hobotnica na žaru",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Осьминог на гриле",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Gambori"
+                    "details": "Креветки"
                 },
                 {
-                    "title_key": "Prženi gambori",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Жареные креветки",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Gambori na žaru",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Креветки на гриле",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Gambori na buzari",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Креветки бузара",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Špageti sa gamborima",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Спагетти с креветками",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Rižoto od gambora",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Ризотто с креветками",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Sipe"
+                    "details": "Каракатица"
                 },
                 {
-                    "title_key": "Rižoto od sipe",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Ризотто с каракатицей",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Brodet"
+                    "details": "Бродет"
                 },
                 {
-                    "title_key": "Brodet",
-                    "text_key": "300 gr. / od sipa sa palentom",
-                    "description_key": "bla bla bla",
+                    "title_key": "Бродет",
+                    "text_key": "300 гр. / из каракатицы с полентой",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Školjke"
+                    "details": "Моллюски"
                 },
                 {
-                    "title_key": "Mušlje na buzaru",
-                    "text_key": "0,50 kg.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мидии бузара",
+                    "text_key": "0,50 кг.",
+                    "description_key": "бла бла бла",
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "details": "Specijaliteti kuće"
+                    "details": "Фирменные блюда"
                 },
                 {
-                    "title_key": "alla \"Bokeški gušti\"",
-                    "text_key": "900 gr. / za 2 osobe",
-                    "description_key": "bla bla bla",
+                    "title_key": "alla \"Бокельский вкус\"",
+                    "text_key": "900 гр. / на 2 персоны",
+                    "description_key": "бла бла бла",
                     "cost_key": "35.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "alla \"Bokeški gušti\"",
-                    "text_key": "1 kg. / za 2 osobe ",
-                    "description_key": "bla bla bla",
+                    "title_key": "alla \"Бокельский вкус\"",
+                    "text_key": "1 кг. / на 2 персоны",
+                    "description_key": "бла бла бла",
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 }
             ]
         },
         "Karta_Vina": {
-            "details": "Karta vina RU",
-            "description": "upotpunjuje jelovnik ukusom i stilom",
+            "details": "Винная карта",
+            "description": "дополняет меню вкусом и стилем",
             "translations": [
                 {
-                    "details": "Bijelo vino"
+                    "details": "Белое вино"
                 },
                 {
-                    "title_key": "Krstač",
-                    "text_key": "1l / Alc.13,5%",
-                    "description_key": "bla bla bla",
+                    "title_key": "Крстач",
+                    "text_key": "1л / Алк. 13,5%",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "alla \"Bokeški gušti\"",
-                        "food_2": "Fabrički pršut"
+                        "food_1": "alla \"Бокельский вкус\""
                     }
                 },
                 {
-                    "title_key": "Krstač",
-                    "text_key": "0,75l / Alc.13,5%",
-                    "description_key": "bla bla bla",
+                    "title_key": "Крстач",
+                    "text_key": "0,75л / Алк. 13,5%",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Shardonnay",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Шардоне",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Sauvignon",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Совиньон",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Malvazija Plantaže",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мальвазия Плантаже",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Malvazija",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мальвазия",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Pošip Čara",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Пошип Чара",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Pošip Intrade",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Пошип Интраде",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Laguna",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Лагуна",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Graševina",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Грашевина",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Koziović",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Козович",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Arhonte",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Архонте",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Laguna",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Лагуна",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Graševina",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Грашевина",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Shardonnay",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Шардоне",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Malvazija",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мальвазия",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Domaći pršut",
-                        "food_2": "Fabrički pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "details": "Crno vino"
+                    "details": "Красное вино"
                 },
                 {
-                    "title_key": "Vranac",
-                    "text_key": "1 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Вранац",
+                    "text_key": "1 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Vranac",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Вранац",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Vranac Pro Corde",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Вранац Про Корде",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Cabernet",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Каберне",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Meriot",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мерло",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Vladika",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Владика",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Zlatan Plavac",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Златан Плавац",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Vranac",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Вранац",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Plavac",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Плавац",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "details": "Rose"
+                    "details": "Розовое вино"
                 },
                 {
-                    "title_key": "Kutjevo",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Кутьево",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Kutjevo",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Кутьево",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Roze Crnogorski",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Розе Черногорское",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "title_key": "Roze Crnogorski",
-                    "text_key": "0,187 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Розе Черногорское",
+                    "text_key": "0,187 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Fabrički pršut",
-                        "food_2": "Grill povrće",
-                        "food_3": "Domaći pršut"
+                        "food_1": ""
                     }
                 },
                 {
-                    "details": "Moje vino"
+                    "details": "Мое вино"
                 },
                 {
-                    "title_key": "Moje vino (poluslatko)",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мое вино (полусладкое)",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 }
             ]
         },
         "Žestoka_Pića": {
-            "details": "Žestoka pića RU",
-            "description": "idealan izbor za aperitiv",
+            "details": "Крепкие напитки",
+            "description": "идеальный выбор для аперитива",
             "translations": [
                 {
-                    "title_key": "Travarica",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Траварица",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Lozova rakija",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Лозова ракия",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/2.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Viljamovka",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Вильямовка",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Pelinkovac",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Пелинковац",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Vodka",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Водка",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Gin",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Джин",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Čokanj",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Чокань",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "details": "Whiskey"
+                    "details": "Виски"
                 },
                 {
-                    "title_key": "Ballantines",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Баллантайнс",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Johnie Walker",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Джонни Уокер",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Black Label",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Блэк Лейбл",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Chivas Regal",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Чивас Ригал",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Jack Daniels",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Джек Дэниэлс",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "details": "Liker"
+                    "details": "Ликер"
                 },
                 {
-                    "title_key": "Jaggermeister",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Ягермейстер",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Baileys",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Бейлис",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Amaro Montenegro",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Амаро Монтенегро",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Ramazzoti",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Рамазотти",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Martini",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Мартини",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Aperol",
-                    "text_key": "0.03l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Апероль",
+                    "text_key": "0.03л",
+                    "description_key": "бла бла бла",
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 }
             ]
         },
         "Piva_Cyders": {
-            "details": "Pivo / Cyders RU",
-            "description": "osvežavajući izbor piva i voćnih cidra.",
+            "details": "Пиво / Сидр",
+            "description": "освежающий выбор пива и фруктовых сидров.",
             "translations": [
                 {
-                    "details": "Pivo"
+                    "details": "Пиво"
                 },
                 {
-                    "title_key": "Tuborg",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Туборг",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.20 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Budweiser (svijetli i tamni)",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Будвайзер (светлое и темное)",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.30 €",
                     "imageSrc": "pr/2.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Calsberg",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Карлсберг",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Točeno - malo",
-                    "text_key": "0,30 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Разливное - малое",
+                    "text_key": "0,30 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Točeno - veliko",
-                    "text_key": "0,50 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Разливное - большое",
+                    "text_key": "0,50 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/3.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "details": "Cyders"
+                    "details": "Сидры"
                 },
                 {
-                    "title_key": "Somersby",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Сомерсби",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 }
             ]
         },
         "Bezalkoholna_Pića": {
-            "details": "Bezalkoholna pića RU",
-            "description": "kafa, voda, sokovi, limunada ...",
+            "details": "Безалкогольные напитки",
+            "description": "кофе, вода, соки, лимонад ...",
             "translations": [
                 {
-                    "details": "Topli napici"
+                    "details": "Горячие напитки"
                 },
                 {
-                    "title_key": "Kafa espresso",
+                    "title_key": "Кофе эспрессо",
                     "text_key": "0,01",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Kafa sa mlijekom",
+                    "title_key": "Кофе с молоком",
                     "text_key": "0,03",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.20 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Kapućino",
+                    "title_key": "Капучино",
                     "text_key": "0,03",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Čaj",
+                    "title_key": "Чай",
                     "text_key": "0,05",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "details": "Sokovi"
+                    "details": "Соки"
                 },
                 {
-                    "title_key": "Gazirani sok limenka",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Газированный сок (банка)",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.70 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Prirodni sok flašica",
-                    "text_key": "0,20 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Натуральный сок (бутылка)",
+                    "text_key": "0,20 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.70 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Ice Tea",
-                    "text_key": "0,20 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Айс Ти",
+                    "text_key": "0,20 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.80 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Limunada",
-                    "text_key": "0,20 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Лимонад",
+                    "text_key": "0,20 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "details": "Flaširana voda"
+                    "details": "Бутилированная вода"
                 },
                 {
-                    "title_key": "Kisela voda - mala",
-                    "text_key": "0,25 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Газированная вода - малая",
+                    "text_key": "0,25 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Kisela voda - velika",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Газированная вода - большая",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Negazirana voda - mala",
-                    "text_key": "0,33 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Негазированная вода - малая",
+                    "text_key": "0,33 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "1.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 },
                 {
-                    "title_key": "Negazirana voda -velika",
-                    "text_key": "0,75 l",
-                    "description_key": "bla bla bla",
+                    "title_key": "Негазированная вода - большая",
+                    "text_key": "0,75 л",
+                    "description_key": "бла бла бла",
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "Grupa 1"
+                        "food_1": "Группа 1"
                     }
                 }
             ]
         },
         "Ugovorene_Grupe": {
-            "details": "Ugovorene grupe RU",
-            "description": "meni za ugovorene grupe",
+            "details": "Договорные группы",
+            "description": "меню для договорных групп",
             "translations": [
                 {
-                    "title_key": "Grupa 1",
+                    "title_key": "Группа 1",
                     "cost_key": "12.50 €",
                     "text_key": "",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Moje vino (poluslatko)"
+                        "drink_1": "Мое вино (полусладкое)"
                     }
                 },
                 {
-                    "title_key": "Grupa 2",
+                    "title_key": "Группа 2",
                     "text_key": "",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "10.50 €",
                     "imageSrc": "pr/2.jpg",
                     "drink": {
-                        "drink_1": "Moje vino (poluslatko)"
+                        "drink_1": "Мое вино (полусладкое)"
                     }
                 },
                 {
-                    "title_key": "Grupa 3",
+                    "title_key": "Группа 3",
                     "text_key": "",
-                    "description_key": "bla bla bla",
+                    "description_key": "бла бла бла",
                     "cost_key": "5.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
-                        "drink_1": "Strano vino",
-                        "drink_2": "Domaće pivo"
+                        "drink_1": ""
                     }
                 }
             ]
         },
         "Poslastice": {
-            "details": "Poslastice RU",
-            "description": "Deserti - voćni, čokoladni, slani ...",
+            "details": "Десерты",
+            "description": "Фруктовые, шоколадные, соленые ...",
             "translations": [
                 {
-                    "title_key": "Voćni kolač",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Фруктовый торт",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Čokoladni kolač",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Шоколадный торт",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 },
                 {
-                    "title_key": "Slani kolač",
-                    "text_key": "200 gr.",
-                    "description_key": "bla bla bla",
+                    "title_key": "Соленый торт",
+                    "text_key": "200 гр.",
+                    "description_key": "бла бла бла",
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": "Lokalno vino",
-                        "drink_2": "Kafa",
-                        "drink_3": "Kraft pivo"
+                        "drink_1": ""
                     }
                 }
             ]
