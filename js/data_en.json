@@ -1,7 +1,7 @@
 {
     "category": {
         "Hladna_Predjela": {
-            "details": "Hladna predjela",
+            "details": "Hladna predjela EN",
             "description": "od pršuta, sira, ribe, čorbe, pašteta ...",
             "translations": [
                 {
@@ -90,7 +90,7 @@
             ]
         },
         "Specijaliteti_Od_Povrća": {
-            "details": "Specijaliteti od povrća",
+            "details": "Specijaliteti od povrća EN",
             "description": "pripremljena na razne načine.",
             "translations": [
                 {
@@ -144,7 +144,7 @@
             ]
         },
         "Salate_I_Prilozi": {
-            "details": "Salate i prilozi",
+            "details": "Salate i prilozi EN",
             "description": "povrće, riža, krompir, umaci.",
             "translations": [
                 {
@@ -282,7 +282,7 @@
             ]
         },
         "Morski_Specijaliteti": {
-            "details": "Morski specijaliteti",
+            "details": "Morski specijaliteti EN",
             "description": "specijaliteti od ribe i plodova mora.",
             "translations": [
                 {
@@ -543,7 +543,7 @@
             ]
         },
         "Karta_Vina": {
-            "details": "Karta vina",
+            "details": "Karta vina EN",
             "description": "upotpunjuje jelovnik ukusom i stilom",
             "translations": [
                 {
@@ -903,7 +903,7 @@
             ]
         },
         "Žestoka_Pića": {
-            "details": "Žestoka pića",
+            "details": "Žestoka pića EN",
             "description": "idealan izbor za aperitiv",
             "translations": [
                 {
@@ -1095,7 +1095,7 @@
             ]
         },
         "Piva_Cyders": {
-            "details": "Pivo / Cyders",
+            "details": "Pivo / Cyders EN",
             "description": "osvežavajući izbor piva i voćnih cidra.",
             "translations": [
                 {
@@ -1167,7 +1167,7 @@
             ]
         },
         "Bezalkoholna_Pića": {
-            "details": "Bezalkoholna pića",
+            "details": "Bezalkoholna pića EN",
             "description": "kafa, voda, sokovi, limunada ...",
             "translations": [
                 {
@@ -1302,7 +1302,7 @@
             ]
         },
         "Ugovorene_Grupe": {
-            "details": "Ugovorene grupe",
+            "details": "Ugovorene grupe EN",
             "description": "meni za ugovorene grupe",
             "translations": [
                 {
@@ -1339,7 +1339,7 @@
             ]
         },
         "Poslastice": {
-            "details": "Poslastice",
+            "details": "Poslastice EN",
             "description": "Deserti - voćni, čokoladni, slani ...",
             "translations": [
                 {
