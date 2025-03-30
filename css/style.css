@@ -168,12 +168,6 @@ img {
     background: white;
 }
 
-.controls {
-    padding: 0 10px 10PX;
-    background-color: #FFF;
-    border-bottom: 1px solid #ddd;
-}
-
 .title-container {
     position: relative;
     width: 100%;
@@ -225,8 +219,16 @@ img {
     background: rgba(0, 0, 0, 0.1);
 }
 
+.controls {
+    padding: 10px 0px 20px;
+    background-color: #FFF;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+}
+
 #slider {
-    width: 100%;
+    width: 90%;
+    margin: auto;
 }
 
 /*********** Baseline, reset styles ***********/

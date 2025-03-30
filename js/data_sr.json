@@ -960,7 +960,7 @@
                     }
                 },
                 {
-                    "title_key": "Vodka",
+                    "title_key": "Votka",
                     "text_key": "0.03l",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
@@ -970,7 +970,7 @@
                     }
                 },
                 {
-                    "title_key": "Gin",
+                    "title_key": "Džin",
                     "text_key": "0.03l",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
@@ -990,10 +990,10 @@
                     }
                 },
                 {
-                    "details": "Whiskey"
+                    "details": "Viski"
                 },
                 {
-                    "title_key": "Ballantines",
+                    "title_key": "Ballantine’s",
                     "text_key": "0.03l",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
@@ -1033,7 +1033,7 @@
                     }
                 },
                 {
-                    "title_key": "Jack Daniels",
+                    "title_key": "Jack Daniel’s",
                     "text_key": "0.03l",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
@@ -1046,7 +1046,7 @@
                     "details": "Liker"
                 },
                 {
-                    "title_key": "Jaggermeister",
+                    "title_key": "Jägermeister",
                     "text_key": "0.03l",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",

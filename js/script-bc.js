@@ -215,10 +215,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadCartFromLocalStorage() {
         const cart = localStorage.getItem('cart');
         if (cart) {
-            state.selectedItems = JSON.parse(cart);
-            updateCart(); // Ažuriraj korpu
-            restoreCheckedCheckboxes(); // Vrati čekirane checkboxove
-            restoreQuantities(); // Vrati količine
+            try {
+                state.selectedItems = JSON.parse(cart);
+                updateCart(); // Ažuriraj korpu
+                restoreCheckedCheckboxes(); // Vrati čekirane checkboxove
+                restoreQuantities(); // Vrati količine
+            } catch (error) {
+                console.error('Greška pri učitavanju korpe:', error);
+                // Ako je došlo do greške, resetuj korpu
+                state.selectedItems = [];
+                localStorage.removeItem('cart');
+                renderEmptyCart();
+            }
         } else {
             // Ako nema stavki u localStorage, prikaži praznu korpu
             renderEmptyCart();
@@ -322,14 +330,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Dodajemo funkciju za promenu jezika
+    // Funkcija za promenu jezika
     function changeLanguage(lang) {
         if (currentLanguage !== lang && languageMap[lang]) {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
 
             // Sačuvaj trenutnu korpu pre osvežavanja
-            saveCartToLocalStorage();
+            const savedCart = localStorage.getItem('cart');
+
+            // Ako postoji korpa, ažuriraj je sa novim prevodima
+            if (savedCart) {
+                const cartItems = JSON.parse(savedCart);
+
+                // Učitaj novi JSON sa podacima za odabrani jezik
+                fetch(languageMap[lang])
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.category) throw new Error('Nevalidan JSON format');
+
+                        // Ažuriraj naslove u korpi sa novim prevodima
+                        const updatedCart = cartItems.map(cartItem => {
+                            const [categoryIndex, itemIndex] = cartItem.id.split('-');
+                            const category = Object.values(data.category)[categoryIndex];
+                            if (category && category.translations[itemIndex]) {
+                                return {
+                                    ...cartItem,
+                                    title: category.translations[itemIndex].title_key || cartItem.title
+                                };
+                            }
+                            return cartItem;
+                        });
+
+                        // Sačuvaj ažuriranu korpu
+                        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+                        // Osveži stranicu
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Greška pri ažuriranju korpe:', error);
+                        window.location.reload();
+                    });
+            } else {
+                // Ako nema korpe, samo osveži stranicu
+                window.location.reload();
+            }
 
             // Ažuriraj aktivna dugmad pre reload-a
             document.querySelectorAll('.language-btn').forEach(btn => {
@@ -338,11 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Zatvori settings meni
             toggleSettings('close');
-
-            // Osveži stranicu nakon kratkog delay-a da se stigne izvršiti prethodni kod
-            setTimeout(() => {
-                window.location.reload();
-            }, 100);
         }
     }
 
