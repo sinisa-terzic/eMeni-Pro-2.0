@@ -201,6 +201,9 @@ img {
 .category-description {
     font-size: 1rem;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn {
