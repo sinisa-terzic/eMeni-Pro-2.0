@@ -14,7 +14,8 @@
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -24,7 +25,8 @@
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -34,7 +36,8 @@
                     "cost_key": "7.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -44,7 +47,8 @@
                     "cost_key": "20.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -54,7 +58,8 @@
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -64,7 +69,8 @@
                     "cost_key": "6.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 },
                 {
@@ -77,7 +83,8 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1"
                     }
                 }
             ]
@@ -93,7 +100,9 @@
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/5.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Kafa 2",
+                        "drink_2": "Kafa 1",
+                        "drink_3": "Kafa 3"
                     }
                 },
                 {
@@ -103,7 +112,9 @@
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -113,17 +124,21 @@
                     "cost_key": "6.50 €",
                     "imageSrc": "pr/4.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
                     "title_key": "Taljatela",
-                    "text_key": "350 gr. / sa miješanim gljivama i tunjevinom",
+                    "text_key": "350 gr. / sa mješanim gljivama i tunjevinom",
                     "description_key": "bla bla bla",
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/6.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 }
             ]
@@ -139,7 +154,9 @@
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -149,7 +166,9 @@
                     "cost_key": "2.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -159,7 +178,9 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -169,7 +190,9 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -179,7 +202,9 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -189,7 +214,9 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -199,17 +226,21 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
-                    "title_key": "Kropmpir salata",
+                    "title_key": "Krompir salata",
                     "text_key": "200 gr.",
                     "description_key": "bla bla bla",
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -219,7 +250,9 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -229,17 +262,21 @@
                     "cost_key": "2.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
-                    "title_key": "Geilovano povrće",
+                    "title_key": "Grilovano povrće",
                     "text_key": "200 gr.",
                     "description_key": "bla bla bla",
                     "cost_key": "4.50 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 }
             ]
@@ -258,7 +295,9 @@
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -268,7 +307,9 @@
                     "cost_key": "30.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -281,7 +322,9 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -291,7 +334,9 @@
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -301,7 +346,9 @@
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -311,7 +358,9 @@
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -324,7 +373,9 @@
                     "cost_key": "17.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -337,7 +388,9 @@
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -347,7 +400,9 @@
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -360,7 +415,9 @@
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -370,7 +427,9 @@
                     "cost_key": "15.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -380,7 +439,9 @@
                     "cost_key": "18.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -390,7 +451,9 @@
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -400,7 +463,9 @@
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -413,7 +478,9 @@
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -426,7 +493,9 @@
                     "cost_key": "10.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -439,7 +508,9 @@
                     "cost_key": "5.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -452,7 +523,9 @@
                     "cost_key": "35.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -462,7 +535,9 @@
                     "cost_key": "40.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 }
             ]
@@ -481,7 +556,8 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": "alla \"Bokeški gušti\""
+                        "food_1": "alla \"Bokeški gušti\"",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -491,7 +567,8 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -501,7 +578,8 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -511,7 +589,8 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -521,7 +600,8 @@
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -531,7 +611,8 @@
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -541,7 +622,8 @@
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -551,7 +633,8 @@
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -561,7 +644,8 @@
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -571,7 +655,8 @@
                     "cost_key": "22.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -581,7 +666,8 @@
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -591,7 +677,8 @@
                     "cost_key": "39.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -601,7 +688,8 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -611,7 +699,8 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -621,7 +710,8 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -631,7 +721,8 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/1.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Domaći pršut",
+                        "food_2": "Fabrički pršut"
                     }
                 },
                 {
@@ -644,7 +735,9 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -654,7 +747,9 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -664,7 +759,9 @@
                     "cost_key": "14.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -674,7 +771,9 @@
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -684,7 +783,9 @@
                     "cost_key": "12.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -694,7 +795,9 @@
                     "cost_key": "25.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -704,7 +807,9 @@
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -714,7 +819,9 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -724,7 +831,9 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -737,7 +846,9 @@
                     "cost_key": "33.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -747,7 +858,9 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -757,7 +870,9 @@
                     "cost_key": "11.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -767,7 +882,9 @@
                     "cost_key": "4.00 €",
                     "imageSrc": "pr/5.jpg",
                     "food": {
-                        "food_1": ""
+                        "food_1": "Fabrički pršut",
+                        "food_2": "Grill povrće",
+                        "food_3": "Domaći pršut"
                     }
                 },
                 {
@@ -977,8 +1094,8 @@
                 }
             ]
         },
-        "Piva_Cyders": {
-            "details": "Pivo / Cyders",
+        "Piva_Ciders": {
+            "details": "Pivo / Ciders",
             "description": "osvežavajući izbor piva i voćnih cidra.",
             "translations": [
                 {
@@ -1215,7 +1332,8 @@
                     "cost_key": "5.50 €",
                     "imageSrc": "pr/3.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Strano vino",
+                        "drink_2": "Domaće pivo"
                     }
                 }
             ]
@@ -1231,7 +1349,9 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -1241,7 +1361,9 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 },
                 {
@@ -1251,7 +1373,9 @@
                     "cost_key": "3.00 €",
                     "imageSrc": "pr/1.jpg",
                     "drink": {
-                        "drink_1": ""
+                        "drink_1": "Lokalno vino",
+                        "drink_2": "Kafa",
+                        "drink_3": "Kraft pivo"
                     }
                 }
             ]

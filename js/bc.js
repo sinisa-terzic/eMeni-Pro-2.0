@@ -381,69 +381,50 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
 
+            // Save current state before refreshing
+            saveAppStateToLocalStorage();
+            saveCartToLocalStorage();
+
+            // Load new language data
             fetch(languageMap[lang])
                 .then(response => response.json())
                 .then(data => {
-                    if (!data.category || !data.language_strings) {
-                        throw new Error('Nedostaju prevodi u JSON fajlu');
-                    }
+                    if (!data.category) throw new Error('Invalid JSON format');
 
-                    // Ažuriraj naslove u korpi
-                    const updatedCart = state.selectedItems.map(item => {
-                        const [catIndex, itemIndex] = item.id.split('-');
-                        const category = Object.values(data.category)[catIndex];
-                        const translation = category?.translations?.[itemIndex];
-
-                        return {
-                            ...item,
-                            title: translation?.title_key || item.title
-                        };
+                    // Update cart items with new translations
+                    const updatedCart = state.selectedItems.map(cartItem => {
+                        const [categoryIndex, itemIndex] = cartItem.id.split('-');
+                        const category = Object.values(data.category)[categoryIndex];
+                        if (category && category.translations[itemIndex]) {
+                            return {
+                                ...cartItem,
+                                title: category.translations[itemIndex].title_key || cartItem.title
+                            };
+                        }
+                        return cartItem;
                     });
 
-                    // Sačuvaj ažuriranu korpu sa novim prevodima
-                    localStorage.setItem('cart', JSON.stringify({
-                        items: updatedCart,
-                        languageStrings: data.language_strings
-                    }));
+                    // Update state and save
+                    state.selectedItems = updatedCart;
+                    saveCartToLocalStorage();
 
+                    // Refresh the page
                     window.location.reload();
                 })
                 .catch(error => {
-                    console.error('Greška pri promeni jezika:', error);
+                    console.error('Error changing language:', error);
                     window.location.reload();
                 });
         }
     }
 
     function getCurrentLanguageStrings() {
-        // Proveri localStorage prvo
-        const cartData = localStorage.getItem('cart');
-        if (cartData) {
-            try {
-                const parsed = JSON.parse(cartData);
-                if (parsed.languageStrings) {
-                    return {
-                        ...parsed.languageStrings,
-                        // Fallback vrednosti ako neki string nedostaje
-                        recommended_drinks: parsed.languageStrings.recommended_drinks || "Preporučena pića",
-                        recommended_food: parsed.languageStrings.recommended_food || "Preporučena jela",
-                        no_recommendations: parsed.languageStrings.no_recommendations || "Nema preporuka"
-                    };
-                }
-            } catch (e) {
-                console.error('Error parsing cart data:', e);
-            }
-        }
-
-        // Fallback na podrazumevane prevode
-        return {
-            empty_cart: "Vaša korpa je prazna",
-            back_to_menu: "Povratak na meni",
-            clear_all: "Izbriši sve",
+        // This assumes you have access to the current language data
+        // You might need to modify based on your actual data structure
+        const langData = state.categories?.[0]?.language_strings;
+        return langData || {
             total_price: "Ukupna cena",
-            recommended_drinks: "Preporučena pića",
-            recommended_food: "Preporučena jela",
-            no_recommendations: "Nema preporuka"
+            // other default strings
         };
     }
 
@@ -669,21 +650,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Otvaranje pop-up prozora
     function openPopup(item, itemId, categoryIndex, itemIndex, isFromCart = false) {
-        addToItemHistory(itemId);
+        addToItemHistory(itemId); // Dodaj u istoriju
 
         const selectedItem = state.selectedItems.find(item => item.id === itemId);
         const quantity = selectedItem ? selectedItem.quantity : 1;
-        const langStrings = getCurrentLanguageStrings();
 
+        // Serijalizujemo podatke o popup-u u string
         state.popupOpen = true;
         updateURL();
 
-        // Prikupite preporučene stavke
+        // Prikupi sve preporučene stavke (pića ili jela)
         const recommendedItems = [];
-        let recommendationTitle = langStrings.no_recommendations;
-
         if (item.drink) {
-            recommendationTitle = langStrings.recommended_drinks || "Preporučena pića";
             Object.values(item.drink).forEach(drinkName => {
                 const recommendedItem = findItemByTitleKey(drinkName);
                 if (recommendedItem) {
@@ -691,7 +669,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else if (item.food) {
-            recommendationTitle = langStrings.recommended_food || "Preporučena jela";
             Object.values(item.food).forEach(foodName => {
                 const recommendedItem = findItemByTitleKey(foodName);
                 if (recommendedItem) {
@@ -700,68 +677,66 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Generisanje HTML za preporučene stavke
-        const recommendedItemsHTML = recommendedItems.length > 0
-            ? recommendedItems.map(recommendedItem => {
-                const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
-                const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
-                const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
+        // Generiši HTML za preporučene stavke
+        const recommendedItemsHTML = recommendedItems.map(recommendedItem => {
+            const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
+            const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
+            const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
 
-                return `
-                    <div class="recommended-item" data-id="${recommendedItemId}">
-                        <div>
-                            <input type="checkbox" class="item-checkbox" 
-                                data-id="${recommendedItemId}" 
-                                data-title="${recommendedItem.title_key}" 
-                                data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
-                                ${recommendedItemSelected ? 'checked' : ''}>
-                            <span class="recommended-item-title">${recommendedItem.title_key}</span>
-                        </div>
-                        <div>
-                            <span class="quantity-controls">
-                                <button class="quantity-btn decrement">-</button>
-                                <span class="quantity">${recommendedItemQuantity}</span>
-                                <button class="quantity-btn increment">+</button>
-                            </span>
-                            <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
-                        </div>
+            return `
+                <div class="recommended-item" data-id="${recommendedItemId}">
+                    <div>
+                        <input type="checkbox" class="item-checkbox" 
+                            data-id="${recommendedItemId}" 
+                            data-title="${recommendedItem.title_key}" 
+                            data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
+                            ${recommendedItemSelected ? 'checked' : ''}>
+                        <span class="recommended-item-title">${recommendedItem.title_key}</span>
                     </div>
-                `;
-            }).join('')
-            : `<p>${langStrings.no_recommendations || "Nema preporuka"}</p>`;
-
-        // Generisanje HTML za popup
-        elements.popupOverlay.innerHTML = `
-            <div class="popup-content" data-id="${itemId}">
-                <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
-                <div class="popup-details">
-                    <div class="card-content">
-                        <div class="popup-header">
-                            <div class="flex">
-                                <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
-                                    data-id="${itemId}" 
-                                    data-title="${item.title_key}" 
-                                    data-price="${item.cost_key.replace('€', '').trim()}"
-                                    ${selectedItem ? 'checked' : ''}>
-                                <h3 class="card-title">${item.title_key}</h3>
-                            </div>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn decrement">-</button>
-                                <span class="quantity">${quantity}</span>
-                                <button class="quantity-btn increment">+</button>
-                                <span class="price">${(item.price * quantity).toFixed(2)} €</span>
-                            </div>
-                        </div>
-                        ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
-                        <div class="drinks-section">
-                            <h4>${recommendationTitle}</h4>
-                            ${recommendedItemsHTML}
-                        </div>
+                    <div>
+                        <span class="quantity-controls">
+                            <button class="quantity-btn decrement">-</button>
+                            <span class="quantity">${recommendedItemQuantity}</span>
+                            <button class="quantity-btn increment">+</button>
+                        </span>
+                        <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
                     </div>
-                    <button class="close-popup">×</button>
                 </div>
+            `;
+        }).join('');
+
+        // Generišemo HTML za popup prozor
+        elements.popupOverlay.innerHTML = `
+        <div class="popup-content" data-id="${itemId}">
+            <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
+            <div class="popup-details">
+                <div class="card-content">
+                    <div class="popup-header">
+                        <div class="flex">
+                            <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
+                                data-id="${itemId}" 
+                                data-title="${item.title_key}" 
+                                data-price="${item.cost_key.replace('€', '').trim()}"
+                                ${selectedItem ? 'checked' : ''}>
+                            <h3 class="card-title">${item.title_key}</h3>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn decrement">-</button>
+                            <span class="quantity">${quantity}</span>
+                            <button class="quantity-btn increment">+</button>
+                            <span class="price">${(item.price * quantity).toFixed(2)} €</span>
+                        </div>
+                    </div>
+                    ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
+                    <div class="drinks-section">
+                        <h4>Preporučena ${item.drink ? 'pića' : 'jela'}:</h4>
+                        ${recommendedItemsHTML.length > 0 ? recommendedItemsHTML : '<p>Nema preporuka.</p>'}
+                    </div>
+                </div>
+                <button class="close-popup">×</button>
             </div>
-        `;
+        </div>
+    `;
 
         elements.popupOverlay.style.display = 'flex';
 
@@ -772,6 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Postavljamo event listenere za popup prozor
         setupPopupEventListeners(elements.popupOverlay, itemId, categoryIndex, itemIndex);
     }
 
@@ -1079,46 +1055,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // *** Prikazuje praznu korpu sa porukom i dugmetom za povratak na meni.
     function renderEmptyCart() {
-        const langStrings = getCurrentLanguageStrings();
-
+        // Postavljamo HTML za prikaz prazne korpe
         elements.selectedItemsContainer.innerHTML = `
             <div class="empty-cart-message">
-                ${langStrings.empty_cart || "Vaša korpa je prazna"}
+                Vaša korpa je prazna.
             </div>
             <div class="cart-actions">
-                <button id="backToMenuButton" class="back-to-menu">
-                    ${langStrings.back_to_menu || "Povratak na meni"}
-                </button>
+                <button id="backToMenuButton" class="back-to-menu" role="button" aria-label="Povratak na meni">Povratak na meni</button>
             </div>
         `;
 
+        // Centriramo dugme "Povratak na meni" unutar kontejnera za akcije korpe
         document.querySelector('.cart-actions').style.justifyContent = 'center';
     }
 
     // *** Prikazuje stavke u korpi, po kategorijama, i opcijama za izmenu i brisanje
     function renderCartItems() {
-        const langStrings = getCurrentLanguageStrings();
-        let cartContent = '';
+        // Proveravamo da li su kategorije učitane
+        if (!state.categories || state.categories.length === 0) {
+            console.error('Kategorije nisu učitane.');
+            return;
+        }
 
-        // Grupisanje stavki po kategorijama
+        // Grupišemo stavke u korpi po kategorijama
         const groupedItems = state.selectedItems.reduce((groups, item) => {
+            // Delimo ID stavke na indeks kategorije i indeks stavke
             const [categoryIndex, itemIndex] = item.id.split('-');
             const category = state.categories[categoryIndex];
+            const originalItem = category?.translations?.[itemIndex];
 
+            // Proveravamo da li su kategorija i originalna stavka pronađeni
+            if (!category || !originalItem) {
+                console.error(`Kategorija ili stavka nije pronađena za id ${item.id}`);
+                return groups;
+            }
+
+            // Ako grupa za ovu kategoriju ne postoji, kreiramo je
             if (!groups[categoryIndex]) {
                 groups[categoryIndex] = {
-                    categoryName: category?.details || 'Nepoznata kategorija',
+                    categoryName: category.details || 'Nepoznata kategorija',
                     items: []
                 };
             }
 
-            groups[categoryIndex].items.push(item);
+            // Pronalazimo checkbox za ovu stavku i ažuriramo cenu i količinu
+            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] .item-checkbox`);
+            if (checkbox) {
+                const quantity = item.quantity;
+                const basePrice = parseFloat(checkbox.getAttribute('data-price'));
+                item.price = basePrice * quantity;
+                item.quantity = quantity;
+            }
+
+            // Dodajemo stavku u odgovarajuću grupu
+            groups[categoryIndex].items.push({
+                id: item.id,
+                title: originalItem.title_key || originalItem.details || 'Nepoznata stavka',
+                quantity: item.quantity,
+                price: item.price
+            });
+
             return groups;
         }, {});
 
-        // Generisanje HTML-a za svaku kategoriju
-        cartContent = Object.values(groupedItems).map(group => `
-            <div class="category-group">
+        // Generišemo HTML za prikaz stavki u korpi
+        let cartContent = Object.values(groupedItems).map(group => `
+           <div class="category-group">
                 <span class="category-title">${group.categoryName}</span>
                 ${group.items.map(item => `
                     <div class="selected-item" data-id="${item.id}">
@@ -1128,35 +1130,36 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} € = ${item.price.toFixed(2)} €</span>
                         </div>
                         <button class="remove-item">
-                            <img data-id="${item.id}" src="img/command/clear.png" alt="clearBtn">    
+                         <img  data-id="${item.id}" src="img/command/clear.png" alt="clearBtn">    
                         </button>
                     </div>
                 `).join('')}
             </div>
         `).join('');
 
-        // Dodavanje ukupne cene
+        // Računamo ukupnu cenu svih stavki u korpi
         const totalPrice = state.selectedItems.reduce((total, item) => total + item.price, 0);
+
+        // Dodajemo HTML za prikaz ukupne cene
         cartContent += `
             <div id="totalPriceContainer" class="total-price-container">
-                <span id="totalPriceTitle">${langStrings.total_price || "Ukupna cena"}:</span>
+                <span id="totalPriceTitle">Ukupna cena:</span>
                 <span id="totalPrice">${totalPrice.toFixed(2)} €</span>
             </div>
         `;
 
-        // Dodavanje dugmadi
+        // Dodajemo HTML za dugmad "Povratak na meni" i "Izbriši sve"
         cartContent += `
             <div class="cart-actions">
-                <button id="backToMenuButton" class="back-to-menu">
-                    ${langStrings.back_to_menu || "Povratak na meni"}
-                </button>
-                <button id="clearAllButton">
-                    ${langStrings.clear_all || "Izbriši sve"}
-                </button>
+                <button id="backToMenuButton" class="back-to-menu">Povratak na meni</button>
+                <button id="clearAllButton">Izbriši sve</button>
             </div>
         `;
 
+        // Postavljamo generisani HTML u kontejner za stavke korpe
         elements.selectedItemsContainer.innerHTML = cartContent;
+
+        // Uklanjamo centriranje dugmadi (ako je postavljeno za praznu korpu)
         document.querySelector('.cart-actions').style.justifyContent = '';
 
         // Dodajemo event listenere za dugmad "✎" (edit) na svaku stavku
@@ -1170,7 +1173,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
 
     // Event listener za dugme "Povratak na meni"
     document.addEventListener('click', (event) => {

@@ -1,4 +1,17 @@
 {
+    "language_strings": {
+        "recommended_drinks": "Recommended drinks",
+        "recommended_food": "Recommended dishes",
+        "back_to_menu": "Back to menu",
+        "clear_all": "Clear all",
+        "confirm_remove_item": "Do you want to remove item",
+        "confirm_clear_all": "Do you want to remove item?",
+        "yes": "Yes",
+        "no": "No",
+        "empty_cart": "Your cart is empty",
+        "total_price": "Total price",
+        "no_recommendations": "No recommendations"
+    },
     "category": {
         "Cold_Appetizers": {
             "details": "Cold appetizers",

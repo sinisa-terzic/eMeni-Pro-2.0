@@ -10,7 +10,7 @@
 body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: 16px;
-    line-height: 1.5;
+    /* line-height: 1.5; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -605,26 +605,32 @@ input[type="range"]:focus::-moz-range-thumb {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgb(221, 221, 221);
     position: sticky;
-    top: 0;
+    top: 0px;
     background: white;
     z-index: 1;
 }
 
 #cartTitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .cart-hamburger {
-    width: 24px;
-    height: 24px;
+    width: 28px;
 }
 
 #selectedItems {
     padding: 10px;
+}
+
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    padding: 20px;
 }
 
 .category-group {

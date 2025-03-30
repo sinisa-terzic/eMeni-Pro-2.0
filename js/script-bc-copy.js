@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url.searchParams.set('slide', state.activeIndex);
         if (state.popupOpen) url.searchParams.set('popup', 'true');
         if (state.callMenuOpen) url.searchParams.set('call', 'true');
-        if (state.searchQuery) url.searchParams.set('search', state.searchQuery);
+        // if (state.searchQuery) url.searchParams.set('search', state.searchQuery);  // Ovo brišemo
         if (state.cartOpen) url.searchParams.set('cart', 'true');
         if (state.settingsOpen) url.searchParams.set('settings', 'true');
         if (state.dropdownOpen) url.searchParams.set('dropdown', 'true');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ako neki od elemenata nisu aktivni, uklanjamo odgovarajući parametar iz URL-a
         if (!state.popupOpen) url.searchParams.delete('popup');
         if (!state.callMenuOpen) url.searchParams.delete('call');
-        if (!state.searchQuery) url.searchParams.delete('search');
+        // if (!state.searchQuery) url.searchParams.delete('search');  // Ovo brišemo
         if (!state.cartOpen) url.searchParams.delete('cart');
         if (!state.settingsOpen) url.searchParams.delete('settings');
         if (!state.dropdownOpen) url.searchParams.delete('dropdown');
@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function readURL() {
         const url = new URL(window.location);
         const stateFromURL = {
-            activeIndex: parseInt(url.searchParams.get('slide')) || 0, // Pročitaj indeks slajda
+            activeIndex: parseInt(url.searchParams.get('slide')) || 0,
             popupOpen: url.searchParams.get('popup') || null,
             callMenuOpen: url.searchParams.get('call') || null,
-            searchQuery: url.searchParams.get('search') || '',
+            // searchQuery: url.searchParams.get('search') || '',  // Ovo brišemo
             cartOpen: url.searchParams.get('cart') || null,
             settingsOpen: url.searchParams.get('settings') || null,
             dropdownOpen: url.searchParams.get('dropdown') || null,
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyURLState(stateFromURL) {
         if (stateFromURL.activeIndex !== undefined) {
             state.activeIndex = stateFromURL.activeIndex;
-            updateClasses(); // Ažuriraj prikaz slajdova
+            updateClasses();
         }
         if (stateFromURL.popupOpen === 'true') {
             state.popupOpen = true;
@@ -116,10 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             toggleCallMenu('close');
         }
-        if (stateFromURL.searchQuery) {
-            elements.searchInput.value = stateFromURL.searchQuery;
-            searchItem(stateFromURL.searchQuery);
-        }
+        // if (stateFromURL.searchQuery) {  // Ovo brišemo
+        //     elements.searchInput.value = stateFromURL.searchQuery;
+        //     searchItem(stateFromURL.searchQuery);
+        // }
         if (stateFromURL.cartOpen === 'true') {
             toggleCart('open');
         } else {
@@ -215,10 +215,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadCartFromLocalStorage() {
         const cart = localStorage.getItem('cart');
         if (cart) {
-            state.selectedItems = JSON.parse(cart);
-            updateCart(); // Ažuriraj korpu
-            restoreCheckedCheckboxes(); // Vrati čekirane checkboxove
-            restoreQuantities(); // Vrati količine
+            try {
+                state.selectedItems = JSON.parse(cart);
+                updateCart(); // Ažuriraj korpu
+                restoreCheckedCheckboxes(); // Vrati čekirane checkboxove
+                restoreQuantities(); // Vrati količine
+            } catch (error) {
+                console.error('Greška pri učitavanju korpe:', error);
+                // Ako je došlo do greške, resetuj korpu
+                state.selectedItems = [];
+                localStorage.removeItem('cart');
+                renderEmptyCart();
+            }
         } else {
             // Ako nema stavki u localStorage, prikaži praznu korpu
             renderEmptyCart();
@@ -296,21 +304,86 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Dodajemo ove promenljive na početku skripte (u delu gde definišemo state)
+    let currentLanguage = 'sr'; // Podrazumevani jezik
+    const languageMap = {
+        sr: 'js/data_sr.json',
+        ru: 'js/data_ru.json',
+        en: 'js/data_en.json'
+    };
+
     // Dohvatanje podataka iz JSON fajla
     async function fetchData(callback) {
         try {
-            const response = await fetch(JSON_PATH);
+            const response = await fetch(languageMap[currentLanguage] || JSON_PATH);
             if (!response.ok) throw new Error(`HTTP greška! status: ${response.status}`);
             const data = await response.json();
             if (!data.category) throw new Error('Nevalidan JSON format');
-            state.categories = Object.values(data.category); // Inicijalizuj state.categories
-            initializeMenu(); // Inicijalizuj meni
-            updateClasses(); // Ažuriraj klase
-            setupImageClickListeners(); // Postavi osluškivače za slike
-            if (callback) callback(); // Pozovi callback ako postoji
+            state.categories = Object.values(data.category);
+            initializeMenu();
+            updateClasses();
+            setupImageClickListeners();
+            if (callback) callback();
         } catch (error) {
             console.error('Greška:', error);
             elements.dataContainer.innerHTML = `<div class="error">${error.message}</div>`;
+        }
+    }
+
+    // Funkcija za promenu jezika
+    function changeLanguage(lang) {
+        if (currentLanguage !== lang && languageMap[lang]) {
+            currentLanguage = lang;
+            localStorage.setItem('selectedLanguage', lang);
+
+            // Sačuvaj trenutnu korpu pre osvežavanja
+            const savedCart = localStorage.getItem('cart');
+
+            // Ako postoji korpa, ažuriraj je sa novim prevodima
+            if (savedCart) {
+                const cartItems = JSON.parse(savedCart);
+
+                // Učitaj novi JSON sa podacima za odabrani jezik
+                fetch(languageMap[lang])
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.category) throw new Error('Nevalidan JSON format');
+
+                        // Ažuriraj naslove u korpi sa novim prevodima
+                        const updatedCart = cartItems.map(cartItem => {
+                            const [categoryIndex, itemIndex] = cartItem.id.split('-');
+                            const category = Object.values(data.category)[categoryIndex];
+                            if (category && category.translations[itemIndex]) {
+                                return {
+                                    ...cartItem,
+                                    title: category.translations[itemIndex].title_key || cartItem.title
+                                };
+                            }
+                            return cartItem;
+                        });
+
+                        // Sačuvaj ažuriranu korpu
+                        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+                        // Osveži stranicu
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Greška pri ažuriranju korpe:', error);
+                        window.location.reload();
+                    });
+            } else {
+                // Ako nema korpe, samo osveži stranicu
+                window.location.reload();
+            }
+
+            // Ažuriraj aktivna dugmad pre reload-a
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Zatvori settings meni
+            toggleSettings('close');
         }
     }
 
@@ -826,11 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentCategory = state.categories[state.activeIndex];
         elements.itemsTitle.innerHTML = `
             <div class="title-container">
-                <button class="btn prev">←</button>
                 <div class="title-content">
                     <h2>${currentCategory.details || 'Nepoznata kategorija'}</h2>
                     <div class="category-description">${currentCategory.description || 'Nema opisa.'}</div>
                 </div>
+                <button class="btn prev">←</button>
                 <button class="btn next">→</button>
             </div>
         `;
@@ -908,16 +981,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function calculateDataContainerHeight() {
         const header = document.getElementById('header');
         const itemsTitle = document.querySelector('.items-title');
-        // const control = document.getElementById('control');
+        const control = document.getElementById('control');
 
         // Proveravamo da li svi elementi postoje pre nego što pristupimo njihovim svojstvima
-        if (!header || !itemsTitle) {
+        if (!header || !control || !itemsTitle) {
             console.error('Neki od elemenata za izračunavanje visine nisu pronađeni');
             return;
         }
 
         const totalUsedHeight =
             header.offsetHeight +
+            control.offsetHeight +
             itemsTitle.offsetHeight;
 
         const viewportHeight = window.innerHeight;
@@ -1385,9 +1459,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Event listeneri za navigaciju i interakciju sa slajdovima
         elements.prevBtn?.addEventListener('click', () => changeSlide('prev'));
         elements.nextBtn?.addEventListener('click', () => changeSlide('next'));
-        // Event listener za slider
         elements.slider.addEventListener('input', () => {
-            changeSlideFromSlider(); // Menjamo slajd na osnovu slidera
+            changeSlideFromSlider();
         });
 
         elements.container?.addEventListener('click', (e) => {
@@ -1420,7 +1493,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.closeBtn?.addEventListener('click', () => toggleCallMenu('close'));
         elements.overlay?.addEventListener('click', () => toggleCallMenu('close'));
 
-        // 5. Event listeneri za pretragu
+        // 5. Event listeneri za pretragu - OVO BRIŠEMO CEO DEO
         elements.searchInput.addEventListener('input', () => {
             const query = elements.searchInput.value;
             if (query) {
@@ -1470,7 +1543,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 7. Resize event listener
         window.addEventListener('resize', debounce(calculateDataContainerHeight, 100));
 
-        // Funkcija za zatvaranje svih menija
         function closeAllMenus() {
             toggleCallMenu('close');
             toggleDropdown('close');
@@ -1658,15 +1730,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicijalizacija slajda na osnovu URL-a
     function initialize() {
-        loadAppStateFromLocalStorage(); // Učitaj stanje aplikacije
-        fetchData(() => {
-            // Ovo će se izvršiti tek nakon što su kategorije učitane
-            loadCartFromLocalStorage(); // Učitaj korpu
-            updateSlider(); // Inicijalizuj slider
-        });
-        setupEventListeners(); // Postavi event listenere
+        // Proveri da li postoji sačuvan jezik u localStorage
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        if (savedLanguage && languageMap[savedLanguage]) {
+            currentLanguage = savedLanguage;
+        }
 
-        // Inicijalizuj slajd na osnovu URL-a
+        loadAppStateFromLocalStorage();
+        fetchData(() => {
+            loadCartFromLocalStorage();
+            updateSlider();
+        });
+        setupEventListeners();
+
+        // Postavi event listenere za dugmad za jezik
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
+            btn.addEventListener('click', () => {
+                changeLanguage(btn.dataset.lang);
+                toggleSettings('close'); // Zatvori settings meni nakon izbora jezika
+            });
+        });
+
         const initialState = readURL();
         applyURLState(initialState);
     }

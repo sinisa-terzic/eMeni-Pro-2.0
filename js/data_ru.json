@@ -1,4 +1,17 @@
 {
+    "language_strings": {
+        "recommended_drinks": "Рекомендуемые напитки",
+        "recommended_food": "Рекомендуемые блюда",
+        "back_to_menu": "Вернуться в меню",
+        "clear_all": "Очистить всё",
+        "confirm_remove_item": "Вы хотите удалить позицию",
+        "confirm_clear_all": "Вы хотите удалить все позиции?",
+        "yes": "Да",
+        "no": "Нет",
+        "empty_cart": "Ваша корзина пуста",
+        "total_price": "Итоговая цена",
+        "no_recommendations": "Нет рекомендаций"
+    },
     "category": {
         "Hladna_Predjela": {
             "details": "Холодные закуски",
