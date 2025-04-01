@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsContainer: document.querySelector('.settings'),
         settingsOverlay: document.querySelector('.settings-overlay'),
         settingBtn: document.getElementById('settingBtn'),
-        settingTitle: document.getElementById('settingTitle'),
+        // settingTitle: document.getElementById('settingTitle'),
         searchInput: document.getElementById('searchInput'),
         searchResults: document.getElementById('searchResults'),
         scrollArrow: document.getElementById('scrollArrow'),
@@ -375,11 +375,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // Funkcija za osvežavanje dugmadi za jezik:
+    function updateLanguageButtons() {
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.classList.toggle('active', savedLanguage && btn.dataset.lang === currentLanguage);
+        });
+    }
+
     // Funkcija za promenu jezika
     function changeLanguage(lang) {
         if (currentLanguage !== lang && languageMap[lang]) {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
+            // updateLanguageButtons(); // Osveži dugmad nakon promene jezika
 
             fetch(languageMap[lang])
                 .then(response => response.json())
@@ -1525,7 +1534,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Event listeneri za settings meni
         elements.settingBtn?.addEventListener('click', debouncedOpenSettings);
         elements.settingsOverlay?.addEventListener('click', () => toggleSettings('close'));
-        elements.settingTitle?.addEventListener('click', () => toggleSettings('close'));
+        // elements.settingTitle?.addEventListener('click', () => toggleSettings('close'));
 
         // 4. Event listeneri za call meni
         elements.phoneNumber?.addEventListener('click', debouncedOpenCallMenu);
@@ -1771,7 +1780,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function initialize() {
         // Proveri da li postoji sačuvan jezik u localStorage
         const savedLanguage = localStorage.getItem('selectedLanguage');
-        if (savedLanguage && languageMap[savedLanguage]) {
+
+        if (!savedLanguage) {
+            // Ako nema sačuvanog jezika, otvori prozor za podešavanja
+            toggleSettings('open');
+            // Postavi podrazumevani jezik na sr, ali ne aktiviraj dugme
+            currentLanguage = 'sr';
+        } else if (languageMap[savedLanguage]) {
             currentLanguage = savedLanguage;
         }
 
@@ -1783,14 +1798,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
 
         // Postavi event listenere za dugmad za jezik
+        // Postavi event listenere za dugmad za jezik
         document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
-            btn.addEventListener('click', () => {
-                changeLanguage(btn.dataset.lang);
-            });
+            // Aktiviraj dugme samo ako postoji sačuvan jezik
+            btn.classList.toggle('active', localStorage.getItem('selectedLanguage') && btn.dataset.lang === currentLanguage);
 
+            btn.addEventListener('click', () => {
+                // Dodaj aktivnu klasu na kliknuto dugme
+                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Sačuvaj izabrani jezik u localStorage
+                localStorage.setItem('selectedLanguage', btn.dataset.lang);
+                changeLanguage(btn.dataset.lang);
+                // Nakon izbora jezika, zatvori prozor za podešavanja
+                toggleSettings('close');
+            });
         });
-        toggleSettings('close');
+
         const initialState = readURL();
         applyURLState(initialState);
     }

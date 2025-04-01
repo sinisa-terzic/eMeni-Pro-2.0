@@ -70,6 +70,17 @@ img {
     font-family: inherit;
 }
 
+#searchInput::placeholder {
+    color: gray;
+    /* Postavi željenu boju */
+    opacity: 1;
+    /* Osigurava da boja bude potpuno vidljiva */
+}
+
+#searchInput:focus::placeholder {
+    color: lightgray;
+}
+
 #searchResults {
     position: absolute;
     top: 100%;
