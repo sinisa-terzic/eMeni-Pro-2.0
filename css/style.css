@@ -114,8 +114,8 @@ img {
 }
 
 .hamburgerBtn {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    /* height: 24px; */
 }
 
 /* ===== DROPDOWN MENU ===== */
@@ -241,7 +241,7 @@ img {
 }
 
 #slider {
-    width: 90%;
+    width: 85%;
     margin: auto;
 }
 
@@ -324,7 +324,7 @@ input[type="range"]:focus::-moz-range-thumb {
     width: 100%;
     height: 5500px;
     min-height: 100%;
-    /* padding: 10px; */
+    padding: 10px;
     transition: transform 0.25s ease-out, opacity 0.25s ease-out;
     opacity: 0;
     transform: translateX(100%);
@@ -808,6 +808,37 @@ input[type="range"]:focus::-moz-range-thumb {
     bottom: 0;
     width: 100%;
     z-index: 100;
+    border-top: 3px solid #fff;
+}
+
+.top_wrapper {
+    background-image: linear-gradient(to left bottom, rgb(86 46 0 / 56%), rgba(35 13 0 / 71%)), url("../img/bgroumd/bg-2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    height: 90vh;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 90%);
+    border-radius: 1em 1em 0 0;
+}
+
+.top_wrapper .menu_title {
+    position: absolute;
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.57);
+    top: 40vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.2em;
+}
+
+.red_font {
+    color: #e75d55;
+}
+
+.top_wrapper .menu_title #subheading {
+    font-size: 0.5em;
 }
 
 #settingBtn,
@@ -818,9 +849,46 @@ input[type="range"]:focus::-moz-range-thumb {
     position: relative;
 }
 
+.finger {
+    width: 1.1em;
+    fill: #BF360C;
+    align-self: flex-end;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        opacity: 0.9;
+        transform: translateX(0);
+    }
+
+    40% {
+        fill: #FF3D31;
+        /* Ispravljeno: promena fill umesto color */
+        opacity: 0.6;
+        transform: translateX(-3px);
+    }
+
+    60% {
+        fill: #CF0B00;
+        /* Ispravljeno: fill za boju */
+        opacity: 1;
+        transform: translateX(4px);
+    }
+}
+
+.flag {
+    width: 2.2em;
+}
+
 .settings {
     display: block;
-    padding: 20px;
+    padding: 0.7em;
     color: #000;
     position: fixed;
     top: 0;
@@ -840,38 +908,28 @@ input[type="range"]:focus::-moz-range-thumb {
 }
 
 .language-selector {
-    padding: 15px;
-    text-align: center;
-}
-
-.language-selector h4 {
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 1.6em;
+    position: absolute;
+    bottom: 17vw;
+    right: 0.5em;
 }
 
 .language-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 5vw;
 }
 
 .language-btn {
-    padding: 8px 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s;
+    filter: opacity(80%) grayscale(50%);
 }
 
-.language-btn:hover {
+/* .language-btn:hover {
     background-color: #e0e0e0;
-}
+} */
 
 .language-btn.active {
-    background-color: #4CAF50;
-    color: white;
-    border-color: #4CAF50;
+    filter: opacity(100%) grayscale(0%);
 }
 
 #checkboxCount {

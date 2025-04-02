@@ -690,8 +690,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prikupite preporučene stavke
         const recommendedItems = [];
         let recommendationTitle = langStrings.no_recommendations;
+        let showRecommendations = true; // Dodajemo flag za prikaz preporuka
 
-        if (item.drink) {
+        if (isFromCart) {
+            showRecommendations = false; // Sakrij preporuke ako je popup otvoren iz korpe
+        } else if (item.drink) {
             recommendationTitle = langStrings.recommended_drinks || "Preporučena pića";
             Object.values(item.drink).forEach(drinkName => {
                 const recommendedItem = findItemByTitleKey(drinkName);
@@ -709,37 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Generisanje HTML za preporučene stavke
-        const recommendedItemsHTML = recommendedItems.length > 0
-            ? recommendedItems.map(recommendedItem => {
-                const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
-                const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
-                const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
-
-                return `
-                    <div class="recommended-item" data-id="${recommendedItemId}">
-                        <div>
-                            <input type="checkbox" class="item-checkbox" 
-                                data-id="${recommendedItemId}" 
-                                data-title="${recommendedItem.title_key}" 
-                                data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
-                                ${recommendedItemSelected ? 'checked' : ''}>
-                            <span class="recommended-item-title">${recommendedItem.title_key}</span>
-                        </div>
-                        <div>
-                            <span class="quantity-controls">
-                                <button class="quantity-btn decrement">-</button>
-                                <span class="quantity">${recommendedItemQuantity}</span>
-                                <button class="quantity-btn increment">+</button>
-                            </span>
-                            <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
-                        </div>
-                    </div>
-                `;
-            }).join('')
-            : `<p>${langStrings.no_recommendations || "Nema preporuka"}</p>`;
-
-        // Generisanje HTML za popup
+        // Generisanje HTML za popup sa opcijom za sakrivanje preporuka
         elements.popupOverlay.innerHTML = `
             <div class="popup-content" data-id="${itemId}">
                 <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
@@ -762,9 +735,37 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                         ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
-                        <div class="drinks-section">
+                        <div class="recommendations-section" style="${!showRecommendations ? 'display: none;' : ''}">
                             <h4>${recommendationTitle}</h4>
-                            ${recommendedItemsHTML}
+                            ${recommendedItems.length > 0 ?
+                recommendedItems.map(recommendedItem => {
+                    const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
+                    const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
+                    const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
+
+                    return `
+                                        <div class="recommended-item" data-id="${recommendedItemId}">
+                                            <div>
+                                                <input type="checkbox" class="item-checkbox" 
+                                                    data-id="${recommendedItemId}" 
+                                                    data-title="${recommendedItem.title_key}" 
+                                                    data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
+                                                    ${recommendedItemSelected ? 'checked' : ''}>
+                                                <span class="recommended-item-title">${recommendedItem.title_key}</span>
+                                            </div>
+                                            <div>
+                                                <span class="quantity-controls">
+                                                    <button class="quantity-btn decrement">-</button>
+                                                    <span class="quantity">${recommendedItemQuantity}</span>
+                                                    <button class="quantity-btn increment">+</button>
+                                                </span>
+                                                <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
+                                            </div>
+                                        </div>
+                                    `;
+                }).join('') :
+                `<p>${langStrings.no_recommendations || "Nema preporuka"}</p>`
+            }
                         </div>
                     </div>
                     <button class="close-popup">×</button>
