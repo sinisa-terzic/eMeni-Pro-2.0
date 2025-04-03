@@ -817,7 +817,7 @@ input[type="range"]:focus::-moz-range-thumb {
     background-size: cover;
     background-position: center bottom;
     height: 90vh;
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 90%);
+    clip-path: polygon(0 0, 100vh 0, 100% 70vh, 0 80vh);
     border-radius: 1em 1em 0 0;
 }
 
