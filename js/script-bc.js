@@ -1095,6 +1095,31 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.checkboxCount.style.display = state.selectedItems.length > 0 ? 'flex' : 'none';
     }
 
+    // Dark mode funkcionalnost
+    function setDarkMode(isDark) {
+        const body = document.querySelector("body");
+        const switchElement = document.querySelector("#switch");
+
+        if (isDark) {
+            body.classList.add("dark");
+            if (switchElement) switchElement.checked = true;
+        } else {
+            body.classList.remove("dark");
+            if (switchElement) switchElement.checked = false;
+        }
+        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+    }
+
+    // Postavi event listener za switch
+    function setupDarkModeToggle() {
+        const switchElement = document.querySelector("#switch");
+        if (switchElement) {
+            switchElement.addEventListener('change', function () {
+                setDarkMode(this.checked);
+            });
+        }
+    }
+
     // *** Prikazuje praznu korpu sa porukom i dugmetom za povratak na meni.
     function renderEmptyCart() {
         const langStrings = getCurrentLanguageStrings();
@@ -1805,6 +1830,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (languageMap[savedLanguage]) {
             currentLanguage = savedLanguage;
         }
+
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+        setDarkMode(darkModeEnabled);
+        setupDarkModeToggle();
 
         loadAppStateFromLocalStorage();
         fetchData(() => {

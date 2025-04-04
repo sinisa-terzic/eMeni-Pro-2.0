@@ -381,50 +381,60 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
 
-            // Save current state before refreshing
-            saveAppStateToLocalStorage();
-            saveCartToLocalStorage();
-
-            // Load new language data
             fetch(languageMap[lang])
                 .then(response => response.json())
                 .then(data => {
-                    if (!data.category) throw new Error('Invalid JSON format');
+                    if (!data.category || !data.language_strings) {
+                        throw new Error('Nedostaju prevodi u JSON fajlu');
+                    }
 
-                    // Update cart items with new translations
-                    const updatedCart = state.selectedItems.map(cartItem => {
-                        const [categoryIndex, itemIndex] = cartItem.id.split('-');
-                        const category = Object.values(data.category)[categoryIndex];
-                        if (category && category.translations[itemIndex]) {
-                            return {
-                                ...cartItem,
-                                title: category.translations[itemIndex].title_key || cartItem.title
-                            };
-                        }
-                        return cartItem;
+                    // Ažuriraj naslove u korpi
+                    const updatedCart = state.selectedItems.map(item => {
+                        const [catIndex, itemIndex] = item.id.split('-');
+                        const category = Object.values(data.category)[catIndex];
+                        const translation = category?.translations?.[itemIndex];
+
+                        return {
+                            ...item,
+                            title: translation?.title_key || item.title
+                        };
                     });
 
-                    // Update state and save
-                    state.selectedItems = updatedCart;
-                    saveCartToLocalStorage();
+                    // Sačuvaj ažuriranu korpu sa novim prevodima
+                    localStorage.setItem('cart', JSON.stringify({
+                        items: updatedCart,
+                        languageStrings: data.language_strings
+                    }));
 
-                    // Refresh the page
                     window.location.reload();
                 })
                 .catch(error => {
-                    console.error('Error changing language:', error);
+                    console.error('Greška pri promeni jezika:', error);
                     window.location.reload();
                 });
         }
     }
 
     function getCurrentLanguageStrings() {
-        // This assumes you have access to the current language data
-        // You might need to modify based on your actual data structure
-        const langData = state.categories?.[0]?.language_strings;
-        return langData || {
-            total_price: "Ukupna cena",
-            // other default strings
+        // Proveri localStorage prvo
+        const cartData = localStorage.getItem('cart');
+        if (cartData) {
+            try {
+                const parsed = JSON.parse(cartData);
+                if (parsed.languageStrings) {
+                    return parsed.languageStrings;
+                }
+            } catch (e) {
+                console.error('Error parsing cart data:', e);
+            }
+        }
+
+        // Fallback na podrazumevane prevode
+        return {
+            empty_cart: "Vaša korpa je prazna",
+            back_to_menu: "Povratak na meni",
+            clear_all: "Izbriši sve",
+            total_price: "Ukupna cena"
         };
     }
 
@@ -1055,72 +1065,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // *** Prikazuje praznu korpu sa porukom i dugmetom za povratak na meni.
     function renderEmptyCart() {
-        // Postavljamo HTML za prikaz prazne korpe
+        const langStrings = getCurrentLanguageStrings();
+
         elements.selectedItemsContainer.innerHTML = `
             <div class="empty-cart-message">
-                Vaša korpa je prazna.
+                ${langStrings.empty_cart || "Vaša korpa je prazna"}
             </div>
             <div class="cart-actions">
-                <button id="backToMenuButton" class="back-to-menu" role="button" aria-label="Povratak na meni">Povratak na meni</button>
+                <button id="backToMenuButton" class="back-to-menu">
+                    ${langStrings.back_to_menu || "Povratak na meni"}
+                </button>
             </div>
         `;
 
-        // Centriramo dugme "Povratak na meni" unutar kontejnera za akcije korpe
         document.querySelector('.cart-actions').style.justifyContent = 'center';
     }
 
     // *** Prikazuje stavke u korpi, po kategorijama, i opcijama za izmenu i brisanje
     function renderCartItems() {
-        // Proveravamo da li su kategorije učitane
-        if (!state.categories || state.categories.length === 0) {
-            console.error('Kategorije nisu učitane.');
-            return;
-        }
+        const langStrings = getCurrentLanguageStrings();
+        let cartContent = '';
 
-        // Grupišemo stavke u korpi po kategorijama
+        // Grupisanje stavki po kategorijama
         const groupedItems = state.selectedItems.reduce((groups, item) => {
-            // Delimo ID stavke na indeks kategorije i indeks stavke
             const [categoryIndex, itemIndex] = item.id.split('-');
             const category = state.categories[categoryIndex];
-            const originalItem = category?.translations?.[itemIndex];
 
-            // Proveravamo da li su kategorija i originalna stavka pronađeni
-            if (!category || !originalItem) {
-                console.error(`Kategorija ili stavka nije pronađena za id ${item.id}`);
-                return groups;
-            }
-
-            // Ako grupa za ovu kategoriju ne postoji, kreiramo je
             if (!groups[categoryIndex]) {
                 groups[categoryIndex] = {
-                    categoryName: category.details || 'Nepoznata kategorija',
+                    categoryName: category?.details || 'Nepoznata kategorija',
                     items: []
                 };
             }
 
-            // Pronalazimo checkbox za ovu stavku i ažuriramo cenu i količinu
-            const checkbox = document.querySelector(`.menu-card[data-id="${item.id}"] .item-checkbox`);
-            if (checkbox) {
-                const quantity = item.quantity;
-                const basePrice = parseFloat(checkbox.getAttribute('data-price'));
-                item.price = basePrice * quantity;
-                item.quantity = quantity;
-            }
-
-            // Dodajemo stavku u odgovarajuću grupu
-            groups[categoryIndex].items.push({
-                id: item.id,
-                title: originalItem.title_key || originalItem.details || 'Nepoznata stavka',
-                quantity: item.quantity,
-                price: item.price
-            });
-
+            groups[categoryIndex].items.push(item);
             return groups;
         }, {});
 
-        // Generišemo HTML za prikaz stavki u korpi
-        let cartContent = Object.values(groupedItems).map(group => `
-           <div class="category-group">
+        // Generisanje HTML-a za svaku kategoriju
+        cartContent = Object.values(groupedItems).map(group => `
+            <div class="category-group">
                 <span class="category-title">${group.categoryName}</span>
                 ${group.items.map(item => `
                     <div class="selected-item" data-id="${item.id}">
@@ -1130,36 +1114,35 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="title-quantity-price">${item.quantity} x ${(item.price / item.quantity).toFixed(2)} € = ${item.price.toFixed(2)} €</span>
                         </div>
                         <button class="remove-item">
-                         <img  data-id="${item.id}" src="img/command/clear.png" alt="clearBtn">    
+                            <img data-id="${item.id}" src="img/command/clear.png" alt="clearBtn">    
                         </button>
                     </div>
                 `).join('')}
             </div>
         `).join('');
 
-        // Računamo ukupnu cenu svih stavki u korpi
+        // Dodavanje ukupne cene
         const totalPrice = state.selectedItems.reduce((total, item) => total + item.price, 0);
-
-        // Dodajemo HTML za prikaz ukupne cene
         cartContent += `
             <div id="totalPriceContainer" class="total-price-container">
-                <span id="totalPriceTitle">Ukupna cena:</span>
+                <span id="totalPriceTitle">${langStrings.total_price || "Ukupna cena"}:</span>
                 <span id="totalPrice">${totalPrice.toFixed(2)} €</span>
             </div>
         `;
 
-        // Dodajemo HTML za dugmad "Povratak na meni" i "Izbriši sve"
+        // Dodavanje dugmadi
         cartContent += `
             <div class="cart-actions">
-                <button id="backToMenuButton" class="back-to-menu">Povratak na meni</button>
-                <button id="clearAllButton">Izbriši sve</button>
+                <button id="backToMenuButton" class="back-to-menu">
+                    ${langStrings.back_to_menu || "Povratak na meni"}
+                </button>
+                <button id="clearAllButton">
+                    ${langStrings.clear_all || "Izbriši sve"}
+                </button>
             </div>
         `;
 
-        // Postavljamo generisani HTML u kontejner za stavke korpe
         elements.selectedItemsContainer.innerHTML = cartContent;
-
-        // Uklanjamo centriranje dugmadi (ako je postavljeno za praznu korpu)
         document.querySelector('.cart-actions').style.justifyContent = '';
 
         // Dodajemo event listenere za dugmad "✎" (edit) na svaku stavku
@@ -1173,6 +1156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
 
     // Event listener za dugme "Povratak na meni"
     document.addEventListener('click', (event) => {

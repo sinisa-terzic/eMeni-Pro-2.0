@@ -318,16 +318,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(languageMap[currentLanguage] || JSON_PATH);
             if (!response.ok) throw new Error(`HTTP greška! status: ${response.status}`);
             const data = await response.json();
-            if (!data.category) throw new Error('Nevalidan JSON format');
+            if (!data.category || !data.language_strings) throw new Error('Nevalidan JSON format');
+
             state.categories = Object.values(data.category);
+            updatePopupTexts(data.language_strings); // Ažuriranje popup tekstova
+
             initializeMenu();
             updateClasses();
             setupImageClickListeners();
+
             if (callback) callback();
         } catch (error) {
             console.error('Greška:', error);
             elements.dataContainer.innerHTML = `<div class="error">${error.message}</div>`;
         }
+    }
+
+    function updatePopupTexts(languageData) {
+        document.querySelector('#clearAllConfirmationPopup p').textContent = languageData.confirm_clear_all;
+        document.querySelector('#confirmClearAll').textContent = languageData.yes;
+        document.querySelector('#cancelClearAll').textContent = languageData.no;
+
+        document.querySelector('#deleteConfirmationPopup p').firstChild.textContent = languageData.confirm_remove_item + ' "';
+        document.querySelector('#confirmDelete').textContent = languageData.yes;
+        document.querySelector('#cancelDelete').textContent = languageData.no;
     }
 
     // Funkcija za promenu jezika
@@ -364,26 +378,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Sačuvaj ažuriranu korpu
                         localStorage.setItem('cart', JSON.stringify(updatedCart));
-
                         // Osveži stranicu
                         window.location.reload();
                     })
                     .catch(error => {
                         console.error('Greška pri ažuriranju korpe:', error);
-                        window.location.reload();
+                        // window.location.reload();
                     });
             } else {
                 // Ako nema korpe, samo osveži stranicu
                 window.location.reload();
             }
-
-            // Ažuriraj aktivna dugmad pre reload-a
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            // Zatvori settings meni
-            toggleSettings('close');
         }
     }
 
@@ -1102,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Dodajemo HTML za prikaz ukupne cene
         cartContent += `
             <div id="totalPriceContainer" class="total-price-container">
-                <span>Ukupna cena:</span>
+                <span id="totalPriceTitle">Ukupna cena:</span>
                 <span id="totalPrice">${totalPrice.toFixed(2)} €</span>
             </div>
         `;
@@ -1748,10 +1753,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
             btn.addEventListener('click', () => {
                 changeLanguage(btn.dataset.lang);
-                toggleSettings('close'); // Zatvori settings meni nakon izbora jezika
             });
-        });
 
+        });
+        toggleSettings('close');
         const initialState = readURL();
         applyURLState(initialState);
     }
