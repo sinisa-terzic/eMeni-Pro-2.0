@@ -1074,6 +1074,14 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.dataContainer.style.height = `${Math.max(remainingHeight, 100)}px`;
     }
 
+    function calculateSettingsWrapperHeight() {
+        const topWrapper = document.querySelector('.settings .top_wrapper');
+        if (!topWrapper) return;
+
+        const viewportHeight = window.innerHeight;
+        topWrapper.style.height = `${viewportHeight * 0.9}px`; // 90% viewport visine
+    }
+
     // *** Ažurira prikaz korpe
     function updateCart() {
         elements.checkboxCount.textContent = state.selectedItems.length;
@@ -1445,6 +1453,10 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.settingsContainer.classList.toggle('open', isOpen);
         elements.settingsOverlay.classList.toggle('active', isOpen);
         state.settingsOpen = isOpen;
+
+        if (isOpen) {
+            calculateSettingsWrapperHeight(); // Dodajte ovu liniju
+        }
         updateURL();
     }
 
@@ -1590,7 +1602,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 7. Resize event listener
-        window.addEventListener('resize', debounce(calculateDataContainerHeight, 100));
+        window.addEventListener('resize', debounce(() => {
+            calculateDataContainerHeight();
+            calculateSettingsWrapperHeight(); // Dodajte ovu liniju
+        }, 100));
 
         function closeAllMenus() {
             toggleCallMenu('close');

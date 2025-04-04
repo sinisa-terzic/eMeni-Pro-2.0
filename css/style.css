@@ -816,7 +816,7 @@ input[type="range"]:focus::-moz-range-thumb {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center bottom;
-    height: 90vh;
+    /* height: 90vh; - ovo uklonite */
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 90%);
     border-radius: 1em 1em 0 0;
 }
@@ -827,7 +827,7 @@ input[type="range"]:focus::-moz-range-thumb {
     color: #fff;
     text-align: center;
     text-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.57);
-    top: 40vh;
+    top: 30vh;
     left: 50%;
     transform: translate(-50%, -50%);
     letter-spacing: 0.2em;
@@ -910,7 +910,7 @@ input[type="range"]:focus::-moz-range-thumb {
 .language-selector {
     font-size: 1.6em;
     position: absolute;
-    bottom: 8%;
+    bottom: 17vw;
     right: 0.5em;
 }
 
