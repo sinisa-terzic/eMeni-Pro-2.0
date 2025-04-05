@@ -375,11 +375,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // Funkcija za osvežavanje dugmadi za jezik:
+    function updateLanguageButtons() {
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.classList.toggle('active', savedLanguage && btn.dataset.lang === currentLanguage);
+        });
+    }
+
     // Funkcija za promenu jezika
     function changeLanguage(lang) {
         if (currentLanguage !== lang && languageMap[lang]) {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
+            // updateLanguageButtons(); // Osveži dugmad nakon promene jezika
 
             fetch(languageMap[lang])
                 .then(response => response.json())
@@ -422,7 +431,13 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const parsed = JSON.parse(cartData);
                 if (parsed.languageStrings) {
-                    return parsed.languageStrings;
+                    return {
+                        ...parsed.languageStrings,
+                        // Fallback vrednosti ako neki string nedostaje
+                        recommended_drinks: parsed.languageStrings.recommended_drinks || "Preporučena pića",
+                        recommended_food: parsed.languageStrings.recommended_food || "Preporučena jela",
+                        no_recommendations: parsed.languageStrings.no_recommendations || "Nema preporuka"
+                    };
                 }
             } catch (e) {
                 console.error('Error parsing cart data:', e);
@@ -434,7 +449,10 @@ document.addEventListener('DOMContentLoaded', () => {
             empty_cart: "Vaša korpa je prazna",
             back_to_menu: "Povratak na meni",
             clear_all: "Izbriši sve",
-            total_price: "Ukupna cena"
+            total_price: "Ukupna cena",
+            recommended_drinks: "Preporučena pića",
+            recommended_food: "Preporučena jela",
+            no_recommendations: "Nema preporuka"
         };
     }
 
@@ -507,9 +525,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${item.text_key ? `<p class="item-description">${item.text_key}</p>` : ''}
                             <div class="item-footer">
                                 <div class="quantity-controls">
-                                    <button class="quantity-btn decrement">-</button>
+                                    <button class="quantity-btn decrement">
+                                        <img class="" src="img/command/minus.svg" alt="minus decrement">
+                                    </button>
                                     <span class="quantity">${item.quantity}</span>
-                                    <button class="quantity-btn increment">+</button>
+                                    <button class="quantity-btn increment">
+                                        <img class="" src="img/command/plus.svg" alt="plus increment">
+                                    </button>
                                 </div>
                                 <span class="title-quantity-price">${item.quantity} x ${pricePerUnit} €</span>
                                 <span class="price">${item.cost_key || '0.00 €'}</span>
@@ -660,18 +682,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Otvaranje pop-up prozora
     function openPopup(item, itemId, categoryIndex, itemIndex, isFromCart = false) {
-        addToItemHistory(itemId); // Dodaj u istoriju
+        addToItemHistory(itemId);
 
         const selectedItem = state.selectedItems.find(item => item.id === itemId);
         const quantity = selectedItem ? selectedItem.quantity : 1;
+        const langStrings = getCurrentLanguageStrings();
 
-        // Serijalizujemo podatke o popup-u u string
         state.popupOpen = true;
         updateURL();
 
-        // Prikupi sve preporučene stavke (pića ili jela)
+        // Prikupite preporučene stavke
         const recommendedItems = [];
-        if (item.drink) {
+        let recommendationTitle = langStrings.no_recommendations;
+        let showRecommendations = true; // Dodajemo flag za prikaz preporuka
+
+        if (isFromCart) {
+            showRecommendations = false; // Sakrij preporuke ako je popup otvoren iz korpe
+        } else if (item.drink) {
+            recommendationTitle = langStrings.recommended_drinks || "Preporučena pića";
             Object.values(item.drink).forEach(drinkName => {
                 const recommendedItem = findItemByTitleKey(drinkName);
                 if (recommendedItem) {
@@ -679,6 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else if (item.food) {
+            recommendationTitle = langStrings.recommended_food || "Preporučena jela";
             Object.values(item.food).forEach(foodName => {
                 const recommendedItem = findItemByTitleKey(foodName);
                 if (recommendedItem) {
@@ -687,66 +716,74 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Generiši HTML za preporučene stavke
-        const recommendedItemsHTML = recommendedItems.map(recommendedItem => {
-            const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
-            const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
-            const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
-
-            return `
-                <div class="recommended-item" data-id="${recommendedItemId}">
-                    <div>
-                        <input type="checkbox" class="item-checkbox" 
-                            data-id="${recommendedItemId}" 
-                            data-title="${recommendedItem.title_key}" 
-                            data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
-                            ${recommendedItemSelected ? 'checked' : ''}>
-                        <span class="recommended-item-title">${recommendedItem.title_key}</span>
-                    </div>
-                    <div>
-                        <span class="quantity-controls">
-                            <button class="quantity-btn decrement">-</button>
-                            <span class="quantity">${recommendedItemQuantity}</span>
-                            <button class="quantity-btn increment">+</button>
-                        </span>
-                        <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // Generišemo HTML za popup prozor
+        // Generisanje HTML za popup sa opcijom za sakrivanje preporuka
         elements.popupOverlay.innerHTML = `
-        <div class="popup-content" data-id="${itemId}">
-            <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
-            <div class="popup-details">
-                <div class="card-content">
-                    <div class="popup-header">
-                        <div class="flex">
-                            <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
-                                data-id="${itemId}" 
-                                data-title="${item.title_key}" 
-                                data-price="${item.cost_key.replace('€', '').trim()}"
-                                ${selectedItem ? 'checked' : ''}>
-                            <h3 class="card-title">${item.title_key}</h3>
+            <div class="popup-content" data-id="${itemId}">
+                <img src="${IMG_BASE_PATH}${item.imageSrc}" alt="${item.title_key}" class="popup-image" loading="lazy">
+                <div class="popup-details">
+                    <div class="card-content">
+                        <div class="popup-header">
+                            <div class="flex">
+                                <input type="checkbox" class="item-checkbox ${isFromCart ? 'from-cart' : ''}" 
+                                    data-id="${itemId}" 
+                                    data-title="${item.title_key}" 
+                                    data-price="${item.cost_key.replace('€', '').trim()}"
+                                    ${selectedItem ? 'checked' : ''}>
+                                <h3 class="card-title">${item.title_key}</h3>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn decrement">
+                                    <img class="" src="img/command/minus.svg" alt="minus decrement">
+                                </button>
+                                <span class="quantity">${quantity}</span>
+                                <button class="quantity-btn increment">
+                                    <img class="" src="img/command/plus.svg" alt="plus increment">
+                                </button>
+                                <span class="price">${(item.price * quantity).toFixed(2)} €</span>
+                            </div>
                         </div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn decrement">-</button>
-                            <span class="quantity">${quantity}</span>
-                            <button class="quantity-btn increment">+</button>
-                            <span class="price">${(item.price * quantity).toFixed(2)} €</span>
+                        ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
+                        <div class="recommendations-section" style="${!showRecommendations ? 'display: none;' : ''}">
+                            <h4>${recommendationTitle}</h4>
+                            ${recommendedItems.length > 0 ?
+                recommendedItems.map(recommendedItem => {
+                    const recommendedItemId = `${recommendedItem.categoryIndex}-${recommendedItem.itemIndex}`;
+                    const recommendedItemSelected = state.selectedItems.find(item => item.id === recommendedItemId);
+                    const recommendedItemQuantity = recommendedItemSelected ? recommendedItemSelected.quantity : 1;
+
+                    return `
+                                        <div class="recommended-item" data-id="${recommendedItemId}">
+                                            <div>
+                                                <input type="checkbox" class="item-checkbox" 
+                                                    data-id="${recommendedItemId}" 
+                                                    data-title="${recommendedItem.title_key}" 
+                                                    data-price="${recommendedItem.cost_key.replace('€', '').trim()}"
+                                                    ${recommendedItemSelected ? 'checked' : ''}>
+                                                <span class="recommended-item-title">${recommendedItem.title_key}</span>
+                                            </div>
+                                            <div>
+                                                <span class="quantity-controls">
+                                                    <button class="quantity-btn decrement">
+                                                        <img class="" src="img/command/minus.svg" alt="minus decrement">
+                                                    </button>
+                                                    <span class="quantity">${recommendedItemQuantity}</span>
+                                                    <button class="quantity-btn increment">
+                                                        <img class="" src="img/command/plus.svg" alt="plus increment">
+                                                    </button>
+                                                </span>
+                                                <span class="price">${(parseFloat(recommendedItem.cost_key.replace('€', '').trim()) * recommendedItemQuantity).toFixed(2)} €</span>
+                                            </div>
+                                        </div>
+                                    `;
+                }).join('') :
+                `<p>${langStrings.no_recommendations || "Nema preporuka"}</p>`
+            }
                         </div>
                     </div>
-                    ${item.description_key ? `<p class="item-description">${item.description_key}</p>` : ''}
-                    <div class="drinks-section">
-                        <h4>Preporučena ${item.drink ? 'pića' : 'jela'}:</h4>
-                        ${recommendedItemsHTML.length > 0 ? recommendedItemsHTML : '<p>Nema preporuka.</p>'}
-                    </div>
+                    <button class="close-popup">×</button>
                 </div>
-                <button class="close-popup">×</button>
             </div>
-        </div>
-    `;
+        `;
 
         elements.popupOverlay.style.display = 'flex';
 
@@ -757,7 +794,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Postavljamo event listenere za popup prozor
         setupPopupEventListeners(elements.popupOverlay, itemId, categoryIndex, itemIndex);
     }
 
@@ -954,8 +990,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2>${currentCategory.details || 'Nepoznata kategorija'}</h2>
                     <div class="category-description">${currentCategory.description || 'Nema opisa.'}</div>
                 </div>
-                <button class="btn prev">←</button>
-                <button class="btn next">→</button>
+                <button class="btn prev">
+                    <img class="" src="img/command/left-arrowhead-svgrepo-com.svg" alt="left-arrowhead">
+                </button>
+                <button class="btn next">
+                    <img class="" src="img/command/right-arrowhead-svgrepo-com.svg" alt="left-arrowhead">
+                </button>
             </div>
         `;
 
@@ -1050,17 +1090,68 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.dataContainer.style.height = `${Math.max(remainingHeight, 100)}px`;
     }
 
+    function calculateSettingsWrapperHeight() {
+        const topWrapper = document.querySelector('.settings .top_wrapper');
+        if (!topWrapper) return;
+
+        const viewportHeight = window.innerHeight;
+        topWrapper.style.height = `${viewportHeight * 0.9}px`; // 90% viewport visine
+    }
+
     // *** Ažurira prikaz korpe
     function updateCart() {
         elements.checkboxCount.textContent = state.selectedItems.length;
 
         if (state.selectedItems.length === 0) {
-            renderEmptyCart(); // Prikaži praznu korpu
+            renderEmptyCart();
         } else {
-            renderCartItems(); // Prikaži stavke u korpi
+            renderCartItems();
+            setupCartQuantityControls(); // Dodajte ovu liniju
         }
 
         elements.checkboxCount.style.display = state.selectedItems.length > 0 ? 'flex' : 'none';
+    }
+
+    // Dodajte novu funkciju za postavljanje event listenera
+    function setupCartQuantityControls() {
+        document.querySelectorAll('.quantity-btn.increment').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemId = btn.getAttribute('data-id');
+                updateCartItemQuantity(itemId, 1);
+            });
+        });
+
+        document.querySelectorAll('.quantity-btn.decrement').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemId = btn.getAttribute('data-id');
+                updateCartItemQuantity(itemId, -1);
+            });
+        });
+    }
+
+    // Dark mode funkcionalnost
+    function setDarkMode(isDark) {
+        const body = document.querySelector("body");
+        const switchElement = document.querySelector("#switch");
+
+        if (isDark) {
+            body.classList.add("dark");
+            if (switchElement) switchElement.checked = true;
+        } else {
+            body.classList.remove("dark");
+            if (switchElement) switchElement.checked = false;
+        }
+        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+    }
+
+    // Postavi event listener za switch
+    function setupDarkModeToggle() {
+        const switchElement = document.querySelector("#switch");
+        if (switchElement) {
+            switchElement.addEventListener('change', function () {
+                setDarkMode(this.checked);
+            });
+        }
     }
 
     // *** Prikazuje praznu korpu sa porukom i dugmetom za povratak na meni.
@@ -1421,6 +1512,10 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.settingsContainer.classList.toggle('open', isOpen);
         elements.settingsOverlay.classList.toggle('active', isOpen);
         state.settingsOpen = isOpen;
+
+        if (isOpen) {
+            calculateSettingsWrapperHeight(); // Dodajte ovu liniju
+        }
         updateURL();
     }
 
@@ -1566,7 +1661,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 7. Resize event listener
-        window.addEventListener('resize', debounce(calculateDataContainerHeight, 100));
+        window.addEventListener('resize', debounce(() => {
+            calculateDataContainerHeight();
+            calculateSettingsWrapperHeight(); // Dodajte ovu liniju
+        }, 100));
 
         function closeAllMenus() {
             toggleCallMenu('close');
@@ -1757,9 +1855,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function initialize() {
         // Proveri da li postoji sačuvan jezik u localStorage
         const savedLanguage = localStorage.getItem('selectedLanguage');
-        if (savedLanguage && languageMap[savedLanguage]) {
+
+        if (!savedLanguage) {
+            // Ako nema sačuvanog jezika, otvori prozor za podešavanja
+            toggleSettings('open');
+            // Postavi podrazumevani jezik na sr, ali ne aktiviraj dugme
+            currentLanguage = 'sr';
+        } else if (languageMap[savedLanguage]) {
             currentLanguage = savedLanguage;
         }
+
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+        setDarkMode(darkModeEnabled);
+        setupDarkModeToggle();
 
         loadAppStateFromLocalStorage();
         fetchData(() => {
@@ -1769,14 +1877,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
 
         // Postavi event listenere za dugmad za jezik
+        // Postavi event listenere za dugmad za jezik
         document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
-            btn.addEventListener('click', () => {
-                changeLanguage(btn.dataset.lang);
-            });
+            // Aktiviraj dugme samo ako postoji sačuvan jezik
+            btn.classList.toggle('active', localStorage.getItem('selectedLanguage') && btn.dataset.lang === currentLanguage);
 
+            btn.addEventListener('click', () => {
+                // Dodaj aktivnu klasu na kliknuto dugme
+                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Sačuvaj izabrani jezik u localStorage
+                localStorage.setItem('selectedLanguage', btn.dataset.lang);
+                changeLanguage(btn.dataset.lang);
+                // Nakon izbora jezika, zatvori prozor za podešavanja
+                toggleSettings('close');
+            });
         });
-        toggleSettings('close');
+
         const initialState = readURL();
         applyURLState(initialState);
     }
